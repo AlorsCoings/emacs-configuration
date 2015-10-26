@@ -1,0 +1,16 @@
+.mc-lists.el
+.places
+abbrev_defs
+ac-comphist.dat
+/auto-save-list
+/backups
+/elpa
+gnus.el-dribble
+helm-doc.org
+history
+org-clock-save.el
+smex-items
+tramp
+*.elc
+/url
+/var

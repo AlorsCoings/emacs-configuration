@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: begin
+# key: begin
+# --
+;;; package --- `(buffer-file-name-body)`
+
+;;; Commentary:
+;;; Emacs configuration file for $1
+
+;;; Code:
+$0
