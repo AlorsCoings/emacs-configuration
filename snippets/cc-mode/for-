@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for-
+# key: for-
+# --
+`(indent-region (- (point) 20) (+ (point) 20) nil)`for (${1:int }${2:i} = ${3:N}; $2 >= ${4:0}; --$2) {
+    $0
+}

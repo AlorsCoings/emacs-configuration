@@ -1,0 +1,12 @@
+[user]
+	email = gros.nicolas0@gmail.com
+	name = Nicolas Gros
+[core]
+	editor = emacs
+[color]
+	ui = true
+	diff = auto
+	status = auto
+	branch = auto
+[push]
+	default = simple

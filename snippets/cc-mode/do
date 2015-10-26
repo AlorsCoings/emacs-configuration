@@ -1,0 +1,6 @@
+#name : do { ... } while (...)
+# key: do
+# --
+`(indent-region (- (point) 20) (+ (point) 20) nil)`do {
+    $0
+} while (${1:condition});

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ends
+# key: ends
+# --
+(provide '`(buffer-file-name-body)`)
+;;; `(buffer-file-name-body)`.el ends here$0

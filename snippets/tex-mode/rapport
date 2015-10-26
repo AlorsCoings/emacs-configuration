@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: rapport
+# key: rapport
+# --
+\documentclass[a4paper, 12pt, titlepage]{report}
+
+\input{/home/toad/latex/preamble.tex}
+
+% \setlength{\parindent}{0pt}
+\definecolor{veryLightGray}{gray}{0.80}
+\definecolor{lightGray}{gray}{0.60}
+
+\lstset{
+  language=C++
+}
+
+\def\pretitle{$1}
+\def\title{$2}
+\def\author{Nicolas \textsc{Gros}}
+\def\supervisor{$3 \textsc{$4}}
+\def\date{Année 2015/2016}
+
+\begin{document}
+\input{/home/toad/latex/titlepageUFRMaster1.tex}
+
+\newpage
+\pagestyle{empty}
+\strut
+\newpage
+
+\renewcommand{\contentsname}{Sommaire}
+\chapter*{Résumé}
+
+\tableofcontents
+\thispagestyle{empty}
+
+\chapter{$0}
+\setcounter{page}{1}
+
+\appendix
+\chapter{Annexes}
+
+\end{document}

@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: tikz
+# key: tikz
+# --
+\documentclass{standalone}
+
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[usenames, dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
+\begin{document}
+% \usetikzlibrary{calc}
+
+$0
+\newcommand{\romain}[1]{\uppercase\expandafter{\romannumeral #1}}
+
+\begin{tikzpicture}[scale=1]
+\tikzstyle{debut}=[ellipse,draw,text=black]
+\tikzstyle{end}=[rectangle,draw,fill=yellow!50]
+\tikzstyle{test}=[diamond, aspect=2.5,thick,
+draw=blue,fill=yellow!50,text=blue]
+\tikzstyle{next}=[->,>=stealth,thick,rounded corners=4pt]
+
+\node[debut] (debut) at (0, 0) {debut};
+\node[test] (test) at (0, 2) {test};
+\node[end] (end) at (0,4) {end};
+
+\draw[next] (debut) -- (test);
+\draw[next] (test) -| (end) node[midway,fill=white]{non};
+
+
+\end{tikzpicture}
+\end{document}
