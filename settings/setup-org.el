@@ -40,12 +40,11 @@
 (setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
 
 ;; (setq org-log-done 'note)
-(setq org-agenda-files (list "~/org/work.org"
-                             "~/org/myAgenda.org"
-                             "~/org/test.org"
-                             "~/org/lesDoudous.org"
+(setq org-agenda-files (list "~/org/home.org"
+                             "~/org/journal.org"
                              "~/org/maison.org"
-                             "~/org/home.org"))
+                             "~/org/menu.org"
+                             "~/org/test.org"))
 
 
 (defun my-org-metaup ()
