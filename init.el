@@ -88,8 +88,8 @@
      cmake-mode
      coffee-mode
      color-theme
-     color-theme-san...
-     color-theme-sol...
+     color-theme-sanityinc-solarized
+     color-theme-solarized
      company
      company-arduino
      company-auctex
@@ -129,23 +129,16 @@
      fakir
      feature-mode
      fill-column-indicator
-     find-file-in-pr...
+     find-file-in-project
      flim
      flx
      flx-ido
      flycheck
      flycheck-clojure
-     flycheck-google...
+     flycheck-google-cpplint
      flycheck-hdevtools
      flycheck-ocaml
      flycheck-pos-tip
-     flymake
-     flymake-cursor
-     flymake-easy
-     flymake-google-...
-     flymake-jslint
-     flymake-json
-     flymake-shell
      fold-this
      frame-cmds
      frame-fns
@@ -178,7 +171,7 @@
      ibuffer-vc
      icomplete+
      ido-at-point
-     ido-completing-...
+     ido-completing-read+
      ido-ubiquitous
      ido-vertical-mode
      idomenu
@@ -196,7 +189,7 @@
      json-reformat
      json-snatcher
      jump-char
-     know-your-http-...
+     know-your-http-well
      kv
      latex-extra
      legalese
@@ -228,7 +221,7 @@
      pcache
      peg
      perspective
-     php-auto-yasnip...
+     php-auto-yasnippets
      php-mode
      pkg-info
      plsql
@@ -262,7 +255,7 @@
      slime-repl
      smart-forward
      smart-mode-line
-     smart-mode-line...
+     smart-mode-line-powerline-theme
      smartparens
      smex
      smooth-scrolling
@@ -282,7 +275,7 @@
      undo-tree
      visual-regexp
      web
-     web-completion-...
+     web-completion-data
      web-mode
      wget
      wgrep
