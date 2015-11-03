@@ -44,6 +44,7 @@
                              "~/org/journal.org"
                              "~/org/maison.org"
                              "~/org/menu.org"
+                             "~/org/perlesSoline.org"
                              "~/org/test.org"))
 
 
@@ -110,14 +111,16 @@
 (require 'org-clock)
 (setq org-clock-idle-time 10)
 (defvar org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/home.org" "Tasks")
-				 "* TODO %?\nCreated at %T")
-				("e" "Emacs Todo" entry (file+headline "~/org/home.org" "Emacs")
-				 "* TODO %?\nCreated at %T")
-				("a" "Agenda" entry (file "~/org/agenda.org")
-				 "* %?Event\n\t:PROPERTIES:\n\t:ID:\n\t:END:\n\n\t%T\n")
-        ("j" "Journal" entry (file+datetree "~/org/journal.org")
-				 "* %?\nEntered on %U\n  %i\n  %a")))
+  '(("t" "Todo" entry (file+headline "~/org/home.org" "Tasks")
+     "* TODO %?\nCreated at %T")
+    ("e" "Emacs Todo" entry (file+headline "~/org/home.org" "Emacs")
+     "* TODO %?\nCreated at %T")
+    ("a" "Agenda" entry (file "~/org/agenda.org")
+     "* %?Event\n\t:PROPERTIES:\n\t:ID:\n\t:END:\n\n\t%T\n")
+    ("j" "Perles Soline" entry (file+datetree "~/org/perlesSoline.org")
+     "* %?\nEntered on %U\n  %i\n  %a")
+    ("s" "Journal" entry (file+datetree "~/org/journal.org")
+     "* %?\nEntered on %U\n  %i\n  %a")))
 
 ;; To save the clock history across Emacs sessions
 (org-clock-persistence-insinuate)
@@ -169,7 +172,7 @@
 ;; And add babel inline code execution, for executing code in org-mode.
 (org-babel-do-load-languages
  'org-babel-load-languages
- ; load all language marked with (lang . t).
+                                        ; load all language marked with (lang . t).
  '((C . t)
    (R . t)
    (asymptote)
