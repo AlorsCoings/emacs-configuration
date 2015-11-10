@@ -133,7 +133,6 @@
 ;; It does this via a „group parameter“ you have to add manually.
 ;; To do it: use G p in the group buffer, then add (modeline-notify t) to the list there
 ;; If it were the only property, it would look like this: ((modeline-notify t))
-(require 'gnus-notify)
 (gnus-demon-add-handler 'gnus-demon-scan-news 2 t) ; this does a call to gnus-group-get-new-news
 
 (provide 'setup-gnus)
