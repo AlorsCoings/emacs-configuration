@@ -24,9 +24,6 @@
 \input{/home/toad/latex/titlepageUFRMaster1.tex}
 
 \newpage
-\pagestyle{empty}
-\strut
-\newpage
 
 \renewcommand{\contentsname}{Sommaire}
 \chapter*{Résumé}
