@@ -176,6 +176,7 @@
      ido-vertical-mode
      idomenu
      iedit
+     image+
      impatient-mode
      inf-ruby
      inflections
@@ -328,6 +329,7 @@
 (require 'setup-highlight-symbol)
 (require 'setup-nxml)
 (require 'setup-ibuffer)
+(require 'setup-image)
 (require 'prodigy)
 
 (eval-after-load "dash" '(dash-enable-font-lock))
