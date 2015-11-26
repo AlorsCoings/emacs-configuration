@@ -7,7 +7,6 @@
 
 (require 'cc-mode)
 (setq c-default-style "k&r")
-(setq c-basic-offset 4)
 
 ;; google-c-style
 (require 'google-c-style)
@@ -110,10 +109,12 @@
   (define-key map (kbd "C-c C-d") 'c-eldoc-force-cache-update))
 (add-hook 'c-mode-hook
           (lambda ()
-            (c-eldoc-define-keybindings c-mode-map)))
+            (c-eldoc-define-keybindings c-mode-map)
+            (setq c-basic-offset 4)))
 (add-hook 'c++-mode-hook
           (lambda ()
-            (c-eldoc-define-keybindings c++-mode-map)))
+            (c-eldoc-define-keybindings c++-mode-map)
+            (setq c-basic-offset 4)))
 (setq c-eldoc-cpp-command "/usr/bin/clang")
 ;; (defvar c-eldoc-cpp-command "/lib/cpp ") ;; compiler
 ;; (defvar c-eldoc-cpp-macro-arguments "-dD -w -P")
