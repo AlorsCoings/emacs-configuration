@@ -2,7 +2,7 @@
 ;;; Snippet definitions:
 ;;;
 (yas-define-snippets 'crappy-jsp-mode
-                     '(("el" "<%--@elvariable id=\"$1\" type=\"$2\"--%>" "elvariable" nil nil nil nil nil nil)))
+                     '(("el" "<%--@elvariable id=\"$1\" type=\"$2\"--%>" "elvariable" nil nil nil "/home/toad/.emacs.d/snippets/crappy-jsp-mode/elvariable" nil nil)))
 
 
-;;; Do not edit! File generated at Mon Aug 24 17:16:26 2015
+;;; Do not edit! File generated at Fri Nov 27 20:06:11 2015
