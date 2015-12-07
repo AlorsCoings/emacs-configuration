@@ -2,7 +2,24 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("butor"
+(("rootPi"
+ (filename .
+           #("/sudo:root@192.168.1.89:/root/" 6 10
+             (tramp-default t)))
+ (front-context-string . ".Xauthority\n  -r")
+ (rear-context-string . " 0 Sep 13 18:00 ")
+ (position . 183))
+("home.org"
+ (filename . "~/org/home.org")
+ (front-context-string . "** Dump some mem")
+ (rear-context-string . "4\n* Information\n")
+ (position . 32840))
+("piInternet"
+ (filename . "/ssh:pi@89.84.80.182#22002:/home/pi/")
+ (front-context-string . "WebSite\n  drwxr-")
+ (rear-context-string . "0K Feb 23  2015 ")
+ (position . 1942))
+("butor"
  (filename . "/ssh:ng860516@ufrsciencestech.u-bourgogne.fr|ssh:ng860516@butor:/home1/ng860516/")
  (front-context-string . ".gconfd\n  drwxr-")
  (rear-context-string . "0K Sep 23 09:52 ")
