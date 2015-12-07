@@ -27,6 +27,7 @@
 
 \renewcommand{\contentsname}{Sommaire}
 \chapter*{Résumé}
+\thispagestyle{empty}
 
 \tableofcontents
 \thispagestyle{empty}
