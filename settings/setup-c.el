@@ -1,7 +1,7 @@
 ;;; package --- setup-c
 
 ;;; Commentary:
-;;; This my emacs configuration file for c/c++ coding
+;;; This my Emacs configuration file for c/c++ coding
 
 ;;; Code:
 
@@ -14,6 +14,8 @@
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 (add-hook 'c++-mode-common-hook 'google-set-c-style)
 (add-hook 'c++-mode-common-hook 'google-make-newline-indent)
+
+(semantic-mode 1)
 
 ;; (require 'cmake-mode)
 ;; (require 'cpputils-cmake)
@@ -81,9 +83,6 @@
 ;; (add-hook 'c++-mode-hook 'my:ac-sources-init)
 ;; (add-hook 'c-mode-hook 'my:ac-sources-init)
 
-(define-key c++-mode-map (kbd "C-c C-c") 'compile)
-(define-key c-mode-map (kbd "C-c C-c") 'compile)
-
 ;; Autocomplete
 ;; (require 'auto-complete-config)
 ;; (add-to-list 'ac-dictionary-directories
@@ -115,7 +114,21 @@
           (lambda ()
             (c-eldoc-define-keybindings c++-mode-map)
             (setq c-basic-offset 4)))
-(setq c-eldoc-cpp-command "/usr/bin/clang")
+
+(define-key c++-mode-map (kbd "C-c C-c") 'compile)
+(define-key c-mode-map (kbd "C-c C-c") 'compile)
+
+(define-key c++-mode-map (kbd "M-j") (lambda () (interactive) (join-line -1)))
+(define-key c-mode-map (kbd "M-j") (lambda () (interactive) (join-line -1)))
+
+(define-key c++-mode-map (kbd "C-<tab>") 'company-complete)
+(define-key c-mode-map (kbd "C-<tab>") 'company-complete)
+
+(require 'company)
+(add-to-list 'company-backends 'company-c-headers)
+;; (setq company-clang-arguments '("-I/usr/include" "-I/usr/local/include"))
+;; (setq c-eldoc-cpp-command "/usr/bin/clang")
+;; (setq c-eldoc-cpp-command "/usr/bin/cpp")
 ;; (defvar c-eldoc-cpp-command "/lib/cpp ") ;; compiler
 ;; (defvar c-eldoc-cpp-macro-arguments "-dD -w -P")
 ;; (defvar c-eldoc-cpp-normal-arguments "-w -P")
