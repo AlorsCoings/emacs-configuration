@@ -310,6 +310,10 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
 
+(global-set-key (kbd "C-c C-j") (lambda () (interactive) (require 'setup-java)))
+(global-set-key (kbd "C-c j") 'eclim-manage-projects)
+
+(global-set-key (kbd "C-S-f") 'forward-sentence)
 
 (global-set-key (kbd "C-c t") 'typing-game)
 (global-set-key (kbd "C-c C-t") 'typing-game)

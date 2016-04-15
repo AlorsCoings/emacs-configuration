@@ -120,6 +120,7 @@
      edn
      elisp-slime-nav
      elnode
+     emacs-eclim
      emmet-mode
      epc
      epl
