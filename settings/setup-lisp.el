@@ -19,5 +19,17 @@
 ;; Load .el if newer than corresponding .elc
 (setq load-prefer-newer t)
 
+(require 'slime)
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(setq slime-contribs '(slime-fancy))
+(eval-after-load 'slime
+  '(define-key slime-mode-map (kbd "M-h") 'slime-documentation-lookup))
+
+(add-hook 'slime-repl-mode-hook
+          (lambda ()
+            (define-key slime-repl-mode-map (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)))
+
+(setq slime-auto-start 'always)
+
 (provide 'setup-lisp)
 ;;; setup-lisp.el ends here
