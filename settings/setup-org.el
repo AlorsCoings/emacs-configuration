@@ -1,7 +1,7 @@
 ;;; package --- setup-org
 
 ;;; Commentary:
-;;; This my emacs configuration file for org-mode
+;;; This my Emacs configuration file for org-mode
 
 ;;; Code:
 
@@ -42,6 +42,7 @@
 ;; (setq org-log-done 'note)
 (setq org-agenda-files (list "~/org/home.org"
                              "~/org/journal.org"
+                             "~/org/work.org"
                              "~/org/maison.org"
                              "~/org/menu.org"
                              "~/org/perlesSoline.org"

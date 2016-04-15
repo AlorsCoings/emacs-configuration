@@ -1,7 +1,7 @@
 ;;; package --- init.el
 
 ;;; Commentary:
-;;; Primary emacs configuration which call others files
+;;; Primary Emacs configuration which call others files
 
 ;;; Code:
 
@@ -11,32 +11,29 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (setq inhibit-startup-message t)
 
-;; Start emacs in fullscrenn
+;; Start emacs in fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; Set path to dependencies
-;; (defvar site-lisp-dir
-;;   (expand-file-name "site-lisp" user-emacs-directory))
 
 (defvar settings-dir
   (expand-file-name "settings" user-emacs-directory))
 
+(require 'gnus)
+(require 'gnus-start)
 (setq
  gnus-home-directory "~/.gnus.d/"
  gnus-init-file (expand-file-name "setup-gnus.el" settings-dir)
  message-directory (expand-file-name "Mail/" gnus-home-directory))
 
+(require 'epa)
+(epa-file-enable)
+;; (setq epg-gpg-program "/usr/bin/gpg2")
+
 ;; Set up load path
 (add-to-list 'load-path settings-dir)
-;; (add-to-list 'load-path site-lisp-dir)
 
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
 (load custom-file)
-
-;; (dolist (project (directory-files site-lisp-dir t "\\w+"))
-;;   (when (file-directory-p project)
-;;     (add-to-list 'load-path project)))
 
 ;; Write backup nfiles to own directory
 (setq backup-directory-alist
@@ -51,7 +48,6 @@
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
-;; Setup packages
 (require 'setup-package)
 
 ;; Set up appearance early
@@ -83,7 +79,6 @@
      caml
      change-inner
      cider
-     clj-refactor
      clojure-mode
      cmake-mode
      coffee-mode
@@ -153,6 +148,7 @@
      gmail-message-mode
      gmail2bbdb
      gntp
+     gnuplot-mode
      google-c-style
      google-translate
      groovy-mode
@@ -253,8 +249,6 @@
      simplezen
      skewer-mode
      slime
-     slime-js
-     slime-repl
      smart-forward
      smart-mode-line
      smart-mode-line-powerline-theme
@@ -332,6 +326,7 @@
 (require 'setup-nxml)
 (require 'setup-ibuffer)
 (require 'setup-image)
+(require 'setup-gnuplot)
 (require 'prodigy)
 
 (eval-after-load "dash" '(dash-enable-font-lock))
@@ -359,7 +354,6 @@
 ;; Load stuff on demand
 (autoload 'skewer-start "setup-skewer" nil t)
 (autoload 'skewer-demo "setup-skewer" nil t)
-;; (autoload 'auto-complete-mode "auto-complete" nil t)
 (eval-after-load 'flycheck '(require 'setup-flycheck))
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook 'global-company-mode)
@@ -374,6 +368,13 @@
 
 ;; Visual regexp
 (require 'visual-regexp)
+
+(defmacro λ (&rest body)
+  "Define λ as a shortcut for lambda function.
+The result is the evaluation of BODY"
+  `(lambda ()
+     (interactive)
+     ,@body))
 
 ;; Functions (load all files in defuns-dir)
 (defvar defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -447,6 +448,7 @@
 (setq shr-external-browser 'browse-url-generic
 	  browse-url-generic-program "chromium-browser")
 
+(setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib:" (getenv "LD_LIBRARY_PATH")))
 ;; (icomplete-mode 99)
 
 (provide 'init)

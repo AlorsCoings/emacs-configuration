@@ -1,7 +1,7 @@
 ;;; package --- key-bindings
 
 ;;; Commentary:
-;;; Key bindings for emacs
+;;; Key bindings for Emacs
 
 ;;; Code:
 
@@ -19,7 +19,7 @@
 
 ;; Avoid typing full path when starting gdb
 (global-set-key (kbd "C-c g")
-                '(lambda ()
+                '(λ ()
                    (interactive)
                    (gud-gdb (concat "gdb --fullname " (cppcm-get-exe-path-current-buffer)))))
 
@@ -198,8 +198,6 @@
 ;; Move more quickly
 (global-set-key (kbd "C-S-n") (λ (ignore-errors (next-line 5))))
 (global-set-key (kbd "C-S-p") (λ (ignore-errors (previous-line 5))))
-(global-set-key (kbd "C-S-f") (λ (ignore-errors (forward-char 5))))
-(global-set-key (kbd "C-S-b") (λ (ignore-errors (backward-char 5))))
 (global-set-key (kbd "M-F") (λ (ignore-errors (subword-forward 5))))
 (global-set-key (kbd "M-B") (λ (ignore-errors (subword-backward 5))))
 
@@ -244,7 +242,6 @@
 (global-set-key (kbd "C-À") 'google-translate-at-point)
 
 ;; Clever newlines
-;; (global-set-key (kbd "C-o") 'open-line-and-indent)
 (global-set-key (kbd "<C-return>") 'open-line-below)
 (global-set-key (kbd "<C-S-return>") 'open-line-above)
 (global-set-key (kbd "<M-return>") 'new-line-dwim)
@@ -303,7 +300,8 @@
 ;; Find files by name and display results in dired
 (global-set-key (kbd "M-s f") 'find-name-dired)
 
-(global-set-key (kbd "C-o") 'switch-window)
+(global-set-key (kbd "C-o") 'next-multiframe-window)
+(global-set-key (kbd "C-S-o") 'previous-multiframe-window)
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -314,6 +312,7 @@
 (global-set-key (kbd "C-c j") 'eclim-manage-projects)
 
 (global-set-key (kbd "C-S-f") 'forward-sentence)
+(global-set-key (kbd "C-S-b") 'backward-sentence)
 
 (global-set-key (kbd "C-c t") 'typing-game)
 (global-set-key (kbd "C-c C-t") 'typing-game)

@@ -39,7 +39,8 @@
 
 (define-key dired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
 (define-key dired-mode-map (kbd "k") 'dired-do-delete)
-(define-key dired-mode-map (kbd "C-o") 'switch-window)
+(define-key dired-mode-map (kbd "C-o") 'next-multiframe-window)
+(define-key dired-mode-map (kbd "C-S-o") 'previous-multiframe-window)
 
 ;; M-up is nicer in dired if it moves to the fourth line - the first file
 (defun dired-back-to-top ()

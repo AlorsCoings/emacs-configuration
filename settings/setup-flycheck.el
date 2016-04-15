@@ -31,10 +31,14 @@ clean buffer we're an order of magnitude laxer about checking."
                                             idle-change
                                             mode-enabled))
 
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))
+
 (require 'flycheck-google-cpplint)
 (custom-set-variables '(flycheck-c/c++-googlelint-executable "/usr/local/bin/cpplint.py"))
-(flycheck-add-next-checker 'c/c++-clang 'c/c++-googlelint 'append)
-;; (flycheck-add-next-checker 'c/c++-clang '(warning . c/c++-googlelint))
+;; (flycheck-add-next-checker 'c/c++-clang 'c/c++-googlelint 'append)
+(flycheck-add-next-checker 'c/c++-clang
+                           '(warning . c/c++-googlelint))
 
 ;; (custom-set-variables
 ;;  '(flycheck-googlelint-verbose "3")

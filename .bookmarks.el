@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("rootPi"
+(("org-capture-last-stored"
+ (filename . "~/org/perlesSoline.org")
+ (front-context-string . "**** Pendant un ")
+ (rear-context-string . "%20languages.]]\n")
+ (position . 1496))
+("rootPi"
  (filename .
            #("/sudo:root@192.168.1.89:/root/" 6 10
              (tramp-default t)))

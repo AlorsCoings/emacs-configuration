@@ -14,3 +14,9 @@ tramp
 *.elc
 /url
 /var
+\#ido.last\#
+%backup%~
+ido.last
+recentf
+recentf~
+/semanticdb

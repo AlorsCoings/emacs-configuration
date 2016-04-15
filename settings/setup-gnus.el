@@ -1,14 +1,14 @@
 ;;; package --- Gnus mail configuration
 
 ;;; Commentary:
-;;; This my emacs configuration file for reading mail with gnus
+;;; This my Emacs configuration file for reading mail with gnus
 
 ;;; Code:
 (require 'gnus)
 (require 'gnus-start)
 
 (setq user-full-name "Nicolas Gros")
-(setq user-mail-address "gros.nicolas0@gmail.com")
+(setq user-mail-address "nico8ness@gmail.com")
 (require 'starttls)
 (setq starttls-use-gnutls t)
 

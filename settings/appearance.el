@@ -5,9 +5,7 @@
 
 ;;; Code:
 
-
-(setq ;; visible-bell t
-      font-lock-maximum-decoration t
+(setq font-lock-maximum-decoration t
       truncate-partial-width-windows nil)
 
 ;; Highlight current line
@@ -56,8 +54,8 @@
 ;; Customize smart-mode-line
 (setq powerline-default-separator 'curve)
 (setq powerline-default-separator-dir '(right . left)
-      sml/name-width 0
-      sml/mode-width 0)
+      sml/name-width 30
+      sml/mode-width 'full)
 (set-face-attribute 'mode-line nil
                     :foreground "Black"
                     :background "gray10"

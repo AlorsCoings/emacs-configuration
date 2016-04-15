@@ -1,7 +1,7 @@
 ;;; package --- sane-defaults
 
 ;;; Commentary:
-;;; emacs sane defaults configuration
+;;; Emacs sane defaults configuration
 
 ;;; Code:
 
@@ -97,6 +97,8 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; UTF-8 please
+(set-language-environment "UTF-8") ; pretty
+(set-default-coding-systems 'utf-8)
 (setq locale-coding-system 'utf-8) ; pretty
 (set-terminal-coding-system 'utf-8) ; pretty
 (set-keyboard-coding-system 'utf-8) ; pretty
@@ -149,7 +151,7 @@
 
 ;; Keep cursor away from edges when scrolling up/down
 (require 'smooth-scrolling)
-(setq smooth-scroll-margin 5)
+(setq smooth-scroll-margin 10)
 
 ;; Allow recursive minibuffers
 (setq enable-recursive-minibuffers t)
@@ -229,6 +231,14 @@
     `(eval-after-load ,feature
        '(progn ,@body))))
 
+(defadvice kill-line (after indent-after-kill-line activate)
+  "Make `kill-line' indent after killing."
+  (indent-according-to-mode))
+
+(require 'hexl)
+(add-hook 'hexl-mode-hook 'font-lock-fontify-buffer)
+
+(setq kill-ring-max 1000)
 
 (require 'typing-game)
 (define-key typing-game-mode-map (kbd "-") nil)
