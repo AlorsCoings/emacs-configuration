@@ -273,6 +273,7 @@
      toggle-quotes
      top-mode
      tuareg
+     typing-game
      undo-tree
      visual-regexp
      web

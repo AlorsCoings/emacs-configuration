@@ -310,5 +310,9 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
 
+
+(global-set-key (kbd "C-c t") 'typing-game)
+(global-set-key (kbd "C-c C-t") 'typing-game)
+
 (provide 'key-bindings)
 ;;; key-bindings.el ends here

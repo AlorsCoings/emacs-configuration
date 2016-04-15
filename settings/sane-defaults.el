@@ -229,5 +229,23 @@
     `(eval-after-load ,feature
        '(progn ,@body))))
 
+
+(require 'typing-game)
+(define-key typing-game-mode-map (kbd "-") nil)
+(define-key typing-game-mode-map (kbd "0") nil)
+(define-key typing-game-mode-map (kbd "1") nil)
+(define-key typing-game-mode-map (kbd "2") nil)
+(define-key typing-game-mode-map (kbd "3") nil)
+(define-key typing-game-mode-map (kbd "4") nil)
+(define-key typing-game-mode-map (kbd "5") nil)
+(define-key typing-game-mode-map (kbd "6") nil)
+(define-key typing-game-mode-map (kbd "7") nil)
+(define-key typing-game-mode-map (kbd "8") nil)
+(define-key typing-game-mode-map (kbd "9") nil)
+(define-key typing-game-mode-map (kbd "g") nil)
+(define-key typing-game-mode-map (kbd "h") nil)
+(define-key typing-game-mode-map (kbd "?") nil)
+(define-key typing-game-mode-map (kbd "q") nil)
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here
