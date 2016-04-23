@@ -26,9 +26,9 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 
-(setq-default TeX-master nil)
+(setq-default TeX-master t)
 
-;; (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+(add-hook 'LaTeX-mode-hook 'auto-fill-mode)
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 ;; (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
@@ -40,10 +40,9 @@
 ;; (setq-default TeX-engine 'luatex)
 
 (require 'tex-mode)
-;; (define-key tex-mode-map (kbd "C-S-l") 'LaTeX-edit-Lua-code-start)
-(global-set-key (kbd "C-S-l") 'LaTeX-edit-Lua-code-start)
 
-(add-hook 'LaTeX-mode-hook #'latex-extra-mode)
+(define-key latex-mode-map (kbd "C-S-l") 'LaTeX-edit-Lua-code-start)
+(define-key latex-mode-map (kbd "C-c C-a") 'latex/compile-commands-until-done)
 
 ;; C-c C-q `latex/clean-fill-indent-environment'
 ;; Completely cleans up the entire current environment
