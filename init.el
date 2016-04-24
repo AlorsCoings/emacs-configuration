@@ -269,6 +269,7 @@
      top-mode
      tuareg
      typing-game
+     typit
      undo-tree
      visual-regexp
      web

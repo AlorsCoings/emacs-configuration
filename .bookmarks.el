@@ -4,9 +4,9 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/org/perlesSoline.org")
- (front-context-string . "**** Pendant un ")
- (rear-context-string . "%20languages.]]\n")
- (position . 1496))
+ (front-context-string . "**** Nouvelle vo")
+ (rear-context-string . "16-04-22 Friday\n")
+ (position . 1787))
 ("rootPi"
  (filename .
            #("/sudo:root@192.168.1.89:/root/" 6 10
