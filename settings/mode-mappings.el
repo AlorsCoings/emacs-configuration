@@ -77,6 +77,10 @@
 (autoload 'ensime-scala-mode-hook "ensime")
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
+;; Lisp
+(autoload 'lisp-mode "lisp-mode")
+(add-to-list 'auto-mode-alist '("\\.cl$" . lisp-mode))
+
 ;; Clojure
 (autoload 'clojure-mode "clojure-mode")
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
@@ -105,9 +109,9 @@
 (add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
 
 ;; Buster.JS
-;(autoload 'buster-mode "buster-mode")
-;(setq buster-node-executable "/usr/local/bin/node")
-;(add-file-find-hook-with-pattern "test\\.js$" (lambda () (buster-mode)) "require(\\(\"\\|'\\)buster")
+                                        ;(autoload 'buster-mode "buster-mode")
+                                        ;(setq buster-node-executable "/usr/local/bin/node")
+                                        ;(add-file-find-hook-with-pattern "test\\.js$" (lambda () (buster-mode)) "require(\\(\"\\|'\\)buster")
 
 ;; Markdown
 (autoload 'markdown-mode "markdown-mode")
@@ -141,6 +145,17 @@
 
 ;; Matlab - Octave
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+
+;; Crontab
+(add-to-list 'auto-mode-alist '("\\.cron\\(tab\\)?\\'" . crontab-mode))
+(add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode))
+
+;; Arduino
+(add-to-list 'auto-mode-alist '("\\.\\(pde\\|ino\\)$" . arduino-mode))
+(autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
+
+;; Gnuplot
+(add-to-list 'auto-mode-alist '("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode))
 
 (provide 'mode-mappings)
 ;;; mode-mappings.el ends here

@@ -11,7 +11,7 @@
 (require 'multiple-cursors-core)
 
 (defun rgrep-fullscreen (regexp &optional files dir confirm)
-  "Open grep in full screen, saving windows."
+  "Open grep with REGEXP in full screen, saving windows."
   (interactive
    (progn
      (grep-compute-defaults)

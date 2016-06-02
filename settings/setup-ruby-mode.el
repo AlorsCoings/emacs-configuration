@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(declare-function after-load "sane-defaults" (feature &rest body))
+
 (require 'ruby-mode)
 (require 'ruby-hash-syntax)
 

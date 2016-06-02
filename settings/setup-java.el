@@ -18,6 +18,8 @@
 
 ;; Displaying compilation error messages in the echo area
 (setq help-at-pt-display-when-idle t)
+
+(require 'help-at-pt)
 (setq help-at-pt-timer-delay 0.1)
 (help-at-pt-set-timer)
 
@@ -26,25 +28,30 @@
 (company-emacs-eclim-setup)
 (global-company-mode t)
 
+(require 'cc-mode)
+
 (define-key java-mode-map (kbd "C-<tab>") 'company-complete)
 (define-key java-mode-map (kbd "M-<tab>") 'company-complete)
 (define-key java-mode-map (kbd "M-j") (lambda () (interactive) (join-line -1)))
-
-(add-hook 'java-mode-hook 'semantic-mode)
 (define-key java-mode-map (kbd "C-.") 'semantic-complete-jump-local)
 (define-key java-mode-map (kbd "C-c C-i") 'eclim-java-import-organize)
 (define-key java-mode-map (kbd "C-c p") 'eclim-problems)
 (define-key java-mode-map (kbd "C-c C-p") 'eclim-problems-compilation-buffer)
 (define-key java-mode-map (kbd "C-c C-c") 'eclim-run-class)
+(define-key java-mode-map (kbd "C-c C-u") 'eclim-maven-lifecycle-phase-run)
+(define-key java-mode-map (kbd "C-c u") 'eclim-maven-run)
+(define-key java-mode-map (kbd "C-c C-d") 'display-local-help)
 
 (add-hook 'java-mode-hook
           (lambda ()
-            (setq c-basic-offset 4))
+            (setq c-basic-offset 4)
+            (semantic-mode 1))
           t)
 
 ;;; eclim-java-hierarchy, C-c C-e h
 ;;; eclim-java-find-type, C-c C-e f t
 ;;; on a given method definition
 ;;; eclim-java-find-references, C-c C-e f r
+
 (provide 'setup-java)
 ;;; setup-java.el ends here

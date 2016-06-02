@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(declare-function after-load "sane-defaults" (feature &rest body))
+
 (require 'org)
 (require 'org-archive)
 
@@ -30,9 +32,11 @@
       org-edit-timestamp-down-means-later t
       org-archive-mark-done nil
       org-catch-invisible-edits 'show
-      ;; org-export-coding-system 'utf-8
       org-fast-tag-selection-single-key 'expert
 	  org-tags-column 80)
+
+(require 'ox)
+(setq org-export-coding-system 'utf-8)
 
 (setq org-refile-use-cache nil)
 
@@ -171,50 +175,51 @@
 ;; 			(add-hook 'after-save-hook 'org-mobile-push nil 'make-it-local)))
 
 ;; And add babel inline code execution, for executing code in org-mode.
-(org-babel-do-load-languages
- 'org-babel-load-languages
-                                        ; load all language marked with (lang . t).
- '((C . t)
-   (R . t)
-   (asymptote)
-   (awk)
-   (calc)
-   (clojure)
-   (comint)
-   (css)
-   (ditaa . t)
-   (dot . t)
-   (emacs-lisp . t)
-   (fortran)
-   (gnuplot . t)
-   (haskell)
-   (io)
-   (java)
-   (js)
-   (latex)
-   (ledger)
-   (lilypond)
-   (lisp)
-   (matlab)
-   (maxima)
-   (mscgen)
-   (ocaml)
-   (octave)
-   (org . t)
-   (perl)
-   (picolisp)
-   (plantuml)
-   (python . t)
-   (ref)
-   (ruby)
-   (sass)
-   (scala)
-   (scheme)
-   (screen)
-   (sh . t)
-   (shen)
-   (sql)
-   (sqlite)))
+;; load all language marked with (lang . t).
+(after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t)
+     (R . t)
+     (asymptote)
+     (awk)
+     (calc)
+     (clojure)
+     (comint)
+     (css)
+     (ditaa . t)
+     (dot . t)
+     (emacs-lisp . t)
+     (fortran)
+     (gnuplot . t)
+     (haskell)
+     (io)
+     (java . t)
+     (js)
+     (latex . t)
+     (ledger)
+     (lilypond)
+     (lisp . t)
+     (matlab)
+     (maxima)
+     (mscgen)
+     (ocaml)
+     (octave)
+     (org . t)
+     (perl . t)
+     (picolisp)
+     (plantuml)
+     (python . t)
+     (ref)
+     (ruby . t)
+     (sass)
+     (scala)
+     (scheme)
+     (screen)
+     (sh . t)
+     (shen)
+     (sql . t)
+     (sqlite))))
 
 (provide 'setup-org)
 ;;; setup-org.el ends here

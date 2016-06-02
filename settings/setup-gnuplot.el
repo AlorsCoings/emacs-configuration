@@ -9,8 +9,5 @@
 
 (setq gnuplot-program "/usr/bin/gnuplot")
 
-(setq auto-mode-alist
-      (append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
-
 (provide 'setup-gnuplot)
 ;;; setup-gnuplot.el ends here

@@ -1,3 +1,12 @@
-;; (require 'php-auto-yasnippets)
-;; (setq php-auto-yasnippet-php-program "~/path/to/Create-PHP-YASnippet.php")
-;; (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
+;;; package --- setup-php
+
+;;; Commentary:
+;;; Emacs configuration file for php
+
+;;; Code:
+
+(require 'php-mode)
+(require 'smarty-mode)
+
+(provide 'setup-php)
+;;; setup-php.el ends here

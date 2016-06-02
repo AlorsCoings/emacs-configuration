@@ -1,11 +1,12 @@
 ;;; package --- setup-package
 
 ;;; Commentary:
-;;; This my emacs configuration file which handle packages
+;;; Emacs configuration file which handle packages
 
 ;;; Code:
 
 (require 'package)
+
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/") t)
@@ -19,6 +20,8 @@
 (unless (file-exists-p "~/.emacs.d/elpa/archives/melpa")
   (package-refresh-contents))
 
+(when (not (package-installed-p 'dash))
+  (package-install 'dash))
 (require 'dash)
 
 (defun packages-install (packages)

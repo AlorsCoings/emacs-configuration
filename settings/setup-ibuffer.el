@@ -12,6 +12,8 @@
 ;; I - As above, with a regular expression.
 ;; 0 - Run occur on the marked buffers.
 
+(declare-function after-load "sane-defaults" (feature &rest body))
+
 (require 'fullframe)
 (require 'ibuffer)
 (after-load 'ibuffer
@@ -23,6 +25,7 @@
   (require 'ibuffer-vc))
 
 (defun ibuffer-set-up-preferred-filters ()
+  "Filter ibuffer by filename/process."
   (ibuffer-vc-set-filter-groups-by-vc-root)
   (unless (eq ibuffer-sorting-mode 'filename/process)
     (ibuffer-do-sort-by-filename/process)))
@@ -63,8 +66,6 @@
               filename-and-process)))
 
 (setq ibuffer-filter-group-name-face 'font-lock-doc-face)
-
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (provide 'setup-ibuffer)
 ;;; setup-ibuffer.el ends here

@@ -16,6 +16,10 @@
 (add-hook 'c++-mode-common-hook 'google-make-newline-indent)
 
 (semantic-mode 1)
+;; (global-semantic-idle-completions-mode t)
+;; (global-semantic-decoration-mode t)
+;; (global-semantic-highlight-func-mode t)
+;; (global-semantic-show-unmatched-syntax-mode t)
 
 ;; (require 'cmake-mode)
 ;; (require 'cpputils-cmake)
@@ -27,73 +31,6 @@
 ;; OPTIONAL, some users need specify extra flags forwarded to compiler
 ;; (setq cppcm-extra-preprocss-flags-from-user '("-I/usr/src/linux/include" "-DNDEBUG"))
 
-;; (require 'auto-complete-clang)
-;; (ac-common-setup)
-;; (add-to-list 'ac-sources 'ac-clang)
-
-
-;; (require 'auto-complete)
-;; (require 'auto-complete-c-headers)
-;; ;; auto-complete-c-headers
-;; ;; associated auto-complete to a key ???
-;; (defun my:ac-c-header-init()
-;;   (add-to-list 'ac-sources 'ac-source-c-headers)
-;;   ;; gcc -xc++ -E -v -
-;;  (add-to-list 'achead:include-directories '"/usr/include/c++/4.8")
-;;   (add-to-list 'achead:include-directories '"/usr/include/x86_64-linux-gnu/c++/4.8")
-;;   (add-to-list 'achead:include-directories '"/usr/include/c++/4.8/backward")
-;;   (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include")
-;;   (add-to-list 'achead:include-directories '"/usr/local/include")
-;;   (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed")
-;;   (add-to-list 'achead:include-directories '"/usr/include/x86_64-linux-gnu")
-;;   (add-to-list 'achead:include-directories '"/usr/include")
-;;   )
-;; (add-hook 'c++-mode-hook 'my:ac-c-header-init)
-;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
-
-;; CEDET
-;; (semantic-mode 1)
-
-;; (setq semantic-load-turn-everything-on t)
-
-;; (defun my:add-semantic-to-autocomplete()
-;;   (add-to-list 'ac-sources 'ac-source-semantic-raw)
-;;   )
-;; (add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
-
-;; (global-set-key [(control tab)] 'semantic-analyze-possible-completions)
-
-;; idle mode
-;; (global-semantic-idle-scheduler-mode 1)
-
-;; Semantic
-;; might want to disable this line because interference with autocomplete
-;; (global-semantic-idle-completions-mode t)
-;; (global-semantic-decoration-mode t)
-;; (global-semantic-highlight-func-mode t)
-;; (global-semantic-show-unmatched-syntax-mode t)
-
-;; CC-mode
-;; (defun my:ac-sources-init()
-;;   (lambda ()
-;;     (setq ac-sources (append '(ac-source-semantic) ac-sources))
-;;     (local-set-key (kbd "RET") 'newline-and-indent)
-;;     (linum-mode t)
-;;     (semantic-mode t)))
-;; (add-hook 'c++-mode-hook 'my:ac-sources-init)
-;; (add-hook 'c-mode-hook 'my:ac-sources-init)
-
-;; Autocomplete
-;; (require 'auto-complete-config)
-;; (add-to-list 'ac-dictionary-directories
-;; 			 (expand-file-name "~/.emacs.d/elpa/auto-complete-20150408.1132/dict"))
-;; (setq ac-comphist-file (expand-file-name
-;;                         "~/.emacs.d/ac-comphist.dat"))
-;; (ac-config-default)
-;; (auto-complete-mode 1)
-;; (require 'auto-complete-c-headers)
-;; (add-to-list 'ac-sources 'ac-source-c-headers)
-
 (require 'gud)
 (define-key gud-mode-map (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)
 
@@ -103,6 +40,13 @@
 (require 'c-eldoc)
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
+;; (setq c-eldoc-cpp-command "/usr/bin/clang")
+;; (setq c-eldoc-cpp-command "/usr/bin/cpp")
+;; (defvar c-eldoc-cpp-command "/lib/cpp ") ;; compiler
+;; (defvar c-eldoc-cpp-macro-arguments "-dD -w -P")
+;; (defvar c-eldoc-cpp-normal-arguments "-w -P")
+;; (defvar c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ ") ;; include flags
+
 (defun c-eldoc-define-keybindings (map)
   "Eldoc defines key bindings in MAP."
   (define-key map (kbd "C-c C-d") 'c-eldoc-force-cache-update))
@@ -127,12 +71,10 @@
 (require 'company)
 (add-to-list 'company-backends 'company-c-headers)
 ;; (setq company-clang-arguments '("-I/usr/include" "-I/usr/local/include"))
-;; (setq c-eldoc-cpp-command "/usr/bin/clang")
-;; (setq c-eldoc-cpp-command "/usr/bin/cpp")
-;; (defvar c-eldoc-cpp-command "/lib/cpp ") ;; compiler
-;; (defvar c-eldoc-cpp-macro-arguments "-dD -w -P")
-;; (defvar c-eldoc-cpp-normal-arguments "-w -P")
-;; (defvar c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ ") ;; include flags
+
+(require 'compile)
+(define-key compilation-mode-map (kbd "C-o") 'next-multiframe-window)
+(define-key compilation-mode-map (kbd "C-S-o") 'previous-multiframe-window)
 
 (provide 'setup-c)
 ;;; setup-c.el ends here

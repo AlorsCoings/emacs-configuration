@@ -18,10 +18,42 @@
       ido-use-filename-at-point nil
       ido-max-prospects 10)
 
+(require 'ido-ubiquitous)
+(setq
+ ido-cr+-max-items 35000
+ ido-ubiquitous-command-overrides
+ '((enable exact "mml-attach-file")
+   (disable exact "execute-extended-command")
+   (enable prefix "wl-")
+   (enable-old prefix "Info-")
+   (enable exact "webjump")
+   (enable regexp "\\`\\(find\\|load\\|locate\\)-library\\'")
+   (disable prefix "org-")
+   (disable prefix "tmm-")
+   (enable regexp "\\`\\(load\\|enable\\|disable\\|describe\\|custom-theme-visit\\)-theme\\'")
+   (enable-old prefix "bbdb-")
+   (enable-old exact "where-is")
+   (enable prefix "xref-")
+   (disable exact "todo-add-category")
+   (enable exact "find-tag")
+   (enable prefix "etags-select-")))
+(ido-ubiquitous-mode 1)
+
+;; Fix ido-ubiquitous for newer packages
+(defmacro ido-ubiquitous-use-new-completing-read (cmd package)
+  "Advice CMD of PACKAGE to use ido-ubiquitous."
+  `(eval-after-load ,package
+     '(defadvice ,cmd (around ido-ubiquitous-new activate)
+        (let ((ido-ubiquitous-enable-compatibility nil))
+          ad-do-it))))
+(ido-ubiquitous-use-new-completing-read webjump 'webjump)
+(ido-ubiquitous-use-new-completing-read yas-expand 'yasnippet)
+(ido-ubiquitous-use-new-completing-read yas-visit-snippet-file 'yasnippet)
+
 ;; Try out flx-ido for better flex matching between words
 (require 'flx-ido)
 (flx-ido-mode 1)
-;; disable ido faces to see flx highlights.
+;; Disable ido faces to see flx highlights.
 (setq ido-use-faces nil)
 
 ;; flx-ido looks better with ido-vertical-mode
@@ -40,29 +72,32 @@
   (interactive)
   (tags-completion-table)
   (let (tag-names)
-	(mapatoms (lambda (x)
-				(push (prin1-to-string x t) tag-names))
-			  tags-completion-table)
-	(find-tag (ido-completing-read "Tag: " tag-names))))
+    (mapatoms (lambda (x)
+                (push (prin1-to-string x t) tag-names))
+              tags-completion-table)
+    (find-tag (ido-completing-read "Tag: " tag-names))))
+
 (defun ido-find-file-in-tag-files ()
+  "Find file in tag files with ido."
   (interactive)
   (save-excursion
-	(let ((enable-recursive-minibuffers t))
-	  (visit-tags-table-buffer))
-	(find-file
-	 (expand-file-name
-	  (ido-completing-read
-	   "Project file: " (tags-table-files) nil t)))))
+    (let ((enable-recursive-minibuffers t))
+      (visit-tags-table-buffer))
+    (find-file
+     (expand-file-name
+      (ido-completing-read
+       "Project file: " (tags-table-files) nil t)))))
 
 (defun my/ido-go-straight-home ()
+  "Change directory to ~ and / if already to ~."
   (interactive)
   (cond
-   ((looking-back "~/") (insert "projects/"))
+   ((looking-back "~/") (insert "//"))
    ((looking-back "/") (insert "~/"))
    (:else (call-interactively 'self-insert-command))))
 
 (defun my/setup-ido ()
-  ;; Go straight home
+  "Define keys for `ido-file-completion-map'."
   (define-key ido-file-completion-map (kbd "~") 'my/ido-go-straight-home)
   (define-key ido-file-completion-map (kbd "C-~") 'my/ido-go-straight-home)
 
@@ -86,21 +121,7 @@
 (require 'ido-at-point)
 (ido-at-point-mode)
 
-;; Use ido everywhere
-(require 'ido-ubiquitous)
-(ido-ubiquitous-mode 1)
-
-;; Fix ido-ubiquitous for newer packages
-(defmacro ido-ubiquitous-use-new-completing-read (cmd package)
-  `(eval-after-load ,package
-     '(defadvice ,cmd (around ido-ubiquitous-new activate)
-        (let ((ido-ubiquitous-enable-compatibility nil))
-          ad-do-it))))
-
-(ido-ubiquitous-use-new-completing-read webjump 'webjump)
-(ido-ubiquitous-use-new-completing-read yas-expand 'yasnippet)
-(ido-ubiquitous-use-new-completing-read yas-visit-snippet-file 'yasnippet)
-;; (ido-ubiquitous-use-new-completing-read mml-attach-file 'gnus)
+(require 'gnus-util)
 (setq gnus-completing-read-function 'gnus-ido-completing-read)
 
 (provide 'setup-ido)

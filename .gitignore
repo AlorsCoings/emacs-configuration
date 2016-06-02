@@ -12,6 +12,7 @@ org-clock-save.el
 smex-items
 tramp
 *.elc
+*~
 /url
 /var
 \#ido.last\#
@@ -20,3 +21,5 @@ ido.last
 recentf
 recentf~
 /semanticdb
+/.docsets
+.bookmarks.el

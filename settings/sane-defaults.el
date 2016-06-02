@@ -6,13 +6,17 @@
 ;;; Code:
 
 ;; Enable accent
+
 (load-library "iso-transl")
+
+(setq max-specpdl-size 13000)
 
 (setq-default
  bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
  indent-tabs-mode nil
  save-interprogram-paste-before-kill t
- show-trailing-whitespace t)
+ show-trailing-whitespace t
+ )
 
 (require 'switch-window)
 (setq switch-window-shortcut-style 'alphabet)
@@ -29,6 +33,9 @@
  '(anzu-mode-lighter "") ;; Same as diminish
  '(anzu-deactivate-region t)
  '(anzu-replace-to-string-separator " => "))
+
+(require 'iedit)
+(set-face-attribute 'iedit-occurrence t :background "gray30")
 
 (defun sanityinc/no-trailing-whitespace ()
   "Turn off display of trailing whitespace in this buffer."
@@ -55,7 +62,7 @@
 (require 'ace-jump-mode)
 ;; Change ace-jump default sequence
 (setq ace-jump-mode-submode-list
-	  '(ace-jump-char-mode
+      '(ace-jump-char-mode
         ace-jump-word-mode
         ace-jump-line-mode))
 ;; Don't ask for a char when searching a word
@@ -122,8 +129,8 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 
-;; Lines should be 80 characters wide, not 72
-(setq fill-column 80)
+;; 80 chars is a good width.
+(set-default 'fill-column 80)
 
 ;; Save a list of recent files visited. (open recent file with C-x f)
 (require 'recentf)
@@ -151,6 +158,7 @@
 
 ;; Keep cursor away from edges when scrolling up/down
 (require 'smooth-scrolling)
+(smooth-scrolling-mode 1)
 (setq smooth-scroll-margin 10)
 
 ;; Allow recursive minibuffers
@@ -171,9 +179,6 @@
 
 ;; Sentences do not need double spaces to end. Period.
 (set-default 'sentence-end-double-space nil)
-
-;; 80 chars is a good width.
-(set-default 'fill-column 80)
 
 ;; Add parts of each file's directory to the buffer name if not unique
 (require 'uniquify)
@@ -211,7 +216,7 @@
   "Offer to create parent directories if they do not exist."
   (let ((parent-directory (file-name-directory buffer-file-name)))
     (when (and (not (file-exists-p parent-directory))
-               (y-or-n-p (format "Directory `%s' does not exist! Create it?" parent-directory)))
+               (y-or-n-p (format "Directory `%s' does not exist! Create it? " parent-directory)))
       (make-directory parent-directory t))))
 
 (add-to-list 'find-file-not-found-functions 'my-create-non-existent-directory)
@@ -256,6 +261,75 @@
 (define-key typing-game-mode-map (kbd "h") nil)
 (define-key typing-game-mode-map (kbd "?") nil)
 (define-key typing-game-mode-map (kbd "q") nil)
+
+(setq  ansi-color-faces-vector
+       [default bold shadow italic underline bold bold-italic bold])
+(setq anzu-deactivate-region t)
+(setq anzu-mode-lighter "")
+(setq anzu-replace-to-string-separator " => ")
+(setq anzu-search-threshold 1000)
+
+(require 'eww)
+(setq eww-download-directory "~/EWW_Downloads/")
+
+(defadvice undo-tree-undo (around keep-region activate)
+  "Keep region when undoing in region."
+  (if (use-region-p)
+      (let ((m (set-marker (make-marker) (mark)))
+            (p (set-marker (make-marker) (point))))
+        ad-do-it
+        (goto-char p)
+        (set-mark m)
+        (set-marker p nil)
+        (set-marker m nil))
+    ad-do-it))
+
+;; Make C-x C-e run 'eval-region if the region is active
+(defun sanityinc/eval-last-sexp-or-region (prefix)
+  "Eval region from BEG to END if active, otherwise the last sexp.
+With argument PREFIX, print output into current buffer."
+  (interactive "P")
+  (if (and (mark) (use-region-p))
+      (eval-region (min (point) (mark)) (max (point) (mark)))
+    (pp-eval-last-sexp prefix)))
+(global-set-key [remap eval-expression] 'pp-eval-expression)
+(define-key emacs-lisp-mode-map (kbd "C-x C-e") 'sanityinc/eval-last-sexp-or-region)
+
+;; Add Urban Dictionary to webjump (C-x g)
+(require 'webjump)
+(add-to-list 'webjump-sites '("Urban Dictionary" .
+                              [simple-query
+                               "www.urbandictionary.com"
+                               "http://www.urbandictionary.com/define.php?term="
+                               ""]))
+
+;; Fix whitespace on save, but only if the file was clean
+(global-whitespace-cleanup-mode)
+
+;; Use normal tabs in makefiles
+(add-hook 'makefile-mode-hook 'indent-tabs-mode)
+
+(defadvice fill-paragraph (after indent-after activate)
+  "Indent after calling `fill-paragraph'."
+  (indent-buffer))
+
+(defun describe-major-mode ()
+  "Show inline doc for current `major-mode'."
+  ;; code by Kevin Rodgers. 2009-02-25
+  (interactive)
+  (describe-function major-mode))
+
+(defun my-randomize-region (beg end)
+  "Randomize lines in region from BEG to END."
+  (interactive "*r")
+  (let ((lines (split-string
+                (delete-and-extract-region beg end) "\n")))
+    (when (string-equal "" (car (last lines 1)))
+      (setq lines (butlast lines 1)))
+    (apply 'insert
+           (mapcar 'cdr
+                   (sort (mapcar (lambda (x) (cons (random) (concat x "\n"))) lines)
+                         (lambda (a b) (< (car a) (car b))))))))
 
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here

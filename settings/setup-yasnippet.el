@@ -53,5 +53,8 @@
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "M-SPC") #'yas-expand)
+
+;; (set-face-attribute 'yas-field-highlight-face nil :background "#333399")
+
 (provide 'setup-yasnippet)
 ;;; setup-yasnippet ends here

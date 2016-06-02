@@ -5,14 +5,19 @@
 
 ;;; Code:
 
+;; Seed the random-number generator
+(random t)
+
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(setq inhibit-startup-message t)
 
-;; Start emacs in fullscreen
+(setq inhibit-startup-screen t)
+
+;; ;; Start emacs in fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq initial-frame-alist '((fullscreen . maximized)))
 
 (defvar settings-dir
   (expand-file-name "settings" user-emacs-directory))
@@ -25,7 +30,7 @@
  message-directory (expand-file-name "Mail/" gnus-home-directory))
 
 (require 'epa)
-(epa-file-enable)
+;; (epa-file-enable)
 ;; (setq epg-gpg-program "/usr/bin/gpg2")
 
 ;; Set up load path
@@ -49,9 +54,6 @@
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
 (require 'setup-package)
-
-;; Set up appearance early
-(require 'appearance)
 
 ;; Install extensions if they're missing
 (defun init--install-packages ()
@@ -79,6 +81,7 @@
      caml
      change-inner
      cider
+     clj-refactor
      clojure-mode
      cmake-mode
      coffee-mode
@@ -99,10 +102,10 @@
      cpputils-cmake
      crappy-jsp-mode
      creole
+     crontab-mode
      css-eldoc
      css-mode
      ctable
-     cups
      dash
      dash-functional
      datomic-snippets
@@ -119,13 +122,12 @@
      emmet-mode
      epc
      epl
-     eproject
+     exec-path-from-shell
      expand-region
      f
      fakir
      feature-mode
      fill-column-indicator
-     find-file-in-project
      flim
      flx
      flx-ido
@@ -146,7 +148,6 @@
      gitconfig-mode
      gitignore-mode
      gmail-message-mode
-     gmail2bbdb
      gntp
      gnuplot-mode
      google-c-style
@@ -156,11 +157,9 @@
      ham-mode
      haml-mode
      hardcore-mode
-     haskell-mode
      helm
      helm-core
      highlight-escape-sequences
-     highlight-symbol
      hl-sexp
      html-to-markdown
      htmlize
@@ -219,13 +218,11 @@
      pcache
      peg
      perspective
-     php-auto-yasnippets
      php-mode
      pkg-info
      plsql
      popup
      popwin
-     powerline
      prodigy
      puppet-mode
      python-environment
@@ -249,17 +246,18 @@
      simplezen
      skewer-mode
      slime
+     slime-company
      smart-forward
      smart-mode-line
-     smart-mode-line-powerline-theme
      smartparens
+     smarty-mode
      smex
      smooth-scrolling
      smtpmail-multi
      spinner
      sql-indent
+     sqlplus
      sqlup-mode
-     ssh-file-modes
      swiper
      switch-window
      tagedit
@@ -275,7 +273,6 @@
      web
      web-completion-data
      web-mode
-     wget
      wgrep
      whitespace-cleanup-mode
      with-editor
@@ -291,6 +288,9 @@
    (package-refresh-contents)
    (init--install-packages)))
 
+;; Set up appearance early
+(require 'appearance)
+
 ;; Lets start with a smattering of sanity
 (require 'sane-defaults)
 
@@ -302,33 +302,32 @@
 (setq guide-key/popup-window-position 'bottom)
 
 ;; Setup extensions
-(eval-after-load 'ido '(require 'setup-ido))
-(eval-after-load 'org '(require 'setup-org))
-(eval-after-load 'dired '(require 'setup-dired))
-(eval-after-load 'magit '(require 'setup-magit))
-(eval-after-load 'grep '(require 'setup-rgrep))
-(eval-after-load 'shell '(require 'setup-shell))
-;; (require 'setup-hippie)
+(require 'setup-ido)
+(require 'setup-org)
+(require 'setup-dired)
+(require 'setup-rgrep)
+(require 'setup-shell)
 (require 'setup-yasnippet)
 (require 'setup-perspective)
-(require 'setup-ffip)
 (require 'setup-paredit)
 (require 'setup-web)
-;; (require 'setup-css)
+(require 'setup-css)
 (require 'setup-latex)
 (require 'setup-ocaml)
 (require 'setup-c)
-(require 'setup-arduino)
 (require 'setup-ispell)
 (require 'setup-sql)
-;; (require 'setup-gnus)
+(require 'setup-gnus)
 (require 'setup-bbdb)
-(require 'setup-highlight-symbol)
 (require 'setup-nxml)
 (require 'setup-ibuffer)
 (require 'setup-image)
 (require 'setup-gnuplot)
+(require 'setup-helm-dash)
 (require 'prodigy)
+(require 'setup-magit)
+(require 'setup-php)
+(require 'setup-lua)
 
 (eval-after-load "dash" '(dash-enable-font-lock))
 
@@ -350,13 +349,11 @@
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
 (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
 (eval-after-load 'markdown-mode '(require 'setup-markdown-mode))
-(eval-after-load 'haskell-mode '(require 'setup-haskell))
 
 ;; Load stuff on demand
 (autoload 'skewer-start "setup-skewer" nil t)
 (autoload 'skewer-demo "setup-skewer" nil t)
-(eval-after-load 'flycheck '(require 'setup-flycheck))
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(require 'setup-flycheck)
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; Map files to modes
@@ -370,15 +367,9 @@
 ;; Visual regexp
 (require 'visual-regexp)
 
-(defmacro λ (&rest body)
-  "Define λ as a shortcut for lambda function.
-The result is the evaluation of BODY"
-  `(lambda ()
-     (interactive)
-     ,@body))
-
 ;; Functions (load all files in defuns-dir)
 (defvar defuns-dir (expand-file-name "defuns" user-emacs-directory))
+
 (dolist (file (directory-files defuns-dir t "\\w+"))
   (when (file-regular-p file)
     (load file)))
@@ -387,7 +378,6 @@ The result is the evaluation of BODY"
 (require 'multiple-cursors)
 (require 'delsel)
 (require 'jump-char)
-(require 'eproject)
 (require 'wgrep)
 (require 'smart-forward)
 (require 'change-inner)
@@ -407,10 +397,6 @@ The result is the evaluation of BODY"
 ;; Show expand-region command used
 (setq er--show-expansion-message t)
 
-;; Fill column indicator
-(require 'fill-column-indicator)
-(setq fci-rule-color "#111122")
-
 ;; Browse kill ring
 (require 'browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
@@ -421,10 +407,6 @@ The result is the evaluation of BODY"
 
 ;; Setup key bindings
 (require 'key-bindings)
-
-;; Misc
-;; (require 'project-archetypes)
-;; (require 'my-misc)
 
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
@@ -442,15 +424,11 @@ The result is the evaluation of BODY"
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-defun 'disabled nil)
 
-;; (setq truncate-partial-width-windows nil)
-
+(require 'browse-url)
 (setq browse-url-browser-function 'browse-url-generic
-	  browse-url-generic-program "chromium-browser")
-(setq shr-external-browser 'browse-url-generic
-	  browse-url-generic-program "chromium-browser")
+      browse-url-generic-program "chromium-browser")
 
-(setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib:" (getenv "LD_LIBRARY_PATH")))
-;; (icomplete-mode 99)
+(icomplete-mode 99)
 
 (provide 'init)
 ;;; init.el ends here

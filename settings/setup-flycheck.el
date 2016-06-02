@@ -16,7 +16,7 @@
 This lets us fix any errors as quickly as possible, but in a
 clean buffer we're an order of magnitude laxer about checking."
   (setq flycheck-idle-change-delay
-        (if flycheck-current-errors 0.5 30.0)))
+        (if flycheck-current-errors 0.5 3.0)))
 
 ;; Each buffer gets its own idle-change-delay because of the
 ;; buffer-sensitive adjustment above.
@@ -35,16 +35,12 @@ clean buffer we're an order of magnitude laxer about checking."
   (flycheck-pos-tip-mode))
 
 (require 'flycheck-google-cpplint)
-(custom-set-variables '(flycheck-c/c++-googlelint-executable "/usr/local/bin/cpplint.py"))
-;; (flycheck-add-next-checker 'c/c++-clang 'c/c++-googlelint 'append)
+(setq flycheck-c/c++-googlelint-executable "/usr/local/bin/cpplint.py")
 (flycheck-add-next-checker 'c/c++-clang
                            '(warning . c/c++-googlelint))
 
-;; (custom-set-variables
-;;  '(flycheck-googlelint-verbose "3")
-;;  '(flycheck-googlelint-filter "-whitespace,+whitespace/braces")
-;;  '(flycheck-googlelint-root "project/src")
-;;  '(flycheck-googlelint-linelength "120"))
+(require 'flycheck-pos-tip)
+(setq flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
 
 (defun flycheck-handle-idle-change ()
   "Handle an expired idle time since the last change.
@@ -56,6 +52,8 @@ threaded system and the forced deferred makes errors never show
 up before you execute another command."
   (flycheck-clear-idle-change-timer)
   (flycheck-buffer-automatically 'idle-change))
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (provide 'setup-flycheck)
 ;;; setup-flycheck.el ends here

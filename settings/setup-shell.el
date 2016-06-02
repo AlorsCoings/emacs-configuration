@@ -1,7 +1,7 @@
 ;;; package --- setup-shell
 
 ;;; Commentary:
-;;; emacs shell configuration
+;;; Emacs shell configuration
 
 ;;; Code:
 
@@ -11,6 +11,8 @@
 
 ;; bash-completion
 
+(declare-function after-load "sane-defaults" (feature &rest body))
+
 (require 'shell)
 (autoload 'bash-completion-dynamic-complete
   "bash-completion"
@@ -19,6 +21,12 @@
           'bash-completion-dynamic-complete)
 (add-hook 'shell-command-complete-functions
           'bash-completion-dynamic-complete)
+
+(setenv "SHELL" "/bin/bash")
+(require 'exec-path-from-shell)
+(dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE"))
+  (add-to-list 'exec-path-from-shell-variables var))
+(exec-path-from-shell-initialize)
 
 ;; tab-completion for shell-command
 

@@ -5,6 +5,11 @@
 
 ;;; Code:
 
+(declare-function replace-region-by "editing-defuns" (fn))
+(declare-function save-region-or-current-line "editing-defuns" (arg))
+(declare-function subword-forward "subword" (&optional arg))
+(declare-function subword-backward "subword" (&optional arg))
+
 ;; I don't need to kill emacs that easily
 ;; the mnemonic is C-x REALLY QUIT
 (global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
@@ -19,7 +24,7 @@
 
 ;; Avoid typing full path when starting gdb
 (global-set-key (kbd "C-c g")
-                '(λ ()
+                '(lambda()
                    (interactive)
                    (gud-gdb (concat "gdb --fullname " (cppcm-get-exe-path-current-buffer)))))
 
@@ -73,10 +78,7 @@
 (global-set-key (kbd "C-x 2") 'split-window-vertically-with-other-buffer)
 (global-set-key (kbd "C-x 3") 'split-window-horizontally-with-other-buffer)
 
-
 ;; Completion that uses many different methods to find options.
-(global-set-key (kbd "C-.") 'hippie-expand-no-case-fold)
-(global-set-key (kbd "C-:") 'hippie-expand-lines)
 (global-set-key (kbd "C-,") 'completion-at-point)
 
 ;; Smart M-x
@@ -108,10 +110,10 @@
 
 ;; Change word separators
 (global-unset-key (kbd "C-x +")) ;; used to be balance-windows
-(global-set-key (kbd "C-x + -") (λ (replace-region-by 's-dashed-words)))
-(global-set-key (kbd "C-x + _") (λ (replace-region-by 's-snake-case)))
-(global-set-key (kbd "C-x + c") (λ (replace-region-by 's-lower-camel-case)))
-(global-set-key (kbd "C-x + C") (λ (replace-region-by 's-upper-camel-case)))
+(global-set-key (kbd "C-x + -") (lambda() (interactive) (replace-region-by 's-dashed-words)))
+(global-set-key (kbd "C-x + _") (lambda() (interactive) (replace-region-by 's-snake-case)))
+(global-set-key (kbd "C-x + c") (lambda() (interactive) (replace-region-by 's-lower-camel-case)))
+(global-set-key (kbd "C-x + C") (lambda() (interactive) (replace-region-by 's-upper-camel-case)))
 
 ;; Killing text
 (global-set-key (kbd "C-S-k") 'kill-and-retry-line)
@@ -119,7 +121,7 @@
 (global-set-key (kbd "C-c C-w") 'kill-to-beginning-of-line)
 
 ;; Use M-w for copy-line if no active region
-(global-set-key (kbd "M-w") (λ (save-region-or-current-line 1)))
+(global-set-key (kbd "M-w") (lambda() (interactive) (save-region-or-current-line 1)))
 (global-set-key (kbd "M-W") 'save-region-or-current-line)
 
 ;; Make shell more convenient, and suspend-frame less
@@ -139,14 +141,11 @@
 (global-set-key (kbd "C-x M-p") 'find-or-create-file-at-point-other-window)
 (global-set-key (kbd "C-c C-y") 'bury-buffer)
 (global-set-key (kbd "C-c C-r") 'revert-buffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;; toggle two most recent buffers
-(fset 'quick-switch-buffer [?\C-x ?b return])
-;; (global-set-key (kbd "C-x b") 'quick-switch-buffer)
+(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
+(global-set-key (kbd "C-x b") 'ibuffer)
 
 ;; Revert without any fuss
-(global-set-key (kbd "M-<escape>") (λ (revert-buffer t t)))
+(global-set-key (kbd "M-<escape>") (lambda() (interactive) (revert-buffer t t)))
 
 ;; Edit file with sudo
 (global-set-key (kbd "M-s e") 'sudo-edit)
@@ -159,7 +158,7 @@
 (global-set-key (kbd "C-!") 'mf/mirror-region-in-multifile)
 
 ;; Indentation help
-(global-set-key (kbd "M-j") (λ (join-line -1)))
+(global-set-key (kbd "M-j") (lambda() (interactive) (join-line -1)))
 
 ;; Help should search more than just commands
 (global-set-key (kbd "C-h j") 'apropos)
@@ -196,10 +195,10 @@
 (global-set-key (kbd "C-r") 'isearch-backward)
 
 ;; Move more quickly
-(global-set-key (kbd "C-S-n") (λ (ignore-errors (next-line 5))))
-(global-set-key (kbd "C-S-p") (λ (ignore-errors (previous-line 5))))
-(global-set-key (kbd "M-F") (λ (ignore-errors (subword-forward 5))))
-(global-set-key (kbd "M-B") (λ (ignore-errors (subword-backward 5))))
+(global-set-key (kbd "C-S-n") (lambda() (interactive) (ignore-errors (next-line 5))))
+(global-set-key (kbd "C-S-p") (lambda() (interactive) (ignore-errors (previous-line 5))))
+(global-set-key (kbd "M-F") (lambda() (interactive) (ignore-errors (subword-forward 5))))
+(global-set-key (kbd "M-B") (lambda() (interactive) (ignore-errors (subword-backward 5))))
 
 ;; Convenience on ThinkPad Keyboard: Use back/forward as pg up/down
 (global-set-key (kbd "<XF86Back>") 'scroll-down)
@@ -317,5 +316,6 @@
 (global-set-key (kbd "C-c t") 'typing-game)
 (global-set-key (kbd "C-c C-t") 'typing-game)
 
+(global-set-key (kbd "C-h é") 'describe-major-mode)
 (provide 'key-bindings)
 ;;; key-bindings.el ends here

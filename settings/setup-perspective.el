@@ -10,14 +10,15 @@
 ;; Enable perspective mode
 (persp-mode t)
 
-;; TODO: implement persp-last as before-advice on persp-switch (?)
-
-(defmacro custom-persp (name &rest body)
-  `(let ((initialize (not (gethash ,name perspectives-hash)))
-         (current-perspective persp-curr))
-     (persp-switch ,name)
-     (when initialize ,@body)
-     (setq persp-last current-perspective)))
+; s -- persp-switch: Query a perspective to switch or create
+; k -- persp-remove-buffer: Query a buffer to remove from current perspective
+; c -- persp-kill : Query a perspective to kill
+; r -- persp-rename: Rename current perspective
+; a -- persp-add-buffer: Query an open buffer to add to current perspective
+; A -- persp-set-buffer: Add buffer to current perspective and remove it from all others
+; i -- persp-import: Import a given perspective from another frame.
+; n, <right> -- persp-next : Switch to next perspective
+; p, <left> -- persp-prev: Switch to previous perspective
 
 (defun custom-persp-last ()
   "Jump to last perspective."

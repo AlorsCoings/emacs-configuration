@@ -1,7 +1,7 @@
 ;;; package --- setup-js2-mode
 
 ;;; Commentary:
-;;; Emacs configuration file for js2 -*- lexical-binding: t; -*-
+;;; Emacs configuration file for js2
 
 ;;; Code:
 
@@ -18,8 +18,9 @@
               js2-include-rhino-externs nil
               js2-include-gears-externs nil
               js2-concat-multiline-strings 'eol
-              js2-rebind-eol-bol-keys nil)
-(setq-default js-indent-level 2)
+              js2-rebind-eol-bol-keys nil
+              js-indent-level 2)
+;; (set-face-attribute 'js2-function-param-face t :foreground "LightGoldenrod")
 
 (require 'coffee-mode)
 (setq coffee-tab-width 2)
@@ -37,9 +38,8 @@
 (require 'js2-imenu-extras)
 (js2-imenu-extras-setup)
 
-;; Set up wrapping of pairs, with the possiblity of semicolons thrown into the mix
-
 (defun js2r--setup-wrapping-pair (open close)
+  "Set up wrapping of pairs (OPEN, CLOSE), with the possiblity of semicolons thrown into the mix."
   (define-key js2-mode-map (read-kbd-macro open) (λ (js2r--self-insert-wrapping open close)))
   (unless (s-equals? open close)
     (define-key js2-mode-map (read-kbd-macro close) (λ (js2r--self-insert-closing open close)))))
@@ -50,6 +50,7 @@
        (funcall 'self-insert-command 1))))
 
 (defun js2r--self-insert-wrapping (open close)
+  "Self insert wrapping between OPEN and CLOSE."
   (cond
    ((use-region-p)
     (save-excursion
@@ -75,7 +76,8 @@
       (js2r--remove-all-this-cruft-on-backward-delete)))))
 
 (defun js2r--remove-all-this-cruft-on-backward-delete ()
-  (set-temporary-overlay-map
+  "Bind `DEL' and `C-h' to undo-tree-undo for the next key."
+  (set-transient-map
    (let ((map (make-sparse-keymap)))
      (define-key map (kbd "DEL") 'undo-tree-undo)
      (define-key map (kbd "C-h") 'undo-tree-undo)
@@ -194,13 +196,16 @@
                 ))))
 
 (require 'json)
+(require 'json-reformat)
+(setq json-reformat:indent-width 2)
+(setq json-reformat:pretty-string\? t)
 
 (defun my-aget (key map)
   (cdr (assoc key map)))
 
 (defun js2-fetch-autolint-externs (file)
   (let* ((settings (with-temp-buffer
-                     (insert-file-literally file)
+                     (insert-file-contents-literally file)
                      (javascript-mode)
                      (let (kill-ring kill-ring-yank-pointer) (kill-comment 1000))
                      (->> (buffer-substring (point-min) (point-max))
@@ -228,7 +233,8 @@
     (insert html)
     (html-mode)
     (indent-region (point-min) (point-max))
-    (goto-line line-number)
+    (goto-char (point-min))
+    (forward-line (1- line-number))
     (back-to-indentation)
     (current-column)))
 

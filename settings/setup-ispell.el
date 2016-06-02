@@ -1,13 +1,16 @@
 ;;; package --- setup-ispell
 
 ;;; Commentary:
-;;; Emacs ispell configuration
+;;; Emacs Ispell configuration
 
 ;;; Code:
 
+(declare-function after-load "sane-defaults" (feature &rest body))
+
 (require 'ispell)
 
-(setq ispell-dictionary "english")
+(setq ispell-highlight-face 'custom-themed)
+(setq ispell-dictionary "french")
 (defun fd-switch-dictionary()
   "Change dictionary for ispell."
   (interactive)
@@ -48,6 +51,7 @@
 ;; ispell-extra-args is the command arguments which will *always* be used when start ispell process
 (setq ispell-extra-args (flyspell-detect-ispell-args t))
 ;; (setq ispell-cmd-args (flyspell-detect-ispell-args))
+
 (defadvice ispell-word (around my-ispell-word activate)
   (let ((old-ispell-extra-args ispell-extra-args))
     (ispell-kill-ispell t)
@@ -99,5 +103,6 @@
   (add-to-list 'flyspell-prog-text-faces 'nxml-text-face))
 
 (global-set-key (kbd "<f8>") 'fd-switch-dictionary)
+
 (provide 'setup-ispell)
 ;;; setup-ispell.el ends here

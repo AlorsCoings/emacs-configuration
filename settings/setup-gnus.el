@@ -15,8 +15,6 @@
 ;; You need this to be able to list all labels in gmail
 (setq gnus-ignored-newsgroups "")
 
-;; (setenv "GPG_AGENT_INFO"  nil)
-
 (setq gnus-select-method '(nnml ""))
 (add-to-list 'gnus-secondary-select-methods
              '(nnimap "gros.nicolas0"
@@ -24,28 +22,28 @@
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)
                       (nnimap-authinfo-file "~/.authinfo.gpg")
-					  ))
+                      ))
 (add-to-list 'gnus-secondary-select-methods
              '(nnimap "nico9ness"
                       (nnimap-address "imap.gmail.com")
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)
                       (nnimap-authinfo-file "~/.authinfo.gpg")
-					  ))
+                      ))
 (add-to-list 'gnus-secondary-select-methods
              '(nnimap "nico8ness"
                       (nnimap-address "imap.gmail.com")
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)
                       (nnimap-authinfo-file "~/.authinfo.gpg")
-					  ))
+                      ))
 (add-to-list 'gnus-secondary-select-methods
              '(nnimap "nico7ness"
                       (nnimap-address "imap.gmail.com")
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)
                       (nnimap-authinfo-file "~/.authinfo.gpg")
-					  ))
+                      ))
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
 (require 'gnus-group)
@@ -55,20 +53,13 @@
 (require 'sendmail)
 (setq message-send-mail-function 'message-send-mail-with-sendmail)
 (setq sendmail-program "/usr/bin/msmtp")
-
+(setq send-mail-function 'smtpmail-send-it)
 
 ;; This is needed to allow msmtp to do its magic:
 (setq message-sendmail-f-is-evil 't)
 
-;;need to tell msmtp which account we're using
+;; Need to tell msmtp which account we're using
 (setq message-sendmail-extra-arguments '("--read-envelope-from"))
-
-;; (setq message-send-mail-function 'message-send-mail-with-sendmail)
-;; (setq sendmail-program "/usr/local/bin/msmtpq"
-;;       mail-specify-envelope-from t
-;;       message-sendmail-f-is-evil nil
-;;       mail-envelope-from 'header
-;;       message-sendmail-envelope-from 'header)
 
 (setq gnus-parameters
       '(("nnimap gros.nicolas0:nnimap+gros.nicolas0*"

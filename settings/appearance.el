@@ -8,19 +8,29 @@
 (setq font-lock-maximum-decoration t
       truncate-partial-width-windows nil)
 
+(set-face-attribute 'default nil :inherit nil :stipple nil :background "black" :foreground "gray90" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant 'normal :weight 'normal :height 128 :width 'normal :foundry "adobe" :family "Source Code Pro")
+(set-face-attribute 'region nil :background "gray25")
+(set-face-attribute 'font-lock-warning-face nil :foreground "#ff6666")
+(set-face-attribute 'highlight nil :background "#111111")
+
 ;; Highlight current line
 (global-hl-line-mode 1)
+(set-face-attribute 'hl-line nil :background "gray10")
 
 ;; Highlight sexp
 (require 'hl-sexp)
 ;; Prevent flickery behaviour due to hl-sexp-mode unhighlighting before each command
 (eval-after-load 'hl-sexp
-            (defadvice hl-sexp-mode (after unflicker (&optional turn-on) activate)
-              (when turn-on
-                (remove-hook 'pre-command-hook #'hl-sexp-unhighlight))))
+  (defadvice hl-sexp-mode (after unflicker (&optional turn-on) activate)
+    (when turn-on
+      (remove-hook 'pre-command-hook #'hl-sexp-unhighlight))))
 
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
+(set-face-attribute 'show-paren-match nil :background "#333399")
+(set-face-attribute 'show-paren-mismatch nil :background "red3" :foreground "white")
+
+(setq global-visual-line-mode nil)
 
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
@@ -44,22 +54,56 @@
 (eval-after-load "guide-key" '(diminish 'guide-key-mode))
 (eval-after-load "whitespace-cleanup-mode" '(diminish 'whitespace-cleanup-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
+(eval-after-load "autorevert" '(diminish 'auto-revert-mode))
 
+(setq custom-safe-themes
+      '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
+        default))
 
-(require 'powerline)
 (require 'smart-mode-line)
-;; Setup smart-mode-line with powerline
-(setq sml/theme 'powerline)
+(setq sml/theme 'dark)
 (sml/setup)
-;; Customize smart-mode-line
-(setq powerline-default-separator 'curve)
-(setq powerline-default-separator-dir '(right . left)
-      sml/name-width 30
-      sml/mode-width 'full)
-(set-face-attribute 'mode-line nil
-                    :foreground "Black"
-                    :background "gray10"
-                    :box nil)
+
+;; Fill column indicator
+(require 'fill-column-indicator)
+(setq fci-rule-color "gray10")
+(add-hook 'c-mode-hook 'fci-mode)
+(add-hook 'c++-mode-hook 'fci-mode)
+(add-hook 'lua-mode-hook 'fci-mode)
+(add-hook 'python-mode-hook 'fci-mode)
+(add-hook 'tuareg-mode-hook 'fci-mode)
+(add-hook 'clojure-mode-hook 'fci-mode)
+(add-hook 'ruby-mode-hook 'fci-mode)
+(add-hook 'js2-mode-hook 'fci-mode)
+(add-hook 'js-mode-hook 'fci-mode)
+(add-hook 'emacs-lisp-mode-hook 'fci-mode)
+(add-hook 'lisp-mode-hook 'fci-mode)
+(add-hook 'sh-mode-hook 'fci-mode)
+(add-hook 'java-mode-hook 'fci-mode)
+
+(require 'vc-annotate)
+(setq vc-annotate-background nil)
+(setq vc-annotate-color-map
+  (quote
+   ((20 . "#dc322f")
+    (40 . "#cb4b16")
+    (60 . "#b58900")
+    (80 . "#859900")
+    (100 . "#2aa198")
+    (120 . "#268bd2")
+    (140 . "#d33682")
+    (160 . "#6c71c4")
+    (180 . "#dc322f")
+    (200 . "#cb4b16")
+    (220 . "#b58900")
+    (240 . "#859900")
+    (260 . "#2aa198")
+    (280 . "#268bd2")
+    (300 . "#d33682")
+    (320 . "#6c71c4")
+    (340 . "#dc322f")
+    (360 . "#cb4b16"))))
+(setq vc-annotate-very-old-color nil)
 
 (provide 'appearance)
 ;;; appearance ends here

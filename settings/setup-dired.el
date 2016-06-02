@@ -1,7 +1,7 @@
 ;;; package --- setup-dired
 
 ;;; Commentary:
-;;; emacs dired configuration
+;;; Emacs dired configuration
 
 ;;; Code:
 
@@ -28,8 +28,8 @@
           dired-do-copy
           dired-create-directory
           wdired-abort-changes)
-        (eval `(defadvice ,it (after revert-buffer activate)
-                 (revert-buffer))))
+  (eval `(defadvice ,it (after revert-buffer activate)
+           (revert-buffer))))
 
 ;; C-a is nicer in dired if it moves back to start of files
 (defun dired-back-to-start-of-files ()
@@ -47,7 +47,8 @@
   "Move to the third line - the first file."
   (interactive)
   (goto-char (point-min))
-  (dired-next-line 3))
+  (forward-line 4)
+  (dired-back-to-start-of-files))
 
 (define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
 (define-key dired-mode-map (vector 'remap 'smart-up) 'dired-back-to-top)
@@ -57,7 +58,9 @@
   "Move to the last file."
   (interactive)
   (goto-char (point-max))
-  (dired-next-line -1))
+  ;; For smooth-scroll to take effect
+  (dired-next-line -2)
+  (dired-next-line 1))
 
 (define-key dired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 (define-key dired-mode-map (vector 'remap 'smart-down) 'dired-jump-to-bottom)
@@ -77,9 +80,9 @@
              zip-file
              " "
              (concat-string-list (mapcar
-               #'(lambda (filename)
-                  (file-name-nondirectory filename))
-               (dired-get-marked-files))))))
+                                  #'(lambda (filename)
+                                      (file-name-nondirectory filename))
+                                  (dired-get-marked-files))))))
   (revert-buffer))
 
 (defun concat-string-list (list)

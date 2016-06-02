@@ -8,9 +8,11 @@
 (require 'clojure-mode)
 
 (defadvice clojure-test-run-tests (before save-first activate)
+  "Save before `cloujure-test-run-tests'."
   (save-buffer))
 
 (defadvice nrepl-load-current-buffer (before save-first activate)
+  "Save before `nrepl-load-current-buffer'."
   (save-buffer))
 
 (require 'clj-refactor)

@@ -43,17 +43,13 @@
   "Add current file path to kill ring. Limits the filename to project root if possible."
   (interactive)
   (let ((filename (buffer-file-name)))
-    (kill-new (if eproject-mode
-                  (s-chop-prefix (eproject-root) filename)
-                filename))))
+    (kill-new filename)))
 
 (defun copy-current-file-name ()
   "Add current file name to kill ring"
   (interactive)
   (let ((filename (file-name-nondirectory (buffer-file-name))))
-    (kill-new (if eproject-mode
-                  (s-chop-prefix (eproject-root) filename)
-                filename))))
+    (kill-new filename)))
 
 (defun find-or-create-file-at-point ()
   "Guesses what parts of the buffer under point is a file name and opens it."
