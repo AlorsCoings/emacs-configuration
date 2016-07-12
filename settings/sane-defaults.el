@@ -341,5 +341,9 @@ With argument PREFIX, print output into current buffer."
            ("github\\.com" . markdown-mode)))
   (add-to-list 'edit-server-url-major-mode-alist mode-to-use))
 
+;; Avoid issue with non-ascii characters with dired over ssh with tramp
+(require 'tramp)
+(setq tramp-remote-process-environment ())
+(add-to-list 'tramp-remote-process-environment "LC_ALL=en_US.UTF-8" 'append)
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here
