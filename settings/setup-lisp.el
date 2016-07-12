@@ -28,7 +28,7 @@
 
 (require 'slime-repl)
 (after-load 'slime-repl
-  (define-key slime-repl-mode-map (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer))
+  (define-key slime-repl-mode-map (kbd "C-e") 'comint-delchar-or-eof-or-kill-buffer))
 
 (setq slime-net-coding-system 'utf-8-unix)
 (let ((extras (when (require 'slime-company nil t)

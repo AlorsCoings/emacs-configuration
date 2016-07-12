@@ -50,30 +50,56 @@
 (define-key paredit-mode-map (kbd "M-s-(") 'paredit-wrap-curly)
 (define-key paredit-mode-map (kbd "M-s-)") 'paredit-wrap-curly-from-behind)
 
-(define-key paredit-mode-map (kbd "C-w") 'paredit-kill-region-or-backward-word)
-(define-key paredit-mode-map (kbd "M-C-<backspace>") 'backward-kill-sexp)
-
 ;; Change nasty paredit keybindings
 (defvar my-nasty-paredit-keybindings-remappings
-  '(("M-s"         "C-M-S-d"         paredit-splice-sexp)
-    ("M-<up>"      "C-M-S-p"      paredit-splice-sexp-killing-backward)
-    ("M-<down>"    "C-M-S-n"    paredit-splice-sexp-killing-forward)
-    ("C-<right>"   "C-M-S-f"   paredit-forward-slurp-sexp)
-    ("C-<left>"    "C-M-S-b"    paredit-forward-barf-sexp)
-    ("C-M-<left>"  "C-M-S-a"  paredit-backward-slurp-sexp)
-    ("C-M-<right>" "C-M-S-e" paredit-backward-barf-sexp)))
+  '(("M-d"         "M-e"     paredit-forward-kill-word)
+    ("C-d"         "C-e"     paredit-forward-delete)
+    ("C-M-f"       "C-M-r"   paredit-forward)
+    ("C-M-b"       "C-M-t"   paredit-backward)
+    ("C-M-p"       "C-M-d"   paredit-backward-down)
+    ("C-M-n"       "C-M-s"   paredit-forward-up)
+    ("M-s"         "C-M-S-e" paredit-splice-sexp)
+    ("M-S"         "M-d"     paredit-split-sexp)
+    ("M-r"         "C-M-S-a" paredit-raise-sexp)
+    ("M-<up>"      "C-M-S-d" paredit-splice-sexp-killing-backward)
+    ("M-<down>"    "C-M-S-s" paredit-splice-sexp-killing-forward)
+    ("C-<right>"   "C-M-S-r" paredit-forward-slurp-sexp)
+    ("C-<left>"    "C-M-S-t" paredit-forward-barf-sexp)
+    ("C-M-<left>"  "C-M-S-v" paredit-backward-slurp-sexp)
+    ("C-M-<right>" "C-M-S-l" paredit-backward-barf-sexp)))
 
-(define-key paredit-mode-map (kbd "C-M-S-r") 'paredit-raise-sexp)
+(define-key paredit-mode-map (kbd "C-e") 'paredit-forward-delete)
+(define-key paredit-mode-map (kbd "M-e") 'paredit-forward-kill-word)
+(define-key paredit-mode-map (kbd "C-'") 'paredit-backward-delete)
+(define-key paredit-mode-map (kbd "M-'") 'paredit-backward-kill-word)
+;; don't hijack \ please
+(define-key paredit-mode-map (kbd "\\") nil)
 
 (--each my-nasty-paredit-keybindings-remappings
- (let ((original (car it))
+  (let ((original (car it))
         (replacement (cadr it))
         (command (car (last it))))
     (define-key paredit-mode-map (read-kbd-macro original) nil)
     (define-key paredit-mode-map (read-kbd-macro replacement) command)))
 
-;; don't hijack \ please
-(define-key paredit-mode-map (kbd "\\") nil)
+(require 'paredit-everywhere)
+(add-hook 'prog-mode-hook 'paredit-everywhere-mode)
+(add-hook 'css-mode-hook 'paredit-everywhere-mode)
+
+;; Redefine paredit-everywhere keymap
+(define-key paredit-everywhere-mode-map (kbd "C-M-S-v") 'paredit-forward-slurp-sexp)
+(define-key paredit-everywhere-mode-map (kbd "C-M-S-l") 'paredit-forward-barf-sexp)
+(define-key paredit-everywhere-mode-map (kbd "M-d") 'paredit-split-sexp)
+(define-key paredit-everywhere-mode-map (kbd "M-J") 'paredit-join-sexps)
+(define-key paredit-everywhere-mode-map (kbd "C-M-S-e") 'paredit-splice-sexp)
+(define-key paredit-everywhere-mode-map (kbd "C-M-S-a") 'paredit-raise-sexp)
+(define-key paredit-everywhere-mode-map (kbd "M-'") 'paredit-backward-kill-word)
+(define-key paredit-everywhere-mode-map (kbd "M-e") 'paredit-forward-kill-word)
+(define-key paredit-everywhere-mode-map (kbd "M-S") nil)
+(define-key paredit-everywhere-mode-map (kbd "M-r") nil)
+(define-key paredit-everywhere-mode-map (kbd "M-s") nil)
+(define-key paredit-everywhere-mode-map (kbd "M-DEL") nil)
+(define-key paredit-everywhere-mode-map (kbd "M-d") nil)
 
 (defun conditionally-enable-paredit-mode ()
   "Enable `paredit-mode' in the minibuffer, during `eval-expression'."
@@ -100,10 +126,6 @@
     sp-select-next-thing
     sp-forward-symbol
     sp-backward-symbol))
-
-(require 'paredit-everywhere)
-(add-hook 'prog-mode-hook 'paredit-everywhere-mode)
-(add-hook 'css-mode-hook 'paredit-everywhere-mode)
 
 (provide 'setup-paredit)
 ;;; setup-paredit.el ends here

@@ -97,17 +97,16 @@
    (:else (call-interactively 'self-insert-command))))
 
 (defun my/setup-ido ()
-  "Define keys for `ido-file-completion-map'."
-  (define-key ido-file-completion-map (kbd "~") 'my/ido-go-straight-home)
-  (define-key ido-file-completion-map (kbd "C-~") 'my/ido-go-straight-home)
-
-  ;; Use C-w to go back up a dir to better match normal usage of C-w
-  ;; - insert current file name with C-x C-w instead.
-  (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)
-  (define-key ido-file-completion-map (kbd "C-x C-w") 'ido-copy-current-file-name)
-
-  (define-key ido-file-dir-completion-map (kbd "C-w") 'ido-delete-backward-updir)
-  (define-key ido-file-dir-completion-map (kbd "C-x C-w") 'ido-copy-current-file-name))
+  "Define keys for `ido-common-completion-map'."
+  (define-key ido-common-completion-map (kbd "~") 'my/ido-go-straight-home)
+  (define-key ido-common-completion-map (kbd "C-~") 'my/ido-go-straight-home)
+  (define-key ido-common-completion-map (kbd "C-w") 'ido-delete-backward-updir)
+  (define-key ido-common-completion-map (kbd "C-x C-w") 'ido-copy-current-file-name)
+  (define-key ido-common-completion-map (kbd "C-e") 'ido-magic-delete-char)
+  (define-key ido-common-completion-map (kbd "C-'") 'ido-delete-backward-updir)
+  (define-key ido-common-completion-map (kbd "C-t") 'ido-magic-backward-char)
+  (define-key ido-common-completion-map (kbd "C-r") 'ido-magic-forward-char)
+  (define-key ido-common-completion-map (kbd "C-d") 'ido-prev-match))
 
 (add-hook 'ido-setup-hook 'my/setup-ido)
 

@@ -52,6 +52,9 @@
                              "~/org/perlesSoline.org"
                              "~/org/test.org"))
 
+(require 'org-agenda)
+(define-key org-agenda-mode-map (kbd "V") 'org-agenda-do-date-earlier)
+(define-key org-agenda-mode-map (kbd "L") 'org-agenda-do-date-later)
 
 (defun my-org-metaup ()
   "Increase date element if on a date otherwise use org-metaup."
@@ -81,21 +84,36 @@
   "Increase days if on a date otherwise use org-metaright."
   (interactive)
   (if
-	  (or (org-at-date-range-p) (org-at-timestamp-p) (org-at-clock-log-p))
-	  (org-timestamp-up-day)
-	(org-metaright)))
+      (or (org-at-date-range-p) (org-at-timestamp-p) (org-at-clock-log-p))
+      (org-timestamp-up-day)
+    (org-metaright)))
 
-(add-hook 'org-mode-hook
-		  (lambda ()
-			(define-key org-mode-map (kbd "M-p") 'my-org-metaup)
-			(define-key org-mode-map (kbd "M-n") 'my-org-metadown)
-			(define-key org-mode-map (kbd "M-P") 'org-shiftmetaup)
-			(define-key org-mode-map (kbd "M-N") 'org-shiftmetadown)
-			(define-key org-mode-map (kbd "M-a") 'my-org-metaleft)
-			(define-key org-mode-map (kbd "M-e") 'my-org-metaright)
-			(define-key org-mode-map (kbd "M-A") 'org-shiftmetaleft)
-			(define-key org-mode-map (kbd "M-E") 'org-shiftmetaright)
-			(define-key org-mode-map (kbd "C-c C-x C-s") 'org-clock-in)))
+;; Don't split the line when creating new headline
+(add-to-list 'org-M-RET-may-split-line '(headline . nil))
+
+(define-key org-mode-map (kbd "C-M-t") nil)
+(define-key org-mode-map (kbd "M-d") 'my-org-metaup)
+(define-key org-mode-map (kbd "M-s") 'my-org-metadown)
+(define-key org-mode-map (kbd "M-D") 'org-shiftmetaup)
+(define-key org-mode-map (kbd "M-S") 'org-shiftmetadown)
+(define-key org-mode-map (kbd "M-v") 'my-org-metaleft)
+(define-key org-mode-map (kbd "M-l") 'my-org-metaright)
+(define-key org-mode-map (kbd "M-V") 'org-shiftmetaleft)
+(define-key org-mode-map (kbd "M-L") 'org-shiftmetaright)
+(define-key org-mode-map (kbd "C-c v") 'outline-up-heading)
+(define-key org-mode-map (kbd "C-c C-'") 'org-table-edit-field)
+(define-key org-mode-map (kbd "C-e") 'delete-forward-char)
+(define-key org-mode-map (kbd "M-e") 'kill-word)
+(define-key org-mode-map (kbd "C-M-e") 'kill-sexp)
+(define-key org-mode-map (kbd "C-i") 'delete-backward-char)
+(define-key org-mode-map (kbd "M-i") 'backward-kill-word)
+(define-key org-mode-map (kbd "C-M-i") 'backward-kill-sexp)
+(define-key org-mode-map (kbd "C-c C-x C-s") 'org-clock-in)
+(define-key org-mode-map (kbd "C-c C-x C-p") 'org-set-property)
+(define-key org-mode-map (kbd "C-c C-x C-d") 'org-clock-display)
+(define-key org-mode-map (kbd "C-c C-x C-o") 'org-clock-out)
+
+(global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
 
 (require 'org-table)
 (add-to-list 'orgtbl-radio-table-templates

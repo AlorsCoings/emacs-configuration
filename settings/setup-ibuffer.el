@@ -14,10 +14,10 @@
 
 (declare-function after-load "sane-defaults" (feature &rest body))
 
-(require 'fullframe)
 (require 'ibuffer)
-(after-load 'ibuffer
-  (fullframe ibuffer ibuffer-quit))
+;; (require 'fullframe)
+;; (after-load 'ibuffer
+;;   (fullframe ibuffer ibuffer-quit))
 
 ;; Explicitly require ibuffer-vc to get its column definitions, which
 ;; can't be autoloaded
@@ -30,7 +30,9 @@
   (unless (eq ibuffer-sorting-mode 'filename/process)
     (ibuffer-do-sort-by-filename/process)))
 
-(add-hook 'ibuffer-hook 'ibuffer-set-up-preferred-filters)
+(add-hook 'ibuffer-hook (lambda ()
+                          (ibuffer-set-up-preferred-filters)
+                          (define-key ibuffer-mode-map (kbd "C-d") 'previous-line)))
 
 (setq-default ibuffer-show-empty-filter-groups nil)
 

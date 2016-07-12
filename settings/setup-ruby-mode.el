@@ -25,7 +25,7 @@
 
 (add-hook 'inf-ruby-mode-hook
           (lambda ()
-            (define-key inf-ruby-mode-map (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)))
+            (define-key inf-ruby-mode-map (kbd "C-e") 'comint-delchar-or-eof-or-kill-buffer)))
 
 ;; M-. to jump to the definition
 ;; M-, to jump back

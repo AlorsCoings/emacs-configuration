@@ -32,7 +32,7 @@
 (setq tuareg-library-path "/usr/lib/ocaml")
 (add-hook 'tuareg-interactive-mode-hook
           (lambda ()
-            (define-key tuareg-interactive-mode-map (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)))
+            (define-key tuareg-interactive-mode-map (kbd "C-e") 'comint-delchar-or-eof-or-kill-buffer)))
 
 (provide 'setup-ocaml)
 ;;; setup-ocaml.el ends here

@@ -32,7 +32,7 @@
 ;; (setq cppcm-extra-preprocss-flags-from-user '("-I/usr/src/linux/include" "-DNDEBUG"))
 
 (require 'gud)
-(define-key gud-mode-map (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)
+(define-key gud-mode-map (kbd "C-e") 'comint-delchar-or-eof-or-kill-buffer)
 
 ;; gdb print vector
 ;; print *(myVector._M_impl._M_start)@myVector.size()
@@ -47,26 +47,29 @@
 ;; (defvar c-eldoc-cpp-normal-arguments "-w -P")
 ;; (defvar c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ ") ;; include flags
 
+(defun my-c-define-keybindings (map)
+  "Define personal key bindings c/c++ MAP."
+  (define-key map (kbd "C-c C-c") 'compile)
+  (define-key map (kbd "M-j") (lambda () (interactive) (join-line -1)))
+  (define-key map (kbd "C-<tab>") 'company-complete)
+  (define-key map (kbd "C-e") 'c-electric-delete-forward)
+  (define-key map (kbd "C-d") 'previous-line))
+
 (defun c-eldoc-define-keybindings (map)
   "Eldoc defines key bindings in MAP."
   (define-key map (kbd "C-c C-d") 'c-eldoc-force-cache-update))
+
 (add-hook 'c-mode-hook
           (lambda ()
             (c-eldoc-define-keybindings c-mode-map)
+            (my-c-define-keybindings c-mode-map)
             (setq c-basic-offset 4)))
 (add-hook 'c++-mode-hook
           (lambda ()
             (c-eldoc-define-keybindings c++-mode-map)
+            (my-c-define-keybindings c++-mode-map)
             (setq c-basic-offset 4)))
 
-(define-key c++-mode-map (kbd "C-c C-c") 'compile)
-(define-key c-mode-map (kbd "C-c C-c") 'compile)
-
-(define-key c++-mode-map (kbd "M-j") (lambda () (interactive) (join-line -1)))
-(define-key c-mode-map (kbd "M-j") (lambda () (interactive) (join-line -1)))
-
-(define-key c++-mode-map (kbd "C-<tab>") 'company-complete)
-(define-key c-mode-map (kbd "C-<tab>") 'company-complete)
 
 (require 'company)
 (add-to-list 'company-backends 'company-c-headers)
