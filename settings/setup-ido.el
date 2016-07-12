@@ -20,7 +20,7 @@
 
 (require 'ido-ubiquitous)
 (setq
- ido-cr+-max-items 35000
+ ido-cr+-max-items 50000
  ido-ubiquitous-command-overrides
  '((enable exact "mml-attach-file")
    (disable exact "execute-extended-command")

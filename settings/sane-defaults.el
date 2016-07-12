@@ -15,8 +15,7 @@
  bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
  indent-tabs-mode nil
  save-interprogram-paste-before-kill t
- show-trailing-whitespace t
- )
+ show-trailing-whitespace t)
 
 (require 'switch-window)
 (setq switch-window-shortcut-style 'alphabet)
@@ -216,14 +215,20 @@
   "Offer to create parent directories if they do not exist."
   (let ((parent-directory (file-name-directory buffer-file-name)))
     (when (and (not (file-exists-p parent-directory))
-               (y-or-n-p (format "Directory `%s' does not exist! Create it? " parent-directory)))
+               (y-or-n-p (format "Directory `%s' does not exist! Create it? "
+                                 parent-directory)))
       (make-directory parent-directory t))))
 
 (add-to-list 'find-file-not-found-functions 'my-create-non-existent-directory)
 
-;; Disallow scrolling with mouse wheel
+;; Disable most mouse interaction
 (when window-system
-  (mouse-wheel-mode -1))
+  (dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]
+               [mouse-2] [down-mouse-2] [drag-mouse-2] [double-mouse-2] [triple-mouse-2]
+               [mouse-3] [down-mouse-3] [drag-mouse-3] [double-mouse-3] [triple-mouse-3]
+               [mouse-4] [down-mouse-4] [drag-mouse-4] [double-mouse-4] [triple-mouse-4]
+               [mouse-5] [down-mouse-5] [drag-mouse-5] [double-mouse-5] [triple-mouse-5]))
+    (global-unset-key k)))
 
 (when (fboundp 'electric-pair-mode)
   (electric-pair-mode))
@@ -293,18 +298,31 @@ With argument PREFIX, print output into current buffer."
       (eval-region (min (point) (mark)) (max (point) (mark)))
     (pp-eval-last-sexp prefix)))
 (global-set-key [remap eval-expression] 'pp-eval-expression)
-(define-key emacs-lisp-mode-map (kbd "C-x C-e") 'sanityinc/eval-last-sexp-or-region)
+(define-key emacs-lisp-mode-map (kbd "C-x C-e")
+  'sanityinc/eval-last-sexp-or-region)
 
 ;; Add Urban Dictionary to webjump (C-x g)
 (require 'webjump)
-(add-to-list 'webjump-sites '("Urban Dictionary" .
-                              [simple-query
-                               "www.urbandictionary.com"
-                               "http://www.urbandictionary.com/define.php?term="
-                               ""]))
+
+;; Webjump let's you quickly search google, wikipedia
+(defvar webjump-sites
+  '(("Google" .
+     [simple-query "www.google.com" "www.google.com/search?q=" ""])
+    ("Google Groups" .
+     [simple-query "groups.google.com" "groups.google.com/groups?q=" ""])
+    ("DuckDuckGo" .
+     [simple-query "duckduckgo.com" "duckduckgo.com/?q=" ""])
+    ("Wikipedia" .
+     [simple-query "wikipedia.org" "wikipedia.org/wiki/" ""])
+    ("Urban Dictionary" .
+     [simple-query "www.urbandictionary.com"
+                   "http://www.urbandictionary.com/define.php?term=" ""])))
 
 ;; Fix whitespace on save, but only if the file was clean
 (global-whitespace-cleanup-mode)
+
+;; Do not remove double space at end of line
+(add-hook 'markdown-mode-hook (lambda () (whitespace-cleanup-mode -1)))
 
 ;; Use normal tabs in makefiles
 (add-hook 'makefile-mode-hook 'indent-tabs-mode)
@@ -331,6 +349,11 @@ With argument PREFIX, print output into current buffer."
                    (sort (mapcar (lambda (x) (cons (random) (concat x "\n"))) lines)
                          (lambda (a b) (< (car a) (car b))))))))
 
+(require 'google-translate-default-ui)
+;; Make Google translate from auto-detect to french by default
+(setq google-translate-default-source-language "auto")
+(setq google-translate-default-target-language "fr")
+
 ;; Require the pandoc package to be installed on your system
 (when (and (require 'edit-server nil t) (daemonp))
   (edit-server-start))
@@ -340,6 +363,9 @@ With argument PREFIX, print output into current buffer."
            ("inbox\\.google\\." . gmail-message-edit-server-mode)
            ("github\\.com" . markdown-mode)))
   (add-to-list 'edit-server-url-major-mode-alist mode-to-use))
+
+;; No warning for goal-column
+(put 'set-goal-column 'disabled nil)
 
 ;; Avoid issue with non-ascii characters with dired over ssh with tramp
 (require 'tramp)

@@ -33,7 +33,8 @@
       org-archive-mark-done nil
       org-catch-invisible-edits 'show
       org-fast-tag-selection-single-key 'expert
-	  org-tags-column 80)
+      org-tags-column 80
+      org-enforce-todo-dependencies t)
 
 (require 'ox)
 (setq org-export-coding-system 'utf-8)
@@ -43,14 +44,7 @@
 ;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 (setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
 
-;; (setq org-log-done 'note)
-(setq org-agenda-files (list "~/org/home.org"
-                             "~/org/journal.org"
-                             "~/org/work.org"
-                             "~/org/maison.org"
-                             "~/org/menu.org"
-                             "~/org/perlesSoline.org"
-                             "~/org/test.org"))
+(setq org-agenda-files '("~/org"))
 
 (require 'org-agenda)
 (define-key org-agenda-mode-map (kbd "V") 'org-agenda-do-date-earlier)
@@ -60,25 +54,25 @@
   "Increase date element if on a date otherwise use org-metaup."
   (interactive)
   (if
-	  (or (org-at-date-range-p) (org-at-timestamp-p))
-	  (org-timestamp-up)
-	(org-metaup)))
+      (or (org-at-date-range-p) (org-at-timestamp-p))
+      (org-timestamp-up)
+    (org-metaup)))
 
 (defun my-org-metadown ()
   "Decrease date element if on a date otherwise use org-metadown."
   (interactive)
   (if
-	  (or (org-at-date-range-p) (org-at-timestamp-p))
-	  (org-timestamp-down)
-	(org-metadown)))
+      (or (org-at-date-range-p) (org-at-timestamp-p))
+      (org-timestamp-down)
+    (org-metadown)))
 
 (defun my-org-metaleft ()
   "Decrease days if on a date otherwise use org-metaleft."
   (interactive)
   (if
-	  (or (org-at-date-range-p) (org-at-timestamp-p))
-	  (org-timestamp-down-day)
-	(org-metaleft)))
+      (or (org-at-date-range-p) (org-at-timestamp-p))
+      (org-timestamp-down-day)
+    (org-metaleft)))
 
 (defun my-org-metaright ()
   "Increase days if on a date otherwise use org-metaright."
@@ -131,20 +125,34 @@
 (require 'company-irony)
 (push 'orgtbl-self-insert-command company-begin-commands)
 
-(require 'org-clock)
-(setq org-clock-idle-time 10)
 (defvar org-capture-templates
   '(("t" "Todo" entry (file+headline "~/org/home.org" "Tasks")
-     "* TODO %?\nCreated at %T")
+     "* TODO %?\nCreated at %U")
     ("e" "Emacs Todo" entry (file+headline "~/org/home.org" "Emacs")
-     "* TODO %?\nCreated at %T")
-    ("a" "Agenda" entry (file "~/org/agenda.org")
-     "* %?Event\n\t:PROPERTIES:\n\t:ID:\n\t:END:\n\n\t%T\n")
+     "* TODO %?\nSCHEDULED: %t\nCreated at %U")
     ("j" "Perles Soline" entry (file+datetree "~/org/perlesSoline.org")
-     "* %?\nEntered on %U\n  %i\n  %a")
+     "* %?\nEntered on %U")
+    ("n" "Next stuff" entry (file+headline "~/org/home.org" "Miscellaneous")
+     "* TODO %?\nSCHEDULED: %t\nEntered on %U")
+    ("c" "Clock" entry (clock)
+     "* TODO %?\nEntered on %U\n%a")
     ("s" "Journal" entry (file+datetree "~/org/journal.org")
      "* %?\nEntered on %U\n  %i\n  %a")))
 
+(require 'org-feed)
+(setq org-feed-alist
+      '(("Slashdot"
+         "http://rss.slashdot.org/Slashdot/slashdot"
+         "~/org/feeds.org" "Slashdot Entries")
+        ("PersistentInfo"
+         "http://feeds.feedburner.com/PersistentInfo"
+         "~/org/feeds.org" "PersistentInfo")
+        ("LifeHacker"
+         "http://feeds.gawker.com/lifehacker/full"
+         "~/org/feeds.org" "LifeHacker")))
+
+(require 'org-clock)
+(setq org-clock-idle-time 10)
 ;; To save the clock history across Emacs sessions
 (org-clock-persistence-insinuate)
 (setq org-clock-persist t)
@@ -178,7 +186,7 @@
 ;; (setq org-gcal-client-id "298706557354-jea7ks1mctj7a0cb6c1dnrcj7ulo4jrf.apps.googleusercontent.com"
 ;;       org-gcal-client-secret "whupPIGL6RmIWL0rJXjxkYlg"
 ;;       org-gcal-file-alist '(("nico8ness@gmail.com" .  "~/org/agenda.org")
-;; 							("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" .  "~/lesDoudous.org")                            ))
+;;                          ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" .  "~/lesDoudous.org")                            ))
 ;; ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" .  "~/lesDoudous.org")
 
 ;; mobileorg settings
@@ -190,7 +198,7 @@
 
 ;; (add-hook 'org-mode-hook
 ;;           (lambda ()
-;; 			(add-hook 'after-save-hook 'org-mobile-push nil 'make-it-local)))
+;;          (add-hook 'after-save-hook 'org-mobile-push nil 'make-it-local)))
 
 ;; And add babel inline code execution, for executing code in org-mode.
 ;; load all language marked with (lang . t).

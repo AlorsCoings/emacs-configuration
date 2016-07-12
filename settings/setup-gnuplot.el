@@ -5,6 +5,7 @@
 
 ;;; Code:
 
+(require 'gnuplot)
 (require 'gnuplot-mode)
 
 (setq gnuplot-program "/usr/bin/gnuplot")
