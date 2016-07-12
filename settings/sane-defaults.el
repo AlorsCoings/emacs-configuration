@@ -331,5 +331,15 @@ With argument PREFIX, print output into current buffer."
                    (sort (mapcar (lambda (x) (cons (random) (concat x "\n"))) lines)
                          (lambda (a b) (< (car a) (car b))))))))
 
+;; Require the pandoc package to be installed on your system
+(when (and (require 'edit-server nil t) (daemonp))
+  (edit-server-start))
+(require 'edit-server)
+(dolist (mode-to-use
+         '(("mail\\.google\\." . gmail-message-edit-server-mode)
+           ("inbox\\.google\\." . gmail-message-edit-server-mode)
+           ("github\\.com" . markdown-mode)))
+  (add-to-list 'edit-server-url-major-mode-alist mode-to-use))
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here
