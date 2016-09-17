@@ -7,7 +7,8 @@
 
 (require 'helm-dash)
 (setq helm-dash-docsets-path (concat user-emacs-directory ".docsets"))
-(setq helm-dash-browser-func 'eww)
+(setq helm-dash-browser-func 'browse-url)
+;; (setq helm-dash-browser-func 'eww)
 (setq helm-dash-enable-debugging nil)
 
 (defvar helm-dash-docsets nil "Local docset's list for helm-dash.")
@@ -58,6 +59,7 @@
   (interactive)
   (setq-local helm-dash-docsets '("AWS_JavaScript"
                                   "Grunt"
+                                  "AngularJS"
                                   "JavaScript"
                                   "jQuery"
                                   "NodeJS")))
