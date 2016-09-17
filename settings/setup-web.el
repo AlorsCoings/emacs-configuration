@@ -28,6 +28,8 @@
 (setq web-mode-enable-part-face t)
 (setq web-mode-enable-sql-detection t)
 
+(set-face-attribute 'web-mode-html-attr-custom-face nil :inherit font-lock-keyword-face)
+;; (set-face-attribute 'web-mode-variable-name-face t :foreground "Pink3")
 ;; (set-face-attribute 'web-mode-comment-face t :foreground "#8fbc8f")
 ;; (set-face-attribute 'web-mode-current-element-highlight-face t :background "gray15")
 ;; (set-face-attribute 'web-mode-html-attr-custom-face t :inherit font-lock-keyword-face)
@@ -59,8 +61,10 @@
 (define-key web-mode-map (kbd "C-M-S-j") 'tagedit-join-tags)
 (define-key web-mode-map (kbd "C-M-S-c") 'tagedit-convolute-tags)
 
-(tagedit-add-experimental-features)
-(add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))
+;; (tagedit-add-experimental-features)
+;; (add-hook 'web-mode-hook (lambda () (tagedit-mode 1)))
+
+(define-key web-mode-map (kbd "C-c C-n") 'web-beautify-html)
 
 (provide 'setup-web)
 ;;; setup-web.el ends here

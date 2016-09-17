@@ -53,6 +53,25 @@ up before you execute another command."
   (flycheck-clear-idle-change-timer)
   (flycheck-buffer-automatically 'idle-change))
 
+;; https://www.emacswiki.org/emacs/Flycheck
+(require 'json)
+(defun parse-jslinter-warning (warning)
+  (flycheck-error-new
+   :line (1+ (cdr (assoc 'line warning)))
+   :column (1+ (cdr (assoc 'column warning)))
+   :message (cdr (assoc 'message warning))
+   :level 'error))
+(defun jslinter-error-parser (output checker buffer)
+  (mapcar 'parse-jslinter-warning
+          (cdr (assoc 'warnings (aref (json-read-from-string output) 0)))))
+(flycheck-define-checker javascript-jslinter
+  "A JavaScript syntax and style checker based on JSLinter.
+
+See URL `https://github.com/tensor5/JSLinter'."
+  :command ("/home/toad/local/bin/jslint" "--raw" source)
+  :error-parser jslinter-error-parser
+  :modes (js-mode js2-mode js3-mode))
+
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (provide 'setup-flycheck)

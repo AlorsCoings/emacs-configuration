@@ -10,6 +10,10 @@
 (dolist (hook '(css-mode-hook html-mode-hook sass-mode-hook))
   (add-hook hook 'rainbow-mode))
 
+(require 'web-beautify)
+(require 'css-mode)
+(define-key css-mode-map (kbd "C-c C-n") 'web-beautify-css)
+
 ;;; SASS and SCSS
 (require 'sass-mode)
 (require 'scss-mode)

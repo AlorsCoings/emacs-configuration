@@ -6,10 +6,10 @@
 ;;; Code:
 
 (setq-default js2-allow-rhino-new-expr-initializer nil
-              js2-basic-offset 2
+              js2-basic-offset 4
               js2-auto-indent-p nil
               js2-enter-indents-newline nil
-              js2-global-externs '("module" "require" "buster" "sinon" "assert" "refute" "setTimeout" "clearTimeout" "setInterval" "clearInterval" "location" "__dirname" "console" "JSON")
+              js2-global-externs '("expect" "it" "inject" "beforeEach" "describe" "angular" "module" "require" "buster" "sinon" "assert" "refute" "setTimeout" "clearTimeout" "setInterval" "clearInterval" "location" "__dirname" "console" "JSON")
               js2-idle-timer-delay 0.1
               js2-indent-on-enter-key nil
               js2-mirror-mode nil
@@ -19,7 +19,7 @@
               js2-include-gears-externs nil
               js2-concat-multiline-strings 'eol
               js2-rebind-eol-bol-keys nil
-              js-indent-level 2)
+              js-indent-level 4)
 ;; (set-face-attribute 'js2-function-param-face t :foreground "LightGoldenrod")
 
 (require 'coffee-mode)
@@ -197,7 +197,7 @@
 
 (require 'json)
 (require 'json-reformat)
-(setq json-reformat:indent-width 2)
+(setq json-reformat:indent-width 4)
 (setq json-reformat:pretty-string\? t)
 
 (defun my-aget (key map)
@@ -266,6 +266,10 @@
                     (:else 0)))))
     (unless first-line
       (indent-line-to offset))))
+
+(require 'karma)
+
+(define-key js2-mode-map (kbd "C-c C-n") 'web-beautify-js)
 
 (provide 'setup-js2-mode)
 ;;; setup-js2-mode.el ends here

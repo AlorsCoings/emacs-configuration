@@ -97,7 +97,6 @@
      company-jedi
      company-math
      company-restclient
-     company-web
      concurrent
      cpputils-cmake
      crappy-jsp-mode
@@ -271,6 +270,7 @@
      undo-tree
      visual-regexp
      web
+     web-beautify
      web-completion-data
      web-mode
      wgrep
@@ -354,7 +354,7 @@
 (autoload 'skewer-start "setup-skewer" nil t)
 (autoload 'skewer-demo "setup-skewer" nil t)
 (require 'setup-flycheck)
-(add-hook 'after-init-hook 'global-company-mode)
+(require 'setup-company)
 
 ;; Map files to modes
 (require 'mode-mappings)
