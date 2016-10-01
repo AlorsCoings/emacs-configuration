@@ -6,8 +6,8 @@
 ;;; Code:
 
 (require 'nxml-mode)
-
-(setq nxml-slash-auto-complete-flag t)
+(setq nxml-slash-auto-complete-flag t
+      nxml-child-indent 4)
 
 ;; See: http://sinewalker.wordpress.com/2008/06/26/pretty-printing-xml-with-emacs-nxml-mode/
 (defun sanityinc/pp-xml-region (beg end)
@@ -33,7 +33,10 @@ using nxml's indentation rules."
 ;; Integration with tidy for html + xml
 ;;----------------------------------------------------------------------------
 (require 'tidy)
-(add-hook 'nxml-mode-hook (lambda () (tidy-build-menu nxml-mode-map)))
+(add-hook 'nxml-mode-hook
+          (lambda () (tidy-build-menu nxml-mode-map)
+            (define-key nxml-mode-map (kbd "C-c C-n") 'cleanup-buffer)
+            (define-key nxml-mode-map (kbd "M-h") 'er/expand-region)))
 
 (defun sanityinc/tidy-buffer-xml (beg end)
   "Run \"tidy -xml\" on the region from BEG to END, or whole buffer."
@@ -42,6 +45,7 @@ using nxml's indentation rules."
     (setq beg (point-min)
           end (point-max)))
   (shell-command-on-region beg end "tidy -xml -q -i" (current-buffer) t "*tidy-errors*" t))
+
 
 (provide 'setup-nxml)
 ;;; setup-nxml.el ends here

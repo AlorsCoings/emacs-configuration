@@ -89,5 +89,7 @@
   "Return a string which is a concatenation of all elements of the LIST separated by spaces."
   (mapconcat #'(lambda (obj) (format "%s" obj)) list " "))
 
+(define-key dired-mode-map (kbd "C-t") 'backward-char)
+
 (provide 'setup-dired)
 ;;; setup-dired ends here

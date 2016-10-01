@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(package-initialize)
+
 ;; Seed the random-number generator
 (random t)
 

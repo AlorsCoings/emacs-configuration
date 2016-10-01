@@ -18,10 +18,10 @@
 \def\title{$2}
 \def\author{Nicolas \textsc{Gros}}
 \def\supervisor{$3 \textsc{$4}}
-\def\date{Année 2015/2016}
+\def\date{Année 2016/2017}
 
 \begin{document}
-\input{/home/toad/latex/titlepageUFRMaster1.tex}
+\input{/home/toad/latex/titlepageUFRMaster2.tex}
 
 \newpage
 

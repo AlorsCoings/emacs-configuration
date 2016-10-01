@@ -30,17 +30,27 @@
 
 (require 'cc-mode)
 
+(setq eclimd-executable nil
+      eclimd-default-workspace "~/workspace")
+
 (define-key java-mode-map (kbd "C-<tab>") 'company-complete)
 (define-key java-mode-map (kbd "M-<tab>") 'company-complete)
 (define-key java-mode-map (kbd "M-j") (lambda () (interactive) (join-line -1)))
 (define-key java-mode-map (kbd "C-.") 'semantic-complete-jump-local)
 (define-key java-mode-map (kbd "C-c C-i") 'eclim-java-import-organize)
 (define-key java-mode-map (kbd "C-c p") 'eclim-problems)
-(define-key java-mode-map (kbd "C-c C-p") 'eclim-problems-compilation-buffer)
+(define-key java-mode-map (kbd "C-c C-p") 'eclim-problems-correct)
+(define-key java-mode-map (kbd "C-c C-l") 'eclim-problems-compilation-buffer)
 (define-key java-mode-map (kbd "C-c C-c") 'eclim-run-class)
 (define-key java-mode-map (kbd "C-c C-u") 'eclim-maven-lifecycle-phase-run)
+(define-key java-mode-map (kbd "C-c C-c") 'eclim-run-class)
+(define-key java-mode-map (kbd "C-c C-r") 'eclim-java-refactor-rename-symbol-at-point)
+(define-key java-mode-map (kbd "C-c C-f") 'eclim-java-find-references)
+(define-key java-mode-map (kbd "C-c C-d") 'eclim-java-show-documentation-for-current-element)
 (define-key java-mode-map (kbd "C-c u") 'eclim-maven-run)
-(define-key java-mode-map (kbd "C-c C-d") 'display-local-help)
+
+(define-key java-mode-map (kbd "C-d") 'previous-line)
+(define-key java-mode-map (kbd "C-c C-n") 'cleanup-buffer)
 
 (add-hook 'java-mode-hook
           (lambda ()

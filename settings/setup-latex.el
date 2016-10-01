@@ -253,5 +253,9 @@
         (output-html "xdg-open")
         (output-pdf "Evince")))
 
+(require 'latex)
+(define-key LaTeX-mode-map (kbd "C-c C-n") 'cleanup-buffer)
+
+
 (provide 'setup-latex)
 ;;; setup-latex.el ends here

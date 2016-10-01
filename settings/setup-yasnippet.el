@@ -1,14 +1,14 @@
 ;;; package --- yasnippet
 
 ;;; Commentary:
-;;; emacs yasnippet configuration
+;;; Emacs yasnippet configuration
 
 ;;; Code:
 
 (require 'yasnippet)
 
 ;; Use only own snippets, do not use bundled ones
-(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+;; (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
 (yas-global-mode 1)
 
 ;; Include snippets for stuff
@@ -37,8 +37,8 @@
         (move-beginning-of-line 1)
       (goto-char position))))
 
-(define-key yas-keymap (kbd "C-e") 'yas/goto-end-of-active-field)
-(define-key yas-keymap (kbd "C-a") 'yas/goto-start-of-active-field)
+(define-key yas-keymap (kbd "C-l") 'yas/goto-end-of-active-field)
+(define-key yas-keymap (kbd "C-v") 'yas/goto-start-of-active-field)
 
 ;; No dropdowns please, yas
 (setq yas-prompt-functions '(yas-ido-prompt yas-completing-prompt))
