@@ -217,6 +217,7 @@
      paredit
      paredit-everywhere
      pcache
+     pdf-tools
      peg
      perspective
      php-mode
@@ -330,6 +331,7 @@
 (require 'setup-magit)
 (require 'setup-php)
 (require 'setup-lua)
+(require 'setup-pdf-tools)
 
 (eval-after-load "dash" '(dash-enable-font-lock))
 
