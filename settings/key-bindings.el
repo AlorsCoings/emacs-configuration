@@ -35,20 +35,11 @@
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 
-;; Switch global-visual-line-mode
-(global-set-key (kbd "C-M-v") 'global-visual-line-mode)
-
-;; iedit
-(global-set-key (kbd "C-;") 'iedit-mode)
-
 ;; Multiple cursor
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-c C-SPC") 'mc/mark-pop)
-;; Extra multiple cursors stuff
-(global-set-key (kbd "C-c i") 'mc/insert-numbers)
-(global-set-key (kbd "C-c C-i") 'mc--insert-number-and-increase)
 
 ;; Manage windows
 (global-set-key (kbd "C-M-S-<left>") 'shrink-window-horizontally)
@@ -79,16 +70,12 @@
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 (global-set-key (kbd "C-c C-n") 'cleanup-buffer)
 
-;; Visual regexp
-(global-set-key (kbd "M-&") 'vr/replace)
-
 ;; Use M-w for copy-line if no active region
 (global-set-key (kbd "M-w") (lambda() (interactive) (save-region-or-current-line 1)))
 (global-set-key (kbd "M-W") 'save-region-or-current-line)
 
-;; Make shell more convenient, and suspend-frame less
+;; Make shell more convenient
 (global-set-key (kbd "C-z") 'shell)
-(global-set-key (kbd "C-x M-z") 'suspend-frame)
 
 ;; Create new frame
 (global-set-key (kbd "C-x C-n") 'make-frame-command)
@@ -96,8 +83,6 @@
 ;; File finding
 (global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
 (global-set-key (kbd "C-x f") 'recentf-ido-find-file)
-(global-set-key (kbd "C-x C-p") 'find-or-create-file-at-point)
-(global-set-key (kbd "C-x M-p") 'find-or-create-file-at-point-other-window)
 (global-set-key (kbd "C-c C-y") 'bury-buffer)
 (global-set-key (kbd "C-c C-r") 'revert-buffer)
 (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
@@ -132,17 +117,12 @@
 (global-set-key (kbd "C-<tab>") 'completion-at-point)
 (global-set-key (kbd "M-<tab>") 'completion-at-point)
 
-;; Convenience on ThinkPad Keyboard: Use back/forward as pg up/down
-(global-set-key (kbd "<XF86Back>") 'scroll-down)
-(global-set-key (kbd "<XF86Forward>") 'scroll-up)
-(global-set-key (kbd "<XF86WakeUp>") 'beginning-of-buffer)
-
 ;; Query replace regex key binding
 (global-set-key (kbd "M-&") 'anzu-replace-at-cursor-thing)
 (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 (global-set-key [remap query-replace] 'anzu-query-replace)
 
-;; zap to char
+;; Zap to char
 (global-set-key (kbd "M-Z") 'zap-up-to-char)
 (define-key isearch-mode-map [(meta z)] 'zap-to-isearch)
 (define-key isearch-mode-map [(control return)] 'isearch-exit-other-end)
@@ -150,16 +130,8 @@
 ;; Activate occur inside isearch
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 
-(define-key isearch-mode-map (kbd "C-M-w") 'isearch-yank-symbol)
-
 ;; Eval buffer
 (global-set-key (kbd "C-c C-k") 'eval-buffer)
-
-;; Move windows, even in org-mode
-(global-set-key (kbd "<C-S-right>") 'windmove-right)
-(global-set-key (kbd "<C-S-left>") 'windmove-left)
-(global-set-key (kbd "<C-S-up>") 'windmove-up)
-(global-set-key (kbd "<C-S-down>") 'windmove-down)
 
 ;; Magit
 (global-set-key (kbd "C-x m") 'magit-status-fullscreen)
@@ -174,28 +146,9 @@
 ;; Clever newlines
 (global-set-key (kbd "<C-return>") 'open-line-below)
 (global-set-key (kbd "<C-S-return>") 'open-line-above)
-(global-set-key (kbd "<M-return>") 'new-line-dwim)
 
 ;; Duplicate region
 (global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
-
-(global-set-key (kbd "M-N") 'move-text-down)
-(global-set-key (kbd "M-P") 'move-text-up)
-
-;; Fold the active region
-(global-set-key (kbd "C-c C-f") 'fold-this-all)
-(global-set-key (kbd "C-c C-F") 'fold-this)
-(global-set-key (kbd "C-c M-f") 'fold-this-unfold-all)
-
-;; Yank and indent
-(global-set-key (kbd "C-S-y") 'yank-unindented)
-
-;; Toggle quotes
-(global-set-key (kbd "C-\"") 'toggle-quotes)
-
-;; Sorting
-(global-set-key (kbd "M-s l") 'sort-lines)
-(global-set-key (kbd "M-s M-l") 'my-randomize-region)
 
 ;; Increase number at point (or other change based on prefix arg)
 (global-set-key (kbd "C-+") 'change-number-at-point)
@@ -212,12 +165,12 @@
 (global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
 (global-set-key (kbd "C-x C-k") 'delete-current-buffer-file)
 
-;; View occurrence in occur mode
-(define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)
-(define-key occur-mode-map (kbd "n") 'next-line)
-(define-key occur-mode-map (kbd "p") 'previous-line)
+;; Browse kill ring
+(require 'browse-kill-ring)
+(define-key browse-kill-ring-mode-map (kbd "d") 'previous-line)
+(define-key browse-kill-ring-mode-map (kbd "s") 'next-line)
 
-;; Find files by name and display results in dired
+;; Find directory
 (global-set-key (kbd "M-s f") 'find-name-dired)
 
 (global-set-key (kbd "C-o") 'other-window)
@@ -231,21 +184,7 @@
 (global-set-key (kbd "C-c C-j") (lambda () (interactive) (require 'setup-java)))
 (global-set-key (kbd "C-c j") 'eclim-manage-projects)
 
-(global-set-key (kbd "C-c t") 'typing-game)
-(global-set-key (kbd "C-c C-t") 'typing-game)
-
-(global-set-key (kbd "C-S-f") 'forward-sentence)
-(global-set-key (kbd "C-S-b") 'backward-sentence)
-
 (global-set-key (kbd "C-h é") 'describe-major-mode)
-
-;; Expand and contract region
-(global-set-key (kbd "C-v") 'er/expand-region)
-(global-set-key (kbd "C-S-v") 'er/contract-region)
-
-(global-set-key (kbd "C-S-a") 'back-to-indentation)
-
-(global-set-key (kbd "M-D") 'kill-region-or-backward-word)
 
 ;; Change word separators
 (global-unset-key (kbd "C-x +")) ;; used to be balance-windows
@@ -256,42 +195,27 @@
 
 ;; Killing text
 (global-set-key (kbd "C-S-k") 'kill-and-retry-line)
-(global-set-key (kbd "C-w") 'kill-region-or-backward-word)
-(global-set-key (kbd "C-c C-w") 'kill-to-beginning-of-line)
+(global-set-key (kbd "C-M-k") 'kill-and-retry-line)
+(global-set-key (kbd "C-c C-'") 'kill-to-beginning-of-line)
+(global-set-key (kbd "C-c '") 'kill-to-beginning-of-line)
 
 ;; Jump to a definition in the current file. (This is awesome)
 (global-set-key (kbd "C-x C-i") 'idomenu)
+(global-set-key (kbd "C-c C-i") 'idomenu)
+(global-set-key (kbd "C-M-<tab>") 'idomenu)
 
 ;; Edit file with sudo
 (global-set-key (kbd "M-s e") 'sudo-edit)
 
-;; Like isearch, but adds region (if any) to history and deactivates mark
-(global-set-key (kbd "C-S-s") 'isearch-forward-use-region)
-(global-set-key (kbd "C-S-r") 'isearch-backward-use-region)
-
-;; Like isearch-*-use-region, but doesn't fuck with the active region
-(global-set-key (kbd "C-s") 'isearch-forward)
-(global-set-key (kbd "C-r") 'isearch-backward)
-
-;; Move more quickly
-(global-set-key (kbd "C-S-n") (lambda() (interactive) (ignore-errors (next-line 5))))
-(global-set-key (kbd "C-S-p") (lambda() (interactive) (ignore-errors (previous-line 5))))
-(global-set-key (kbd "M-F") (lambda() (interactive) (ignore-errors (subword-forward 5))))
-(global-set-key (kbd "M-B") (lambda() (interactive) (ignore-errors (subword-backward 5))))
+;; Switch beetween buffer
+(global-set-key (kbd "C-é") 'switch-to-next-buffer)
+(global-set-key (kbd "C-É") 'switch-to-prev-buffer)
 
 ;; Easy-mode fullscreen rgrep
 (global-set-key (kbd "M-s s") 'git-grep-fullscreen)
 (global-set-key (kbd "M-s S") 'rgrep-fullscreen)
 
-;; Display and edit occurances of regexp in buffer
-(global-set-key (kbd "C-c C-s") 'occur)
-
-;; Multi-occur
-(global-set-key (kbd "C-c s") 'multi-occur)
-(global-set-key (kbd "C-c M-s") 'multi-occur)
-
-;; Keep newline-and-indent for regexp purpose
-(global-set-key (kbd "C-S-j") 'newline-and-indent)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 ;; Goal-column
 (global-set-key (kbd "M-n") 'set-goal-column)
@@ -342,7 +266,7 @@
 (global-set-key (kbd "M-R") (lambda() (interactive) (ignore-errors (subword-forward 5)))) ;; was paredit-raise-sexp
 (global-set-key (kbd "C-M-r") 'forward-sexp) ;; was isearch-backward-regexp
 
-;; er/expand-region and er/contract-region
+;; Expand and contract region
 (global-set-key (kbd "M-h") 'er/expand-region)
 (global-set-key (kbd "M-H") 'er/contract-region)
 
@@ -351,7 +275,7 @@
 (global-set-key (kbd "C-p") 'recenter-top-bottom)
 
 (global-set-key (kbd "M-p") 'subword-downcase)
-
+78.95
 (global-set-key (kbd "C-e") 'delete-forward-char)
 (global-set-key (kbd "M-e") 'kill-word)
 (global-set-key (kbd "C-M-e") 'kill-sexp)
