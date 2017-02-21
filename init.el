@@ -70,15 +70,18 @@
    '(
      ace-jump-mode
      alert
+     anaconda-mode
      angular-snippets
      anzu
      apache-mode
      apel
      arduino-mode
      async
+     atomic-chrome
      auctex
      auctex-lua
      auto-compile
+     auto-complete
      bash-completion
      bbdb
      bison-mode
@@ -91,6 +94,7 @@
      cider
      clj-refactor
      clojure-mode
+     clojure-mode-extra-font-locking
      cmake-mode
      coffee-mode
      color-theme
@@ -122,19 +126,31 @@
      dired-details
      dired-sort
      dockerfile-mode
+     edit-server
      edn
      elisp-slime-nav
      elnode
+     elpy
      emacs-eclim
+     emacsql
+     emacsql-sqlite
      emmet-mode
      epc
      epl
+     ess
+     ess-R-data-view
+     ess-R-object-popup
+     ess-smart-equals
+     ess-smart-underscore
+     ess-view
      exec-path-from-shell
      expand-region
      f
      fakir
      feature-mode
      fill-column-indicator
+     finalize
+     find-file-in-project
      flim
      flx
      flx-ido
@@ -156,6 +172,7 @@
      gitignore-mode
      gmail-message-mode
      gntp
+     gnuplot
      gnuplot-mode
      google-c-style
      google-translate
@@ -166,8 +183,12 @@
      hardcore-mode
      helm
      helm-core
+     helm-dash
      highlight-escape-sequences
+     highlight-indentation
+     highlight-symbol
      hl-sexp
+     ht
      html-to-markdown
      htmlize
      hydra
@@ -185,6 +206,7 @@
      inflections
      ipretty
      irony
+     ivy
      jade-mode
      jedi-core
      js2-mode
@@ -192,7 +214,9 @@
      json-mode
      json-reformat
      json-snatcher
+     julia-mode
      jump-char
+     karma
      know-your-http-well
      kv
      latex-extra
@@ -201,23 +225,29 @@
      log4e
      logito
      lua-mode
+     macrostep
      magit
      magit-popup
      markdown-mode
      markdown-mode+
+     marshal
      math-symbol-lists
      merlin
      misc-cmds
      misc-fns
      mmm-mode
+     mmt
      move-text
+     multi-eshell
      multifiles
      multiple-cursors
      nodejs-repl
      noflet
      oauth2
      org
+     org-gcal
      org-mobile-sync
+     org-pdfview
      packed
      page-break-lines
      paredit
@@ -231,9 +261,12 @@
      plsql
      popup
      popwin
+     pos-tip
      prodigy
      puppet-mode
      python-environment
+     pythonic
+     pyvenv
      queue
      rainbow-mode
      request
@@ -264,9 +297,11 @@
      smtpmail-multi
      spinner
      sql-indent
+     sqlite
      sqlplus
      sqlup-mode
      swiper
+     tablist
      tern
      tidy
      toggle-quotes
@@ -280,12 +315,14 @@
      web-beautify
      web-completion-data
      web-mode
+     websocket
      wgrep
      whitespace-cleanup-mode
      with-editor
      yaml-mode
      yari
      yasnippet
+     zeal-at-point
      zencoding-mode
      )))
 
