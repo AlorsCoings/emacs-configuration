@@ -331,6 +331,8 @@
 (require 'setup-php)
 (require 'setup-lua)
 (require 'setup-pdf-tools)
+(require 'setup-R)
+(require 'setup-python)
 
 (eval-after-load "dash" '(dash-enable-font-lock))
 
