@@ -357,5 +357,9 @@ With argument PREFIX, print output into current buffer."
 (require 'tramp)
 (setq tramp-remote-process-environment ())
 (add-to-list 'tramp-remote-process-environment "LC_ALL=en_US.UTF-8" 'append)
+
+;; Do not ask which shell to get
+(setenv "ESHELL" "bash")
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here
