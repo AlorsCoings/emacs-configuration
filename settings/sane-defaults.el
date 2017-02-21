@@ -350,16 +350,6 @@ With argument PREFIX, print output into current buffer."
 (setq google-translate-default-source-language "auto")
 (setq google-translate-default-target-language "fr")
 
-;; Require the pandoc package to be installed on your system
-(when (and (require 'edit-server nil t) (daemonp))
-  (edit-server-start))
-(require 'edit-server)
-(dolist (mode-to-use
-         '(("mail\\.google\\." . gmail-message-edit-server-mode)
-           ("inbox\\.google\\." . gmail-message-edit-server-mode)
-           ("github\\.com" . markdown-mode)))
-  (add-to-list 'edit-server-url-major-mode-alist mode-to-use))
-
 ;; No warning for goal-column
 (put 'set-goal-column 'disabled nil)
 
