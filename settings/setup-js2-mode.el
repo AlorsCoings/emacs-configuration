@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(require 'js2-mode)
+
 (setq-default js2-allow-rhino-new-expr-initializer nil
               js2-basic-offset 4
               js2-auto-indent-p nil
@@ -19,7 +21,15 @@
               js2-include-gears-externs nil
               js2-concat-multiline-strings 'eol
               js2-rebind-eol-bol-keys nil
-              js-indent-level 4)
+              js-indent-level 4
+              js2-indent-switch-body t
+              js2-auto-indent-p t
+              js2-global-externs '("angular")
+              js2-indent-on-enter-key t
+              flycheck-disabled-checkers '(javascript-jshint)
+              flycheck-checkers '(javascript-eslint)
+              flycheck-eslintrc "~/.eslintrc")
+
 ;; (set-face-attribute 'js2-function-param-face t :foreground "LightGoldenrod")
 
 (require 'coffee-mode)
@@ -209,13 +219,13 @@
                      (javascript-mode)
                      (let (kill-ring kill-ring-yank-pointer) (kill-comment 1000))
                      (->> (buffer-substring (point-min) (point-max))
-                       (s-trim)
-                       (s-chop-prefix "module.exports = ")
-                       (s-chop-suffix ";")
-                       (json-read-from-string))))
+                          (s-trim)
+                          (s-chop-prefix "module.exports = ")
+                          (s-chop-suffix ";")
+                          (json-read-from-string))))
          (predef (->> settings
-                   (my-aget 'linterOptions)
-                   (my-aget 'predef))))
+                      (my-aget 'linterOptions)
+                      (my-aget 'predef))))
     (--each (append predef nil)
       (add-to-list 'js2-additional-externs it))))
 
@@ -270,6 +280,7 @@
 (require 'karma)
 
 (define-key js2-mode-map (kbd "C-c C-n") 'web-beautify-js)
+(define-key js2-mode-map (kbd "M-j") (lambda() (interactive) (join-line -1)))
 
 (provide 'setup-js2-mode)
 ;;; setup-js2-mode.el ends here
