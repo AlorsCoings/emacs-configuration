@@ -7,8 +7,8 @@
 
 (require 'image+)
 
-(eval-after-load 'image+ '(imagex-auto-adjust-mode 1))
-(eval-after-load 'image+ '(imagex-global-sticky-mode 1))
+;; (eval-after-load 'image+ '(imagex-auto-adjust-mode 1))
+;; (eval-after-load 'image+ '(imagex-global-sticky-mode 1))
 (eval-after-load 'image+
   `(when (require 'hydra nil t)
      (defhydra imagex-sticky-binding (global-map "C-x C-l")
