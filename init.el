@@ -416,9 +416,12 @@
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
 (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t) (eldoc-mode 1)))
 
+(require 'atomic-chrome)
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
+  (atomic-chrome-start-server)
+  (add-hook 'atomic-chrome-edit-mode-hook (lambda () (flyspell-mode)))
   (server-start))
 
 ;; Run at full power please
