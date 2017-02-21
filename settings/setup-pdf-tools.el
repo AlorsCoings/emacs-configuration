@@ -9,6 +9,8 @@
 (require 'pdf-view)
 (require 'tex)
 
+(setq pdf-view-continuous nil)
+
 (when (eq system-type 'gnu/linux)
 
   (pdf-tools-install)
