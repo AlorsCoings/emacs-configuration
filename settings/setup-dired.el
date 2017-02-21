@@ -41,6 +41,8 @@
 (define-key dired-mode-map (kbd "k") 'dired-do-delete)
 (define-key dired-mode-map (kbd "C-o") 'other-window)
 (define-key dired-mode-map (kbd "C-S-o") (lambda() (interactive) (other-window -1)))
+(define-key dired-mode-map (kbd "C-S-n") 'dired-do-isearch)
+(define-key dired-mode-map (kbd "C-M-S-n") 'dired-do-isearch-regexp)
 
 ;; M-up is nicer in dired if it moves to the fourth line - the first file
 (defun dired-back-to-top ()
