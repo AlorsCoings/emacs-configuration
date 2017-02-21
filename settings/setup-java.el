@@ -5,6 +5,10 @@
 
 ;;; Code:
 
+;; Maven command
+;; Generate project: mvn archetype:generate -DgroupId=univ.fr -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+;; Attach javadoc: mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs
+
 (require 'eclim)
 (global-eclim-mode)
 
@@ -49,6 +53,8 @@
 (define-key java-mode-map (kbd "C-c C-d") 'eclim-java-show-documentation-for-current-element)
 (define-key java-mode-map (kbd "C-c u") 'eclim-maven-run)
 
+(define-key java-mode-map (kbd "M-&") 'eclim-java-refactor-rename-symbol-at-point)
+
 (define-key java-mode-map (kbd "C-d") 'previous-line)
 (define-key java-mode-map (kbd "C-c C-n") 'cleanup-buffer)
 
@@ -62,6 +68,9 @@
 ;;; eclim-java-find-type, C-c C-e f t
 ;;; on a given method definition
 ;;; eclim-java-find-references, C-c C-e f r
+
+(require 'pmd)
+(setq pmd-home "/opt/pmd")
 
 (provide 'setup-java)
 ;;; setup-java.el ends here
