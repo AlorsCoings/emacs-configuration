@@ -8,7 +8,10 @@
 ;;; Colourise CSS colour literals
 (require 'rainbow-mode)
 (dolist (hook '(css-mode-hook html-mode-hook sass-mode-hook))
-  (add-hook hook 'rainbow-mode))
+  (add-hook hook 'rainbow-mode)
+  ;; Disable hl-line-mode for css
+  (make-variable-buffer-local 'global-hl-line-mode)
+  (add-hook hook (lambda () (setq global-hl-line-mode nil))))
 
 (require 'web-beautify)
 (require 'css-mode)
