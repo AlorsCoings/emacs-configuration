@@ -15,9 +15,6 @@
 (declare-function after-load "sane-defaults" (feature &rest body))
 
 (require 'ibuffer)
-;; (require 'fullframe)
-;; (after-load 'ibuffer
-;;   (fullframe ibuffer ibuffer-quit))
 
 ;; Explicitly require ibuffer-vc to get its column definitions, which
 ;; can't be autoloaded
@@ -68,6 +65,16 @@
               filename-and-process)))
 
 (setq ibuffer-filter-group-name-face 'font-lock-doc-face)
+
+(define-key ibuffer-mode-map (kbd "C-t") 'backward-char)
+(define-key ibuffer-mode-map (kbd "C-r") 'forward-char)
+(define-key ibuffer-mode-map (kbd "C-d") 'previous-line)
+(define-key ibuffer-mode-map (kbd "C-s") 'next-line)
+(define-key ibuffer-mode-map (kbd "d") 'previous-line)
+(define-key ibuffer-mode-map (kbd "s") 'next-line)
+(define-key ibuffer-mode-map (kbd "D") 'ibuffer-mark-for-delete)
+(define-key ibuffer-mode-map (kbd "C-o") 'other-window)
+(define-key ibuffer-mode-map (kbd "U") 'ibuffer-unmark-all)
 
 (provide 'setup-ibuffer)
 ;;; setup-ibuffer.el ends here
