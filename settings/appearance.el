@@ -70,7 +70,7 @@
 
 ;; Fill column indicator
 (require 'fill-column-indicator)
-(setq fci-rule-color "gray10")
+(setq fci-rule-color "gray30")
 (add-hook 'c-mode-hook 'fci-mode)
 (add-hook 'c++-mode-hook 'fci-mode)
 (add-hook 'lua-mode-hook 'fci-mode)
