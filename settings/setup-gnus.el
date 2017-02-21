@@ -12,10 +12,17 @@
 (require 'starttls)
 (setq starttls-use-gnutls t)
 
+;; Don't ask for reading auto-save file at startup, just do it
+(setq gnus-always-read-dribble-file t)
+
 ;; You need this to be able to list all labels in gmail
 (setq gnus-ignored-newsgroups "")
 
+(setq gnus-check-new-newsgroups nil)
+(setq gnus-save-killed-list nil)
+
 (setq gnus-select-method '(nnml ""))
+
 (add-to-list 'gnus-secondary-select-methods
              '(nnimap "gros.nicolas0"
                       (nnimap-address "imap.gmail.com")
@@ -120,12 +127,14 @@
         ((header "cc" "gros.nicolas0@gmail.com")
          (address "gros.nicolas0@gmail.com"))))
 
-;; gnus-notify allows you to select which groups you want to include in the report
-;; It does this via a „group parameter“ you have to add manually.
-;; To do it: use G p in the group buffer, then add (modeline-notify t) to the list there
-;; If it were the only property, it would look like this: ((modeline-notify t))
-(gnus-demon-add-handler 'gnus-demon-scan-news 2 t) ; this does a call to gnus-group-get-new-news
+(define-key gnus-summary-mode-map (kbd "a") 'gnus-summary-delete-article)
 (define-key gnus-summary-mode-map (kbd "C-o") 'other-window)
+(define-key gnus-summary-mode-map (kbd "C-d") 'previous-line)
+(define-key gnus-summary-mode-map (kbd "m") 'gnus-summary-mark-as-processable)
+(define-key gnus-summary-mode-map (kbd "M") 'gnus-summary-mail-other-window)
+
+;; TODO check
+;; (setq gnus-agent nil)
 
 (provide 'setup-gnus)
 ;;; setup-gnus.el ends here
