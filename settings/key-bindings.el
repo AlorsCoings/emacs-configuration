@@ -57,11 +57,11 @@
 (global-set-key (kbd "C-M-S-<up>") 'enlarge-window)
 
 ;; Window switching
-(global-set-key (kbd "C-x o") 'switch-window)
 (windmove-default-keybindings) ;; Shift+direction
 (global-set-key (kbd "C-x -") 'toggle-window-split)
 (global-set-key (kbd "C-x C--") 'rotate-windows)
-;; don't zoom like this
+
+;; Don't zoom like this
 (global-unset-key (kbd "C-x C-+"))
 
 (global-set-key (kbd "C-x 1") 'sanityinc/toggle-delete-other-windows)
@@ -220,8 +220,8 @@
 ;; Find files by name and display results in dired
 (global-set-key (kbd "M-s f") 'find-name-dired)
 
-(global-set-key (kbd "C-o") 'next-multiframe-window)
-(global-set-key (kbd "C-S-o") 'previous-multiframe-window)
+(global-set-key (kbd "C-o") 'other-window)
+(global-set-key (kbd "C-S-o") (lambda() (interactive) (other-window -1)))
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)

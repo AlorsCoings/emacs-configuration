@@ -76,8 +76,8 @@
 ;; (setq company-clang-arguments '("-I/usr/include" "-I/usr/local/include"))
 
 (require 'compile)
-(define-key compilation-mode-map (kbd "C-o") 'next-multiframe-window)
-(define-key compilation-mode-map (kbd "C-S-o") 'previous-multiframe-window)
+(define-key compilation-mode-map (kbd "C-o") 'other-window)
+(define-key compilation-mode-map (kbd "C-S-o") (lambda() (interactive) (other-window -1)))
 
 (provide 'setup-c)
 ;;; setup-c.el ends here

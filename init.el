@@ -261,7 +261,6 @@
      sqlplus
      sqlup-mode
      swiper
-     switch-window
      tagedit
      tern
      tidy

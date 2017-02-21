@@ -125,6 +125,7 @@
 ;; To do it: use G p in the group buffer, then add (modeline-notify t) to the list there
 ;; If it were the only property, it would look like this: ((modeline-notify t))
 (gnus-demon-add-handler 'gnus-demon-scan-news 2 t) ; this does a call to gnus-group-get-new-news
+(define-key gnus-summary-mode-map (kbd "C-o") 'other-window)
 
 (provide 'setup-gnus)
 ;;; setup-gnus.el ends here

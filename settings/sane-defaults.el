@@ -16,9 +16,6 @@
  save-interprogram-paste-before-kill t
  show-trailing-whitespace t)
 
-(require 'switch-window)
-(setq switch-window-shortcut-style 'alphabet)
-
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)
 
