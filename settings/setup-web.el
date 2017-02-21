@@ -49,21 +49,6 @@
                    (setq emmet-preview-default t)
                    (emmet-mode))))
 
-(require 'tagedit)
-(add-hook 'web-mode-hook (lambda () (tagedit-mode 1)))
-
-;; (tagedit-add-paredit-like-keybindings)
-(define-key web-mode-map (kbd "C-M-S-d") 'tagedit-splice-tag)
-(define-key web-mode-map (kbd "C-M-S-f") 'tagedit-forward-slurp-tag)
-(define-key web-mode-map (kbd "C-M-S-b") 'tagedit-forward-barf-tag)
-(define-key web-mode-map (kbd "C-M-S-r") 'tagedit-raise-tag)
-(define-key web-mode-map (kbd "C-M-S-s") 'tagedit-split-tag)
-(define-key web-mode-map (kbd "C-M-S-j") 'tagedit-join-tags)
-(define-key web-mode-map (kbd "C-M-S-c") 'tagedit-convolute-tags)
-
-;; (tagedit-add-experimental-features)
-;; (add-hook 'web-mode-hook (lambda () (tagedit-mode 1)))
-
 (define-key web-mode-map (kbd "C-c C-n") 'web-beautify-html)
 
 (provide 'setup-web)

@@ -269,7 +269,6 @@
      sqlplus
      sqlup-mode
      swiper
-     tagedit
      tern
      tidy
      toggle-quotes
