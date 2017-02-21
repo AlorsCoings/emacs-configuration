@@ -11,14 +11,6 @@
 (require 'ipretty)
 (ipretty-mode 1)
 
-;; Automatic byte compilation
-(require 'auto-compile)
-(auto-compile-on-save-mode 1)
-(auto-compile-on-load-mode 1)
-
-;; Load .el if newer than corresponding .elc
-(setq load-prefer-newer t)
-
 (require 'slime)
 
 (setq inferior-lisp-program "/usr/bin/sbcl")
