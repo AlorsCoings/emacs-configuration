@@ -305,13 +305,13 @@
 
 ;; Setup extensions
 (require 'setup-ido)
+(require 'setup-smartparens)
 (require 'setup-org)
 (require 'setup-dired)
 (require 'setup-rgrep)
 (require 'setup-shell)
 (require 'setup-yasnippet)
 (require 'setup-perspective)
-(require 'setup-paredit)
 (require 'setup-web)
 (require 'setup-css)
 (require 'setup-latex)
@@ -389,7 +389,6 @@
 (require 'google-translate-default-ui)
 (require 'legalese)
 (require 'misc)
-(require 'toggle-quotes)
 
 ;; Convenient printing
 (require 'printing)
