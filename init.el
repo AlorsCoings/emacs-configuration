@@ -40,8 +40,6 @@
  message-directory (expand-file-name "Mail/" gnus-home-directory))
 
 (require 'epa)
-;; (epa-file-enable)
-;; (setq epg-gpg-program "/usr/bin/gpg2")
 
 ;; Set up load path
 (add-to-list 'load-path settings-dir)
