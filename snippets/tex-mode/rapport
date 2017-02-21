@@ -29,8 +29,16 @@
 \chapter*{Résumé}
 \thispagestyle{empty}
 
+Ce projet s'inscrit dans le cadre de mes études de
+2\up{ème} année de Master Informatique Base de Données et Intelligence
+Artificiel au sein du module \textbf{$5}. Celui-ci
+consiste à $6.
+
+\clearpage
+\pagenumbering{gobble}
 \tableofcontents
-\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
 
 \chapter{$0}
 \setcounter{page}{1}

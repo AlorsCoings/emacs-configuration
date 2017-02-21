@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: video
+# key: video
+# --
+{
+    "title": "${1:$(replace-regexp-in-string "_" " " yas-text)}",
+    "type": "$2",
+    "file": "/media/hdd/Videos/${1:Video_title}.mp4",
+    "image": "images/small-$1.jpg",
+    "videoId": "$1",
+    "age": ${3:18},
+    "seen": false
+}$0

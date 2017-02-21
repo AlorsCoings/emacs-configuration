@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: rapport
-# key: rapport
+# name: figure
+# key: figure
 # --
-\begin{figure}[!htb]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=1.0\textwidth]{$1}
+  \includegraphics[width=1.0\textwidth]{$1.png}
   \caption{$2}
-  \label{fig:$3}
+  \label{fig:$1}
 \end{figure}

@@ -1,0 +1,28 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: ngcomponent
+# key: ngcomponent
+# binding: direct-keybinding
+# --
+(function() {
+    'use strict';
+
+    angular
+        .module('${1:module}')
+        .component('${2:Component}', {
+        templateUrl: '$3.html',
+        controller: ${2:$(capitalize yas-text)}Controller,
+        bindings: {}
+    });
+
+    ${2:$(capitalize yas-text)}Controller.$inject = [
+        '$4'
+    ];
+
+    function ${2:$(capitalize yas-text)}Controller(${4:dependencies}) {
+        var vm = this;
+        vm.${5:func} = $5;
+
+        function $5() {
+        }
+    }
+})();

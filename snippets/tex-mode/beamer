@@ -1,0 +1,64 @@
+# -*- mode: snippet -*-
+# name: beamer
+# key: beamer
+# --
+
+
+\documentclass{beamer}
+
+\input{/home/toad/latex/preamble.tex}
+
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{luainputenc}
+% \usepackage{lmodern}
+% \usepackage[frenchb]{babel}
+% \usepackage{textpos}
+% \usepackage{multimedia}
+% \usepackage{graphicx}
+
+\usetheme{Warsaw}
+% \usetheme{Goettingen}
+\usecolortheme{spruce}
+
+\title{}
+\author{Nicolas Gros}
+\institute{Université de Bourgogne}
+\date{\today}
+\logo{\includegraphics[height=1cm]{/home/toad/Pictures/logo/logoub.png}}
+
+\hypersetup{pdfpagemode=FullScreen}
+
+\setbeamertemplate{navigation symbols}{}
+
+% \addtobeamertemplate{frametitle}{\let\insertframetitle\insertsectionhead}{}
+\addtobeamertemplate{frametitle}{\let\insertframesubtitle\insertsubsectionhead}{}
+\addtobeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber\hspace{2em}\null}
+
+\setbeamercolor{section in sidebar shaded}{fg=gray}
+\setbeamercolor{palette sidebar secondary}{fg=black}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=green!50!black}
+\setbeamercolor{background canvas}{bg=yellow!15!white}
+
+\makeatletter
+\CheckCommand*\beamer@checkframetitle{\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+\renewcommand*\beamer@checkframetitle{\global\let\beamer@frametitle\relax\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+\makeatother
+
+\addtobeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber\hspace{2em}\null}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage{}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[pausesections]
+\end{frame}
+
+\section{Introduction}
+
+\end{document}

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: perl
+# key: perl
+# --
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+$0
