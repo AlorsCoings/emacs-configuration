@@ -5,6 +5,11 @@
 
 ;;; Code:
 
+(require 'helm)
+
+(define-key helm-map (kbd "C-s") 'helm-next-line)
+(define-key helm-map (kbd "C-d") 'helm-previous-line)
+
 (require 'helm-dash)
 (setq helm-dash-docsets-path (concat user-emacs-directory ".docsets"))
 (setq helm-dash-browser-func 'browse-url)
