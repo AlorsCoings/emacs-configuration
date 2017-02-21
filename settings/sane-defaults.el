@@ -361,5 +361,9 @@ With argument PREFIX, print output into current buffer."
 ;; Do not ask which shell to get
 (setenv "ESHELL" "bash")
 
+;; Change key bindings during isearch
+(define-key isearch-mode-map (kbd "C-d") 'isearch-repeat-backward)
+(define-key isearch-mode-map (kbd "C-'") 'isearch-delete-char)
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here
