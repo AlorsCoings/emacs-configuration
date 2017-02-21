@@ -10,6 +10,13 @@
 (require 'org)
 (require 'org-archive)
 
+(add-to-list 'org-export-backends 'beamer)
+
+(eval-after-load 'org '(require 'org-pdfview))
+
+(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . org-pdfview-open))
+
 (defun myorg-update-parent-cookie ()
   "Update the todo statistics in parent heading."
   (when (equal major-mode 'org-mode)
@@ -24,6 +31,12 @@
 
 (defadvice kill-whole-line (after fix-cookies activate)
   "Update todo statistics on kill whole line."
+  (myorg-update-parent-cookie))
+
+(define-key org-mode-map (kbd "<RET>") 'org-return-indent)
+
+(defadvice org-return-indent (after fix-cookies activate)
+  "Update todo statistics on kill line."
   (myorg-update-parent-cookie))
 
 ;; Various preferences
@@ -49,6 +62,7 @@
 (require 'org-agenda)
 (define-key org-agenda-mode-map (kbd "V") 'org-agenda-do-date-earlier)
 (define-key org-agenda-mode-map (kbd "L") 'org-agenda-do-date-later)
+(define-key org-agenda-mode-map (kbd "c") 'org-agenda-capture)
 
 (defun my-org-metaup ()
   "Increase date element if on a date otherwise use org-metaup."
@@ -78,36 +92,56 @@
   "Increase days if on a date otherwise use org-metaright."
   (interactive)
   (if
-      (or (org-at-date-range-p) (org-at-timestamp-p) (org-at-clock-log-p))
+      (or (org-at-date-range-p)
+          (org-at-timestamp-p)
+          (org-at-clock-log-p))
       (org-timestamp-up-day)
     (org-metaright)))
 
 ;; Don't split the line when creating new headline
 (add-to-list 'org-M-RET-may-split-line '(headline . nil))
 
-(define-key org-mode-map (kbd "C-M-t") nil)
-(define-key org-mode-map (kbd "M-d") 'my-org-metaup)
-(define-key org-mode-map (kbd "M-s") 'my-org-metadown)
-(define-key org-mode-map (kbd "M-D") 'org-shiftmetaup)
-(define-key org-mode-map (kbd "M-S") 'org-shiftmetadown)
-(define-key org-mode-map (kbd "M-v") 'my-org-metaleft)
-(define-key org-mode-map (kbd "M-l") 'my-org-metaright)
-(define-key org-mode-map (kbd "M-V") 'org-shiftmetaleft)
-(define-key org-mode-map (kbd "M-L") 'org-shiftmetaright)
-(define-key org-mode-map (kbd "C-c v") 'outline-up-heading)
-(define-key org-mode-map (kbd "C-c C-'") 'org-table-edit-field)
-(define-key org-mode-map (kbd "C-e") 'delete-forward-char)
-(define-key org-mode-map (kbd "M-e") 'kill-word)
-(define-key org-mode-map (kbd "C-M-e") 'kill-sexp)
-(define-key org-mode-map (kbd "C-i") 'delete-backward-char)
-(define-key org-mode-map (kbd "M-i") 'backward-kill-word)
-(define-key org-mode-map (kbd "C-M-i") 'backward-kill-sexp)
-(define-key org-mode-map (kbd "C-c C-x C-s") 'org-clock-in)
-(define-key org-mode-map (kbd "C-c C-x C-p") 'org-set-property)
-(define-key org-mode-map (kbd "C-c C-x C-d") 'org-clock-display)
-(define-key org-mode-map (kbd "C-c C-x C-o") 'org-clock-out)
+(mapc (lambda (info)
+        (let ((key (kbd (car info)))
+              (function (car (cdr info))))
+          (define-key org-mode-map key function)))
+      '(("C-M-t" nil)
+        ("C-c C-<" mc/mark-all-like-this)
+        ("C-M-v" org-backward-heading-same-level)
+        ("C-M-l" org-forward-heading-same-level)
+        ("C-M-d" outline-up-heading)
+        ("M-d" my-org-metaup)
+        ("M-s" my-org-metadown)
+        ("M-D" org-shiftmetaup)
+        ("M-S" org-shiftmetadown)
+        ("M-v" my-org-metaleft)
+        ("M-l" my-org-metaright)
+        ("M-V" org-shiftmetaleft)
+        ("M-L" org-shiftmetaright)
+        ("C-c v" outline-up-heading)
+        ("C-c C-" org-table-edit-field)
+        ("C-e" delete-forward-char)
+        ("M-e" kill-word)
+        ("C-M-e" kill-sexp)
+        ("C-i" delete-backward-char)
+        ("M-i" backward-kill-word)
+        ("C-M-i" backward-kill-sexp)
+        ("C-c C-x C-s" org-clock-in)
+        ("C-c C-x C-p" org-set-property)
+        ("C-c C-x C-d" org-clock-display)
+        ("C-c C-x C-o" org-clock-out)
+        ("C-c C-x e" org-set-effort)
+        ("C-'" delete-backward-char)
+        ("C-c C-n" cleanup-buffer)))
 
 (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+
+(define-key minibuffer-local-map (kbd "C-d") 'previous-history-element)
+(define-key minibuffer-local-map (kbd "C-s") 'next-history-element)
+
+(define-key org-agenda-mode-map (kbd "r") 'org-agenda-later)
+(define-key org-agenda-mode-map (kbd "t") 'org-agenda-earlier)
+(define-key org-agenda-mode-map (kbd "C-c t") 'org-agenda-todo)
 
 (require 'org-table)
 (add-to-list 'orgtbl-radio-table-templates
@@ -136,6 +170,18 @@
      "* TODO %?\nSCHEDULED: %t\nEntered on %U")
     ("c" "Clock" entry (clock)
      "* TODO %?\nEntered on %U\n%a")
+    ("a" "Agenda" entry (file "~/org/agenda.org")
+     "*  %?
+
+%T
+
+Description")
+    ("l" "Agenda Location" entry (file "~/org/agenda.org")
+     "*  %? %^{LOCATION}p
+
+%T
+
+Description")
     ("s" "Journal" entry (file+datetree "~/org/journal.org")
      "* %?\nEntered on %U\n  %i\n  %a")))
 
@@ -182,19 +228,25 @@
 (setq org-archive-location "%s_archive::* Archive")
 
 ;; (require 'org-compat)
-;; (require 'org-gcal)
-;; (setq org-gcal-client-id "298706557354-jea7ks1mctj7a0cb6c1dnrcj7ulo4jrf.apps.googleusercontent.com"
-;;       org-gcal-client-secret "whupPIGL6RmIWL0rJXjxkYlg"
-;;       org-gcal-file-alist '(("nico8ness@gmail.com" .  "~/org/agenda.org")
-;;                          ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" .  "~/lesDoudous.org")                            ))
-;; ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" .  "~/lesDoudous.org")
+(require 'org-gcal)
+;; (setq org-gcal-client-id "839243307571-kajprn704fekr2rf6r3uf4m6ta745d6b.apps.googleusercontent.com"
+;;       org-gcal-client-secret "PQobuVQA5Nm3CUhASqBeQvp-"
+;;       org-gcal-file-alist '(("gros.nicolas0@gmail.com" .  "~/org/agenda.org")
+;;                             ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" . "~/org/doudous.org")))
+
+(setq org-gcal-client-id "715462846304-h9tbe2jvs2pbpakt6gfl2f452kots5gg.apps.googleusercontent.com"
+      org-gcal-client-secret "71P4oJtFKIVuK_Gk4QCR14PL"
+      org-gcal-file-alist '(("qufrio94dao8o2mn85pdcbhfjk@group.calendar.google.com" .  "~/org/agenda.org")
+                            ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" . "~/org/doudous.org")))
+(define-key org-mode-map (kbd "C-c C-r") 'org-gcal-post-at-point)
+(define-key org-mode-map (kbd "C-c C-f") 'org-gcal-sync)
 
 ;; mobileorg settings
-(require 'org-mobile)
-(setq org-directory "~/Dropbox/org")
-(setq org-mobile-inbox-for-pull "~/Dropbox/org/inbox.org")
-(setq org-mobile-directory "~/Dropbox/MobileOrg")
-(setq org-mobile-files '("~/Dropbox/org"))
+;; (require 'org-mobile)
+;; (setq org-directory "~/Dropbox/org")
+;; (setq org-mobile-inbox-for-pull "~/Dropbox/org/inbox.org")
+;; (setq org-mobile-directory "~/Dropbox/MobileOrg")
+;; (setq org-mobile-files '("~/Dropbox/org"))
 
 ;; (add-hook 'org-mode-hook
 ;;           (lambda ()
@@ -242,9 +294,10 @@
      (scala)
      (scheme)
      (screen)
-     (sh . t)
+     (shell . t)
      (shen)
      (sql . t)
+     (dot . t)
      (sqlite))))
 
 (provide 'setup-org)
