@@ -9,8 +9,6 @@
 
 ;; Don't prompt me
 (magit-auto-revert-mode t)
-(set-default 'magit-stage-all-confirm nil)
-(set-default 'magit-unstage-all-confirm nil)
 (set-default 'magit-completing-read-function 'magit-ido-completing-read)
 
 (eval-after-load 'ediff
