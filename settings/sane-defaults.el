@@ -6,7 +6,6 @@
 ;;; Code:
 
 ;; Enable accent
-
 (load-library "iso-transl")
 
 (setq max-specpdl-size 13000)

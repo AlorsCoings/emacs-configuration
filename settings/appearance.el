@@ -8,7 +8,11 @@
 (setq font-lock-maximum-decoration t
       truncate-partial-width-windows nil)
 
-(set-face-attribute 'default nil :inherit nil :stipple nil :background "black" :foreground "gray90" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant 'normal :weight 'normal :height 128 :width 'normal :foundry "adobe" :family "Source Code Pro")
+(set-face-attribute 'default nil :inherit nil :stipple nil :background "black"
+                    :foreground "gray90" :inverse-video nil :box nil
+                    :strike-through nil :overline nil :underline nil
+                    :slant 'normal :weight 'normal :height 128 :width 'normal
+                    :foundry "adobe" :family "Source Code Pro")
 (set-face-attribute 'region nil :background "gray25")
 (set-face-attribute 'font-lock-warning-face nil :foreground "#ff6666")
 (set-face-attribute 'highlight nil :background "#111111")
