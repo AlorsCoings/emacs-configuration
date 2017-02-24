@@ -227,30 +227,8 @@ Description")
 
 (setq org-archive-location "%s_archive::* Archive")
 
-;; (require 'org-compat)
-(require 'org-gcal)
-;; (setq org-gcal-client-id "839243307571-kajprn704fekr2rf6r3uf4m6ta745d6b.apps.googleusercontent.com"
-;;       org-gcal-client-secret "PQobuVQA5Nm3CUhASqBeQvp-"
-;;       org-gcal-file-alist '(("gros.nicolas0@gmail.com" .  "~/org/agenda.org")
-;;                             ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" . "~/org/doudous.org")))
-
-(setq org-gcal-client-id "715462846304-h9tbe2jvs2pbpakt6gfl2f452kots5gg.apps.googleusercontent.com"
-      org-gcal-client-secret "71P4oJtFKIVuK_Gk4QCR14PL"
-      org-gcal-file-alist '(("qufrio94dao8o2mn85pdcbhfjk@group.calendar.google.com" .  "~/org/agenda.org")
-                            ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" . "~/org/doudous.org")))
-(define-key org-mode-map (kbd "C-c C-r") 'org-gcal-post-at-point)
-(define-key org-mode-map (kbd "C-c C-f") 'org-gcal-sync)
-
-;; mobileorg settings
-;; (require 'org-mobile)
-;; (setq org-directory "~/Dropbox/org")
-;; (setq org-mobile-inbox-for-pull "~/Dropbox/org/inbox.org")
-;; (setq org-mobile-directory "~/Dropbox/MobileOrg")
-;; (setq org-mobile-files '("~/Dropbox/org"))
-
-;; (add-hook 'org-mode-hook
-;;           (lambda ()
-;;          (add-hook 'after-save-hook 'org-mobile-push nil 'make-it-local)))
+(if (file-exists-p "setup-org-gcal.el")
+    (require 'setup-org-gcal))
 
 ;; And add babel inline code execution, for executing code in org-mode.
 ;; load all language marked with (lang . t).
