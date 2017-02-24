@@ -140,7 +140,6 @@ re-downloaded in order to locate PACKAGE."
      flx-ido
      flycheck
      flycheck-clojure
-     flycheck-google-cpplint
      flycheck-hdevtools
      flycheck-ocaml
      flycheck-pos-tip
