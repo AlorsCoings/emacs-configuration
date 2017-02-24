@@ -87,6 +87,7 @@ re-downloaded in order to locate PACKAGE."
      company-arduino
      company-auctex
      company-c-headers
+     company-emacs-eclim
      company-inf-ruby
      company-irony
      company-jedi
@@ -109,12 +110,12 @@ re-downloaded in order to locate PACKAGE."
      dired-details
      dired-sort
      dockerfile-mode
+     eclim
      edit-server
      edn
      elisp-slime-nav
      elnode
      elpy
-     emacs-eclim
      emacsql
      emacsql-sqlite
      emmet-mode
