@@ -215,7 +215,7 @@
 (global-set-key (kbd "M-s s") 'git-grep-fullscreen)
 (global-set-key (kbd "M-s S") 'rgrep-fullscreen)
 
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "C-x k") (lambda() (interactive) (kill-buffer (current-buffer))))
 
 ;; Goal-column
 (global-set-key (kbd "M-n") 'set-goal-column)
