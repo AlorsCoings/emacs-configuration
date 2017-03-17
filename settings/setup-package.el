@@ -182,7 +182,6 @@ re-downloaded in order to locate PACKAGE."
      ido-ubiquitous
      ido-vertical-mode
      idomenu
-     iedit
      image+
      impatient-mode
      inf-ruby

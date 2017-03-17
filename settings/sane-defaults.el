@@ -29,9 +29,6 @@
  '(anzu-deactivate-region t)
  '(anzu-replace-to-string-separator " => "))
 
-(require 'iedit)
-(set-face-attribute 'iedit-occurrence t :background "gray30")
-
 (defun sanityinc/no-trailing-whitespace ()
   "Turn off display of trailing whitespace in this buffer."
   (setq show-trailing-whitespace nil))
