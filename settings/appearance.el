@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(setq ring-bell-function 'ignore)
+
 (setq font-lock-maximum-decoration t
       truncate-partial-width-windows nil)
 
