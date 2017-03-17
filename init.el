@@ -39,6 +39,8 @@
 ;; Set up load path
 (add-to-list 'load-path settings-dir)
 
+(setq abbrev-file-name (concat user-emacs-directory "abbrev_defs"))
+
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
 (load custom-file)
