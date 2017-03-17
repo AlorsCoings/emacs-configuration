@@ -236,7 +236,7 @@ Description")
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((C . t)
-     (R . t)
+     ;; (R . t) ;; seems to bug under some installation
      (asymptote)
      (awk)
      (calc)

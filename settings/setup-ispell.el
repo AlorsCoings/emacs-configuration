@@ -47,10 +47,11 @@
         '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8))))
  (t (setq ispell-program-name nil)))
 
-;; ispell-cmd-args is useless, it's the list of *extra* arguments we will append to the ispell process when "ispell-word" is called.
-;; ispell-extra-args is the command arguments which will *always* be used when start ispell process
-(setq ispell-extra-args (flyspell-detect-ispell-args t))
-;; (setq ispell-cmd-args (flyspell-detect-ispell-args))
+;; ispell-extra-args is the command arguments which will *always* be
+;; used when start ispell process
+;; Add condition to avoid eror when no ispell program was found
+(cond (ispell-program-name
+       (setq ispell-extra-args (flyspell-detect-ispell-args t))))
 
 (defadvice ispell-word (around my-ispell-word activate)
   (let ((old-ispell-extra-args ispell-extra-args))
