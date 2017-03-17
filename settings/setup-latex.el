@@ -45,6 +45,7 @@
 ;; 2. Filling text (and only text, not equations).
 ;; 3. Indenting everything.
 
+;; customize-font chapter section subsection
 (setq LaTeX-command "latex -synctex=1")
 (setq TeX-command-list
       '(("TeX" "%(PDF)%(tex) %(file-line-error) %(extraopts) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
@@ -53,6 +54,8 @@
         ("LaTeX" "%`%l%(mode)%' %t" TeX-run-TeX nil
          (latex-mode doctex-mode)
          :help "Run LaTeX")
+        ("Glossary" "makeglossaries %s" TeX-run-command nil
+         (latex-mode) :help "Create glossaries")
         ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
          (texinfo-mode)
          :help "Run Makeinfo with Info output")
