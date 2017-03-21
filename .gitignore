@@ -4,7 +4,7 @@ abbrev_defs
 ac-comphist.dat
 /auto-save-list
 /backups
-/elpa
+# /elpa
 gnus.el-dribble
 helm-doc.org
 history
