@@ -31,8 +31,12 @@ sudo make install-arch-dep install-arch-indep prefix=/usr/local/stow/emacs-"$ver
 cd /usr/local/stow
 sudo stow emacs-"$version"
 
+# install source code pro font
+mkdir -p ~/.fonts
 cd ~/.fonts
 wget 'https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.tar.gz'
+tar xzf 1.050R-it.tar.gz
+rm 1.050R-it.tar.gz
 sudo fc-cache -f -v
 
 sudo echo "[Unit]
