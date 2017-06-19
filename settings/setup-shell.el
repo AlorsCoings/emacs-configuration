@@ -39,6 +39,8 @@
 
 (add-hook 'shell-mode-hook
           (lambda ()
+            (define-key shell-mode-map (kbd "C-d") 'comint-previous-input)
+            (define-key shell-mode-map (kbd "C-s") 'comint-next-input)
             (define-key shell-mode-map (kbd "C-e") 'comint-delchar-or-eof-or-kill-buffer)))
 
 (provide 'setup-shell)

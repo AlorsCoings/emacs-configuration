@@ -50,6 +50,7 @@
 (defun my-c-define-keybindings (map)
   "Define personal key bindings c/c++ MAP."
   (define-key map (kbd "C-c C-c") 'compile)
+  (define-key map (kbd "C-c C-n") 'cleanup-buffer)
   (define-key map (kbd "M-j") (lambda () (interactive) (join-line -1)))
   (define-key map (kbd "C-<tab>") 'company-complete)
   (define-key map (kbd "C-e") 'c-electric-delete-forward)

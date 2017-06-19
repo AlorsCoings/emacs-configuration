@@ -41,7 +41,6 @@
 
 ;; Various preferences
 (setq org-log-done 'time
-      org-completion-use-ido t
       org-edit-timestamp-down-means-later t
       org-archive-mark-done nil
       org-catch-invisible-edits 'show
@@ -63,6 +62,35 @@
 (define-key org-agenda-mode-map (kbd "V") 'org-agenda-do-date-earlier)
 (define-key org-agenda-mode-map (kbd "L") 'org-agenda-do-date-later)
 (define-key org-agenda-mode-map (kbd "c") 'org-agenda-capture)
+
+(setq org-agenda-dim-blocked-tasks t)
+
+(setq org-agenda-compact-blocks nil)
+(setq org-agenda-custom-commands
+      '(("w" "Work"
+         ((agenda "")
+          (tags-todo "work")))
+        ;; tags "work"
+        ;; ((org-agenda-overriding-header "Work")
+        ;;  (org-tags-match-list-sublevels t)
+        ;;  (agenda "")))
+        ;; (("h" "Agenda and Home-related tasks"
+        ;;   ((agenda "")
+        ;;    (tags-todo "home")
+        ;;    (tags "garden")))
+        ;;  ("o" "Agenda and Office-related tasks"
+        ;;   ((agenda "")
+        ;;    (tags-todo "work")
+        ;;    (tags "office"))))
+        ;; ("h" "Habits" tags-todo "STYLE=\"habit\""
+        ;;  ((org-agenda-overriding-header "Habits")
+        ;;   (org-agenda-sorting-strategy
+        ;;    '(todo-state-down effort-up category-keep))))
+        (" " "Agenda"
+         ((agenda "" t)
+          (tags-todo "Work"
+                     ((org-agenda-overriding-header "Work")
+                      (org-tags-match-list-sublevels nil)))))))
 
 (defun my-org-metaup ()
   "Increase date element if on a date otherwise use org-metaup."
@@ -227,8 +255,11 @@ Description")
 
 (setq org-archive-location "%s_archive::* Archive")
 
-(if (file-exists-p "setup-org-gcal.el")
-    (require 'setup-org-gcal))
+(require 'setup-org-gcal)
+
+(add-hook 'after-init-hook (lambda ()
+                             (org-agenda-list)
+                             (delete-other-windows)))
 
 ;; And add babel inline code execution, for executing code in org-mode.
 ;; load all language marked with (lang . t).
@@ -277,6 +308,10 @@ Description")
      (sql . t)
      (dot . t)
      (sqlite))))
+
+;(require 'org-babel)
+;(require 'org-babel-init)
+;(require 'org-babel-gnuplot)
 
 (provide 'setup-org)
 ;;; setup-org.el ends here

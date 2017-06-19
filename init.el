@@ -25,7 +25,8 @@
 (setq initial-frame-alist '((fullscreen . maximized)))
 
 (defvar settings-dir
-  (expand-file-name "settings" user-emacs-directory))
+  (expand-file-name "settings" user-emacs-directory)
+  "Path to settings directory.")
 
 (require 'gnus)
 (require 'gnus-start)
@@ -208,7 +209,7 @@
 
 (require 'browse-url)
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "chromium-browser")
+      browse-url-generic-program "google-chrome")
 
 (icomplete-mode 99)
 

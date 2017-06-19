@@ -9,6 +9,7 @@
 (load-library "iso-transl")
 
 (setq max-specpdl-size 13000)
+(setq max-lisp-eval-depth 5000)
 
 (setq-default
  bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
@@ -81,7 +82,8 @@
 (setq echo-keystrokes 0.1)
 
 ;; Move files to trash when deleting
-(setq delete-by-moving-to-trash t)
+;; Not good when having double hard drives
+;; (setq delete-by-moving-to-trash t)
 
 ;; Real emacs knights don't use shift to mark things
 (setq shift-select-mode nil)

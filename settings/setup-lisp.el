@@ -13,7 +13,8 @@
 
 (require 'slime)
 
-(setq inferior-lisp-program "/usr/bin/sbcl")
+;; (setq inferior-lisp-program "/usr/bin/sbcl")
+(setq inferior-lisp-program "/usr/bin/clisp")
 (setq slime-contribs '(slime-fancy))
 (eval-after-load 'slime
   '(define-key slime-mode-map (kbd "M-h") 'slime-documentation-lookup))
