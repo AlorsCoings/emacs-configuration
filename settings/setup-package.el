@@ -72,7 +72,6 @@ re-downloaded in order to locate PACKAGE."
      buster-mode
      buster-snippets
      c-eldoc
-     caml
      change-inner
      cider
      clj-refactor
@@ -97,7 +96,6 @@ re-downloaded in order to locate PACKAGE."
      cpputils-cmake
      crappy-jsp-mode
      creole
-     crontab-mode
      css-eldoc
      css-mode
      ctable
@@ -123,7 +121,6 @@ re-downloaded in order to locate PACKAGE."
      epl
      ess
      ess-R-data-view
-     ess-R-object-popup
      ess-smart-equals
      ess-smart-underscore
      ess-view
@@ -179,7 +176,6 @@ re-downloaded in order to locate PACKAGE."
      icomplete+
      ido-at-point
      ido-completing-read+
-     ido-ubiquitous
      ido-vertical-mode
      idomenu
      image+
@@ -288,7 +284,6 @@ re-downloaded in order to locate PACKAGE."
      tidy
      toggle-quotes
      top-mode
-     tuareg
      typing-game
      typit
      undo-tree

@@ -28,15 +28,6 @@
   (expand-file-name "settings" user-emacs-directory)
   "Path to settings directory.")
 
-(require 'gnus)
-(require 'gnus-start)
-(setq
- gnus-home-directory "~/.gnus.d/"
- gnus-init-file (expand-file-name "setup-gnus.el" settings-dir)
- message-directory (expand-file-name "Mail/" gnus-home-directory))
-
-(require 'epa)
-
 ;; Set up load path
 (add-to-list 'load-path settings-dir)
 
@@ -91,7 +82,6 @@
 (require 'setup-web)
 (require 'setup-css)
 (require 'setup-latex)
-(require 'setup-ocaml)
 (require 'setup-c)
 (require 'setup-ispell)
 (require 'setup-sql)

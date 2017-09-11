@@ -357,6 +357,9 @@ With argument PREFIX, print output into current buffer."
 (setq tramp-remote-process-environment ())
 (add-to-list 'tramp-remote-process-environment "LC_ALL=en_US.UTF-8" 'append)
 
+(when (or (eq system-type 'windows-nt) (eq system-type 'ms-dos))
+  (set-default 'tramp-default-method "plink"))
+
 ;; Do not ask which shell to get
 (setenv "ESHELL" "bash")
 
