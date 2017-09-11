@@ -4,7 +4,8 @@
 
 set -eu
 
-readonly version="25.1"
+readonly version="25.2"
+install_directory="/usr/local/stow"
 
 # install dependencies
 sudo apt-get -qq update
@@ -21,14 +22,14 @@ if [[ ! -d emacs-"$version" ]]; then
 fi
 
 # build and install
-sudo mkdir -p /usr/local/stow
+sudo mkdir -p ${install_directory}
 cd emacs-"$version"
 ./configure --with-xft --with-x-toolkit=lucid
 
 make
-sudo make install-arch-dep install-arch-indep prefix=/usr/local/stow/emacs-"$version"
+sudo make install-arch-dep install-arch-indep prefix="${install_directory}"/emacs-"$version"
 
-cd /usr/local/stow
+cd ${install_directory}
 sudo stow emacs-"$version"
 
 # install source code pro font

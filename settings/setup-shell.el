@@ -22,7 +22,7 @@
 (add-hook 'shell-command-complete-functions
           'bash-completion-dynamic-complete)
 
-(setenv "PATH" "/home/toad/anaconda3/bin:/usr/lib/jvm/jdk1.8/bin:/usr/local/apache-maven-3.3.9/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usrr/games:/usr/local/games:/home/toad/local/bin:/usr/local/apache-log4j-1.2.15:/snap/bin:/snap/bin")
+(setenv "PATH" "~/local/bin:/home/toad/anaconda3/bin:/usr/lib/jvm/jdk1.8/bin:/usr/local/apache-maven-3.3.9/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usrr/games:/usr/local/games:/home/toad/local/bin:/usr/local/apache-log4j-1.2.15:/snap/bin:/snap/bin")
 (setenv "JAVA_HOME" "/usr/lib/jvm/jdk1.8")
 (setenv "SHELL" "/bin/bash")
 
@@ -39,8 +39,11 @@
 
 (add-hook 'shell-mode-hook
           (lambda ()
-            (define-key shell-mode-map (kbd "C-d") 'comint-previous-input)
-            (define-key shell-mode-map (kbd "C-s") 'comint-next-input)
+            (define-key shell-mode-map (kbd "M-d") 'comint-previous-input)
+            (define-key shell-mode-map (kbd "C-d") 'previous-line)
+            (define-key shell-mode-map (kbd "M-r") 'subword-forward)
+            (define-key shell-mode-map (kbd "M-s") 'comint-next-input)
+            (define-key shell-mode-map (kbd "C-s") 'next-line)
             (define-key shell-mode-map (kbd "C-e") 'comint-delchar-or-eof-or-kill-buffer)))
 
 (provide 'setup-shell)

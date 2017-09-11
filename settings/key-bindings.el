@@ -37,9 +37,14 @@
 
 ;; Multiple cursor
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-»") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-«") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-M-«") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-c C-SPC") 'mc/mark-pop)
+(global-set-key (kbd "C-c C-»") 'mc--insert-number-and-increase)
+(global-set-key (kbd "C-c C-«") 'mc--insert-letter-and-increase)
 
 ;; Manage windows
 (global-set-key (kbd "C-M-S-<left>") 'shrink-window-horizontally)
@@ -110,6 +115,7 @@
 ;; Navigation bindings
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
+(global-set-key (kbd "C-c C-o") 'browse-url-of-file)
 (global-set-key (kbd "C-x g") 'webjump)
 (global-set-key (kbd "C-x M-g") 'browse-url-at-point)
 
@@ -154,8 +160,10 @@
 (global-set-key (kbd "C-+") 'change-number-at-point)
 (global-set-key (kbd "C--") 'subtract-number-at-point)
 
+(global-set-key (kbd "C-ê") 'undo-tree-undo)
 (global-set-key (kbd "C-_") 'undo-tree-undo)
 (global-set-key (kbd "C- ") 'undo-tree-redo)
+(global-set-key (kbd "C-Ê") 'undo-tree-redo)
 (global-set-key (kbd "C-x u") 'undo-tree-visualize)
 
 ;; Browse the kill ring
@@ -218,8 +226,8 @@
 (global-set-key (kbd "C-x k") (lambda() (interactive) (kill-buffer (current-buffer))))
 
 ;; Goal-column
-(global-set-key (kbd "M-n") 'set-goal-column)
-(global-set-key (kbd "M-N") (lambda () (interactive) (set-goal-column -1)))
+;; (global-set-key (kbd "M-n") 'set-goal-column)
+;; (global-set-key (kbd "M-N") (lambda () (interactive) (set-goal-column -1)))
 
 ;; Helm-dash
 (global-set-key (kbd "C-M-z") 'helm-dash-at-point)
@@ -285,6 +293,7 @@
 
 (global-set-key (kbd "C-n") 'isearch-forward)
 (global-set-key (kbd "C-M-n") 'isearch-forward-regexp)
+(global-set-key (kbd "M-n") 'isearch-forward-regexp)
 (global-set-key (kbd "C-S-n") 'isearch-backward)
 (global-set-key (kbd "C-M-S-n") 'isearch-backward-regexp)
 
@@ -297,5 +306,6 @@
 (global-set-key (kbd "M-f w") 'transpose-words)
 (global-set-key (kbd "M-f p") 'transpose-params)
 
+(global-set-key (kbd "M-,") 'comment-dwim)
 (provide 'key-bindings)
 ;;; key-bindings.el ends here

@@ -50,7 +50,6 @@
 (defun my-c-define-keybindings (map)
   "Define personal key bindings c/c++ MAP."
   (define-key map (kbd "C-c C-c") 'compile)
-  (define-key map (kbd "C-c C-n") 'cleanup-buffer)
   (define-key map (kbd "M-j") (lambda () (interactive) (join-line -1)))
   (define-key map (kbd "C-<tab>") 'company-complete)
   (define-key map (kbd "C-e") 'c-electric-delete-forward)
@@ -62,15 +61,19 @@
 
 (add-hook 'c-mode-hook
           (lambda ()
-            (c-eldoc-define-keybindings c-mode-map)
+            ;; (c-eldoc-define-keybindings c-mode-map)
             (my-c-define-keybindings c-mode-map)
             (setq c-basic-offset 4)))
 (add-hook 'c++-mode-hook
           (lambda ()
-            (c-eldoc-define-keybindings c++-mode-map)
+            ;; (c-eldoc-define-keybindings c++-mode-map)
             (my-c-define-keybindings c++-mode-map)
             (setq c-basic-offset 4)))
 
+(add-hook 'java-mode-hook
+          (lambda ()
+            (my-c-define-keybindings java-mode-map)
+            (setq c-basic-offset 4)))
 
 (require 'company)
 (add-to-list 'company-backends 'company-c-headers)

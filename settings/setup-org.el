@@ -63,9 +63,6 @@
 (define-key org-agenda-mode-map (kbd "L") 'org-agenda-do-date-later)
 (define-key org-agenda-mode-map (kbd "c") 'org-agenda-capture)
 
-(setq org-agenda-dim-blocked-tasks t)
-
-(setq org-agenda-compact-blocks nil)
 (setq org-agenda-custom-commands
       '(("w" "Work"
          ((agenda "")
@@ -151,7 +148,7 @@
         ("C-e" delete-forward-char)
         ("M-e" kill-word)
         ("C-M-e" kill-sexp)
-        ("C-i" delete-backward-char)
+        ("C-i" pcomplete)
         ("M-i" backward-kill-word)
         ("C-M-i" backward-kill-sexp)
         ("C-c C-x C-s" org-clock-in)
@@ -170,6 +167,16 @@
 (define-key org-agenda-mode-map (kbd "r") 'org-agenda-later)
 (define-key org-agenda-mode-map (kbd "t") 'org-agenda-earlier)
 (define-key org-agenda-mode-map (kbd "C-c t") 'org-agenda-todo)
+
+;; (setq org-html-validation-link nil)
+
+;; Configure org-agenda-time-grid ?
+;; (setq org-agenda-use-time-grid nil)
+
+(setq org-agenda-custom-commands
+      '(("A" "Project A"
+         ((agenda "")
+          (tags-todo "pa|pb")))))
 
 (require 'org-table)
 (add-to-list 'orgtbl-radio-table-templates
@@ -309,9 +316,18 @@ Description")
      (dot . t)
      (sqlite))))
 
-;(require 'org-babel)
-;(require 'org-babel-init)
-;(require 'org-babel-gnuplot)
+(setq org-agenda-compact-blocks nil)
+(setq org-agenda-dim-blocked-tasks nil)
+
+(setq org-confirm-babel-evaluate nil)
+;; (setq org-export-babel-evaluate t)
+
+(add-hook 'org-export-before-processing-hook #'org-babel-tangle)
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (org-agenda-list)
+            (delete-other-windows)))
 
 (provide 'setup-org)
 ;;; setup-org.el ends here

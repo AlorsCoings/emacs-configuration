@@ -53,7 +53,6 @@ re-downloaded in order to locate PACKAGE."
    '(
      ace-jump-mode
      alert
-     anaconda-mode
      angular-snippets
      anzu
      apache-mode

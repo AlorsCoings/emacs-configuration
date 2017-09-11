@@ -7,27 +7,50 @@
 
 (require 'python)
 
-(setq python-indent-offset 4)
-(add-to-list 'python-shell-completion-native-disabled-interpreters "python3")
-(setq python-shell-interpreter "python3")
 
-(define-key inferior-python-mode-map (kbd "C-d") 'comint-previous-input)
-(define-key inferior-python-mode-map (kbd "C-s") 'comint-next-input)
+;; (setq python-indent-offset 4)
+;; (add-to-list 'python-shell-completion-native-disabled-interpreters "python3")
+;; (setq python-shell-interpreter "python")
+;; (setq python-shell-interpreter "ipython")
+;; (setq python-shell-interpreter-args "--profile=dev")
+;; (setq python-shell-interpreter-args "")
+
+(define-key python-mode-map (kbd "C-M-S-h") 'python-mark-defun)
+(define-key inferior-python-mode-map (kbd "M-d") 'comint-previous-input)
+(define-key inferior-python-mode-map (kbd "C-d") 'previous-line)
+(define-key inferior-python-mode-map (kbd "M-r") 'subword-forward)
+(define-key inferior-python-mode-map (kbd "M-s") 'comint-next-input)
+(define-key inferior-python-mode-map (kbd "C-s") 'next-line)
 (define-key inferior-python-mode-map (kbd "C-e") 'comint-delchar-or-eof-or-kill-buffer)
 
-(setq python-shell-exec-path '("~/anaconda3/bin"))
+(require 'elpy)
+(elpy-enable)
 
-;; (require 'elpy)
+(define-key elpy-mode-map (kbd "C-c C-p") 'run-python)
+(define-key elpy-mode-map (kbd "C-c C-r") 'python-shell-send-region)
+;; (require 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;; (define-key anaconda-mode-map (kbd "M-r") nil)
+;; (define-key anaconda-mode-map (kbd "C-c C-d") 'anaconda-mode-show-doc)
+;; (define-key anaconda-mode-map (kbd "M-.") 'anaconda-mode-find-references)
+;; Remove warning when starting python shell
+;; (add-to-list 'python-shell-completion-native-disabled-interpreters "python")
+
+;; (add-hook 'python-mode-hook #'flycheck-mode)
+
 ;; (elpy-enable)
+;; (elpy-use-ipython)
+;; (require 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;; (define-key anaconda-mode-map (kbd "M-r") nil)
+;; (define-key anaconda-mode-map (kbd "C-c C-d") 'anaconda-mode-show-doc)
+;; (define-key anaconda-mode-map (kbd "M-.") 'anaconda-mode-find-references)
 
-(require 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-(define-key anaconda-mode-map (kbd "M-r") nil)
-(define-key anaconda-mode-map (kbd "C-c C-d") 'anaconda-mode-show-doc)
-(define-key anaconda-mode-map (kbd "M-.") 'anaconda-mode-find-references)
+;; (remove-hook 'anaconda-mode-response-read-fail-hook
+;;              'anaconda-mode-show-unreadable-response)
 ;; Add intern dependencies
-(add-to-list 'python-shell-extra-pythonpaths "~/anaconda3")
 ;; Virtual environment
 ;; M-x pythonic-activate RET /path/to/virtualenv RET
 
