@@ -11,8 +11,8 @@
       org-gcal-client-secret "71P4oJtFKIVuK_Gk4QCR14PL"
       org-gcal-file-alist '(;; ("qufrio94dao8o2mn85pdcbhfjk@group.calendar.google.com" .  "~/org/agenda.org")
                             ("s101uit489k7q1v5hr2g8jedro@group.calendar.google.com" . "~/org/doudous.org")))
-(define-key org-mode-map (kbd "C-c C-r") 'org-gcal-post-at-point)
-(define-key org-mode-map (kbd "C-c C-f") 'org-gcal-sync)
+(define-key org-mode-map (kbd "C-c C-g C-r") 'org-gcal-post-at-point)
+(define-key org-mode-map (kbd "C-c C-g C-f") 'org-gcal-sync)
 
 (org-gcal-refresh-token)
 (org-gcal-sync)

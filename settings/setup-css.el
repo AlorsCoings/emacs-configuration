@@ -18,7 +18,6 @@
 (define-key css-mode-map (kbd "C-c C-n") 'web-beautify-css)
 
 ;;; SASS and SCSS
-(require 'sass-mode)
 (require 'scss-mode)
 (setq-default scss-compile-at-save nil)
 

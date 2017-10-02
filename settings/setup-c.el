@@ -9,11 +9,11 @@
 (setq c-default-style "k&r")
 
 ;; google-c-style
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-(add-hook 'c++-mode-common-hook 'google-set-c-style)
-(add-hook 'c++-mode-common-hook 'google-make-newline-indent)
+;; (require 'google-c-style)
+;; (add-hook 'c-mode-common-hook 'google-set-c-style)
+;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+;; (add-hook 'c++-mode-common-hook 'google-set-c-style)
+;; (add-hook 'c++-mode-common-hook 'google-make-newline-indent)
 
 (semantic-mode 1)
 ;; (global-semantic-idle-completions-mode t)

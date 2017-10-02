@@ -20,6 +20,9 @@
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)
 
+;; Redefine M-< and M-> for some modes
+(beginend-global-mode)
+
 (require 'anzu)
 (global-anzu-mode t)
 (diminish 'anzu-mode)
@@ -49,17 +52,7 @@
 
 (global-set-key [remap just-one-space] 'cycle-spacing)
 
-(when (fboundp 'global-prettify-symbols-mode)
-  (global-prettify-symbols-mode))
-
-(require 'ace-jump-mode)
-;; Change ace-jump default sequence
-(setq ace-jump-mode-submode-list
-      '(ace-jump-char-mode
-        ace-jump-word-mode
-        ace-jump-line-mode))
-;; Don't ask for a char when searching a word
-(setq ace-jump-word-mode-use-query-char nil)
+(global-prettify-symbols-mode 1)
 
 ;; Set default indentation level
 (setq-default tab-width 4)
@@ -115,10 +108,6 @@
 ;; Remove text in active region if inserting text
 (delete-selection-mode 1)
 
-(require 'jump-char)
-;; Don't highlight matches with jump-char - it's distracting
-(setq jump-char-lazy-highlight-face nil)
-
 ;; Always display line and column numbers
 (setq line-number-mode t)
 (setq column-number-mode t)
@@ -151,9 +140,14 @@
 (setq-default truncate-lines t)
 
 ;; Keep cursor away from edges when scrolling up/down
-(require 'smooth-scrolling)
-(smooth-scrolling-mode 1)
-(setq smooth-scroll-margin 10)
+;; (require 'smooth-scrolling)
+;; (smooth-scrolling-mode 1)
+;; (setq smooth-scroll-margin 10)
+(setq scroll-margin 10
+      scroll-step 1
+      scroll-conservatively 10
+      scroll-preserve-screen-position 1
+      )
 
 ;; Allow recursive minibuffers
 (setq enable-recursive-minibuffers t)
@@ -244,23 +238,6 @@
 (add-hook 'hexl-mode-hook 'font-lock-fontify-buffer)
 
 (setq kill-ring-max 1000)
-
-(require 'typing-game)
-(define-key typing-game-mode-map (kbd "-") nil)
-(define-key typing-game-mode-map (kbd "0") nil)
-(define-key typing-game-mode-map (kbd "1") nil)
-(define-key typing-game-mode-map (kbd "2") nil)
-(define-key typing-game-mode-map (kbd "3") nil)
-(define-key typing-game-mode-map (kbd "4") nil)
-(define-key typing-game-mode-map (kbd "5") nil)
-(define-key typing-game-mode-map (kbd "6") nil)
-(define-key typing-game-mode-map (kbd "7") nil)
-(define-key typing-game-mode-map (kbd "8") nil)
-(define-key typing-game-mode-map (kbd "9") nil)
-(define-key typing-game-mode-map (kbd "g") nil)
-(define-key typing-game-mode-map (kbd "h") nil)
-(define-key typing-game-mode-map (kbd "?") nil)
-(define-key typing-game-mode-map (kbd "q") nil)
 
 (setq  ansi-color-faces-vector
        [default bold shadow italic underline bold bold-italic bold])
@@ -366,6 +343,36 @@ With argument PREFIX, print output into current buffer."
 ;; Change key bindings during isearch
 (define-key isearch-mode-map (kbd "C-d") 'isearch-repeat-backward)
 (define-key isearch-mode-map (kbd "C-'") 'isearch-delete-char)
+
+;; Run at full power please
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-defun 'disabled nil)
+
+(require 'browse-url)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
+(icomplete-mode 99)
+
+;; Smart M-x is smart
+(require 'smex)
+(smex-initialize)
+
+;; Don't use expand-region fast keys
+(setq expand-region-fast-keys-enabled nil)
+
+;; Show expand-region command used
+(setq er--show-expansion-message t)
+
+;; Browse kill ring
+(require 'browse-kill-ring)
+(setq browse-kill-ring-quit-action 'save-and-restore)
+
+;; Visual regexp
+(require 'visual-regexp)
 
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here

@@ -9,17 +9,13 @@
 
 ;; (eval-after-load 'image+ '(imagex-auto-adjust-mode 1))
 ;; (eval-after-load 'image+ '(imagex-global-sticky-mode 1))
-(eval-after-load 'image+
-  `(when (require 'hydra nil t)
-     (defhydra imagex-sticky-binding (global-map "C-x C-l")
-       "Manipulating Image"
-       ("+" imagex-sticky-zoom-in "zoom in")
-       ("-" imagex-sticky-zoom-out "zoom out")
-       ("M" imagex-sticky-maximize "maximize")
-       ("O" imagex-sticky-restore-original "restore original")
-       ("S" imagex-sticky-save-image "save file")
-       ("r" imagex-sticky-rotate-right "rotate right")
-       ("l" imagex-sticky-rotate-left "rotate left"))))
+(define-key image-mode-map (kbd "+") 'imagex-sticky-zoom-in)
+(define-key image-mode-map (kbd "-") 'imagex-sticky-zoom-out)
+(define-key image-mode-map (kbd "M") 'imagex-sticky-maximize)
+(define-key image-mode-map (kbd "O") 'imagex-sticky-restore-original)
+(define-key image-mode-map (kbd "S") 'imagex-sticky-save-image)
+(define-key image-mode-map (kbd "r") 'imagex-sticky-rotate-right)
+(define-key image-mode-map (kbd "l") 'imagex-sticky-rotate-left)
 
 (provide 'setup-image)
 ;;; setup-image.el ends here

@@ -8,9 +8,6 @@
 (setq-default initial-scratch-message
               (concat ";; Happy hacking " (or user-login-name "") " - Emacs ♥ you!\n\n"))
 
-(require 'ipretty)
-(ipretty-mode 1)
-
 (require 'slime)
 
 ;; (setq inferior-lisp-program "/usr/bin/sbcl")
@@ -57,6 +54,10 @@
                               "basic+search")))))))
 
 (define-key lisp-mode-map (kbd "C-c l") 'lispdoc)
+
+;; Elisp go-to-definition with M-. and back again with M-,
+(autoload 'elisp-slime-nav-mode "elisp-slime-nav")
+(add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t) (eldoc-mode 1)))
 
 (provide 'setup-lisp)
 ;;; setup-lisp.el ends here

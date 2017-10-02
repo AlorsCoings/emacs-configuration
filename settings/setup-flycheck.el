@@ -38,6 +38,9 @@ clean buffer we're an order of magnitude laxer about checking."
 (flycheck-add-next-checker 'c/c++-clang
                            '(warning . c/c++-googlelint))
 
+;; (add-to-list 'flycheck-disabled-checkers 'javascript-jshint)
+;; (setq flycheck-eslintrc "~/.eslintrc")
+
 (require 'flycheck-pos-tip)
 (setq flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
 

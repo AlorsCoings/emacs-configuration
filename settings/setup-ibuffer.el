@@ -15,11 +15,7 @@
 (declare-function after-load "sane-defaults" (feature &rest body))
 
 (require 'ibuffer)
-
-;; Explicitly require ibuffer-vc to get its column definitions, which
-;; can't be autoloaded
-(after-load 'ibuffer
-  (require 'ibuffer-vc))
+(require 'ibuffer-vc)
 
 (defun ibuffer-set-up-preferred-filters ()
   "Filter ibuffer by filename/process."

@@ -6,7 +6,7 @@
 ;;; Code:
 
 (require 'php-mode)
-(require 'smarty-mode)
+;; (require 'smarty-mode)
 
 (provide 'setup-php)
 ;;; setup-php.el ends here

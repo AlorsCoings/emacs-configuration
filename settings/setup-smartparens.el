@@ -9,7 +9,18 @@
 (require 'smartparens-latex)
 
 (smartparens-global-mode t)
+;; (--each '(css-mode-hook
+;;           restclient-mode-hook
+;;           js-mode-hook
+;;           java-mode
+;;           ruby-mode
+;;           markdown-mode
+;;           groovy-mode)
+;;   (add-hook it 'turn-on-smartparens-mode))
 (show-smartparens-global-mode t)
+
+(sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+(sp-local-pair 'emacs-lisp-mode "\"" nil :actions '(wrap))
 
 (mapc (lambda (info)
         (let ((key (kbd (car info)))

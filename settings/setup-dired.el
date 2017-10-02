@@ -44,15 +44,6 @@
 (define-key dired-mode-map (kbd "C-S-n") 'dired-do-isearch)
 (define-key dired-mode-map (kbd "C-M-S-n") 'dired-do-isearch-regexp)
 
-;; M-up is nicer in dired if it moves to the fourth line - the first file
-(defun dired-back-to-top ()
-  "Move to the third line - the first file."
-  (interactive)
-  (goto-char (point-min))
-  (forward-line 4)
-  (dired-back-to-start-of-files))
-
-(define-key dired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
 (define-key dired-mode-map (vector 'remap 'smart-up) 'dired-back-to-top)
 
 ;; M-down is nicer in dired if it moves to the last file

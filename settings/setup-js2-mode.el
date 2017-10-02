@@ -25,37 +25,28 @@
               js2-indent-switch-body t
               js2-auto-indent-p t
               js2-global-externs '("angular")
-              js2-indent-on-enter-key t
-              flycheck-disabled-checkers '(javascript-jshint)
-              flycheck-checkers '(javascript-eslint)
-              flycheck-eslintrc "~/.eslintrc")
+              js2-indent-on-enter-key t)
 
 ;; (set-face-attribute 'js2-function-param-face t :foreground "LightGoldenrod")
-
-(require 'coffee-mode)
-(setq coffee-tab-width 2)
-
 ;; Let flycheck handle parse errors
+
 (setq-default js2-show-parse-errors nil)
 (setq-default js2-strict-missing-semi-warning nil)
 (setq-default js2-strict-trailing-comma-warning t) ;; jshint does not warn about this now for some reason
 
 (add-hook 'js2-mode-hook (lambda () (flycheck-mode 1)))
 
-(require 'js2-refactor)
-(js2r-add-keybindings-with-prefix "C-c C-m")
-
 (require 'js2-imenu-extras)
 (js2-imenu-extras-setup)
 
 (defun js2r--setup-wrapping-pair (open close)
   "Set up wrapping of pairs (OPEN, CLOSE), with the possiblity of semicolons thrown into the mix."
-  (define-key js2-mode-map (read-kbd-macro open) (λ (js2r--self-insert-wrapping open close)))
+  (define-key js2-mode-map (read-kbd-macro open) (lambda (js2r--self-insert-wrapping open close)))
   (unless (s-equals? open close)
-    (define-key js2-mode-map (read-kbd-macro close) (λ (js2r--self-insert-closing open close)))))
+    (define-key js2-mode-map (read-kbd-macro close) (lambda (js2r--self-insert-closing open close)))))
 
 (define-key js2-mode-map (kbd ";")
-  (λ (if (looking-at ";")
+  (lambda (if (looking-at ";")
          (forward-char)
        (funcall 'self-insert-command 1))))
 
@@ -172,21 +163,6 @@
 (define-key js2-mode-map (kbd "C-x C-k") 'js2r-delete-current-buffer-file)
 
 (define-key js2-mode-map (kbd "C-k") 'js2r-kill)
-
-(comment ;; avoid confusing shorthands
- ;; Use lambda for anonymous functions
- (font-lock-add-keywords
-  'js2-mode `(("\\(function\\) *("
-               (0 (progn (compose-region (match-beginning 1)
-                                         (match-end 1) "\u0192")
-                         nil)))))
-
- ;; Use right arrow for return in one-line functions
- (font-lock-add-keywords
-  'js2-mode `(("function *([^)]*) *{ *\\(return\\) "
-               (0 (progn (compose-region (match-beginning 1)
-                                         (match-end 1) "\u2190")
-                         nil))))))
 
 ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
 ;; add any symbols to a buffer-local var of acceptable global vars

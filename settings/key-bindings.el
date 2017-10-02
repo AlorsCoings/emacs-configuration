@@ -68,9 +68,6 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
-;; Quickly jump in document with ace-jump-mode
-(global-set-key (kbd "C-q") 'ace-jump-mode)
-
 ;; Perform general cleanup.
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 (global-set-key (kbd "C-c C-n") 'cleanup-buffer)

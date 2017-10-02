@@ -21,6 +21,7 @@
 (when (not (package-installed-p 'dash))
   (package-install 'dash))
 (require 'dash)
+(eval-after-load "dash" '(dash-enable-font-lock))
 
 (defun packages-install (packages)
   "Install PACKAGES which wasn't installed."
@@ -51,14 +52,10 @@ re-downloaded in order to locate PACKAGE."
   "Install extensions if they're missing."
   (packages-install
    '(
-     ace-jump-mode
-     alert
      angular-snippets
      anzu
      apache-mode
-     apel
      arduino-mode
-     async
      atomic-chrome
      auctex
      auctex-lua
@@ -66,111 +63,52 @@ re-downloaded in order to locate PACKAGE."
      auto-complete
      bash-completion
      bbdb
-     bison-mode
+     beginend
      browse-kill-ring
-     buster-mode
-     buster-snippets
      c-eldoc
-     change-inner
-     cider
-     clj-refactor
-     clojure-mode
-     clojure-mode-extra-font-locking
-     cmake-mode
-     coffee-mode
-     color-theme
-     color-theme-sanityinc-solarized
-     color-theme-solarized
      company
-     company-arduino
      company-auctex
      company-c-headers
      company-emacs-eclim
-     company-inf-ruby
      company-irony
      company-jedi
-     company-math
      company-restclient
-     concurrent
-     cpputils-cmake
      crappy-jsp-mode
-     creole
      css-eldoc
-     css-mode
-     ctable
      dash
      dash-functional
-     datomic-snippets
-     db
      deferred
      diminish
      dired-details
      dired-sort
      dockerfile-mode
      eclim
-     edit-server
-     edn
      elisp-slime-nav
      elnode
      elpy
      emacsql
      emacsql-sqlite
      emmet-mode
-     epc
-     epl
-     ess
-     ess-R-data-view
-     ess-smart-equals
-     ess-smart-underscore
-     ess-view
      exec-path-from-shell
      expand-region
-     f
-     fakir
-     feature-mode
      fill-column-indicator
-     finalize
-     find-file-in-project
-     flim
-     flx
      flx-ido
      flycheck
-     flycheck-clojure
-     flycheck-hdevtools
-     flycheck-ocaml
      flycheck-pos-tip
-     fold-this
-     frame-cmds
-     frame-fns
      fullframe
-     gh
-     gist
-     git-commit
      git-messenger
      gitconfig-mode
      gitignore-mode
-     gmail-message-mode
-     gntp
      gnuplot
      gnuplot-mode
-     google-c-style
+     ;; google-c-style
      google-translate
-     groovy-mode
-     guide-key
-     ham-mode
-     haml-mode
-     hardcore-mode
      helm
-     helm-core
      helm-dash
      highlight-escape-sequences
      highlight-indentation
      highlight-symbol
      hl-sexp
-     ht
-     html-to-markdown
-     htmlize
-     hydra
      ibuffer-vc
      icomplete+
      ido-at-point
@@ -179,128 +117,49 @@ re-downloaded in order to locate PACKAGE."
      idomenu
      image+
      impatient-mode
-     inf-ruby
-     inflections
-     ipretty
      irony
-     ivy
-     jade-mode
-     jedi-core
      js2-mode
-     js2-refactor
      json-mode
-     json-reformat
-     json-snatcher
-     julia-mode
-     jump-char
      karma
-     know-your-http-well
-     kv
      latex-extra
      legalese
-     let-alist
-     log4e
-     logito
      lua-mode
-     macrostep
      magit
-     magit-popup
-     markdown-mode
-     markdown-mode+
-     marshal
      math-symbol-lists
-     merlin
-     misc-cmds
-     misc-fns
-     mmm-mode
-     mmt
      move-text
-     multi-eshell
-     multifiles
      multiple-cursors
-     nodejs-repl
-     noflet
      oauth2
      org
      org-gcal
-     org-mobile-sync
      org-pdfview
-     packed
      page-break-lines
-     paredit
-     paredit-everywhere
-     pcache
      pdf-tools
-     peg
-     perspective
      php-mode
-     pkg-info
      plsql
-     popup
-     popwin
-     pos-tip
-     prodigy
-     puppet-mode
-     python-environment
-     pythonic
-     pyvenv
-     queue
      rainbow-mode
-     request
-     request-deferred
-     restclient
-     rhtml-mode
-     rich-minority
-     robe
-     ruby-compilation
-     ruby-hash-syntax
-     s
-     sass-mode
+     scala-mode
      scss-mode
-     semi
-     seq
      shell-command
-     simple-httpd
-     simplezen
      skewer-mode
      slime
      slime-company
-     smart-forward
      smart-mode-line
      smartparens
-     smarty-mode
      smex
-     smooth-scrolling
-     smtpmail-multi
-     spinner
      sql-indent
-     sqlite
      sqlplus
      sqlup-mode
-     swiper
-     tablist
      tern
      tidy
      toggle-quotes
      top-mode
-     typing-game
-     typit
      undo-tree
      visual-regexp
-     web
      web-beautify
-     web-completion-data
      web-mode
-     websocket
      wgrep
      whitespace-cleanup-mode
-     with-editor
-     yaml-mode
-     yari
-     yasnippet
-     zeal-at-point
-     zencoding-mode
-     )))
+     yasnippet)))
 
 (condition-case nil
     (init--install-packages)

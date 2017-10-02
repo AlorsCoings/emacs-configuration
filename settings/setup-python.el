@@ -7,9 +7,8 @@
 
 (require 'python)
 
-
 ;; (setq python-indent-offset 4)
-;; (add-to-list 'python-shell-completion-native-disabled-interpreters "python3")
+(add-to-list 'python-shell-completion-native-disabled-interpreters "python")
 ;; (setq python-shell-interpreter "python")
 ;; (setq python-shell-interpreter "ipython")
 ;; (setq python-shell-interpreter-args "--profile=dev")
@@ -23,11 +22,13 @@
 (define-key inferior-python-mode-map (kbd "C-s") 'next-line)
 (define-key inferior-python-mode-map (kbd "C-e") 'comint-delchar-or-eof-or-kill-buffer)
 
+;; pip install jedi flake8 importmagic autopep8
 (require 'elpy)
 (elpy-enable)
 
 (define-key elpy-mode-map (kbd "C-c C-p") 'run-python)
-(define-key elpy-mode-map (kbd "C-c C-r") 'python-shell-send-region)
+
+;; (define-key elpy-mode-map (kbd "C-c C-r") 'python-shell-send-region)
 ;; (require 'anaconda-mode)
 ;; (add-hook 'python-mode-hook 'anaconda-mode)
 ;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
