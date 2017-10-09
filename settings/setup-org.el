@@ -14,6 +14,8 @@
 
 (eval-after-load 'org '(require 'org-pdfview))
 
+(setq org-src-fontify-natively t)
+
 (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
 (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . org-pdfview-open))
 

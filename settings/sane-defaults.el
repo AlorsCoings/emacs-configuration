@@ -146,18 +146,13 @@
 (setq scroll-margin 10
       scroll-step 1
       scroll-conservatively 10
-      scroll-preserve-screen-position 1
-      )
+      scroll-preserve-screen-position 1)
 
 ;; Allow recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
 ;; Don't be so stingy on the memory, we have lots now. It's the distant future.
 (setq gc-cons-threshold 20000000)
-
-;; Fontify org-mode code blocks
-(require 'org)
-(setq org-src-fontify-natively t)
 
 ;; Represent undo-history as an actual tree (visualize with C-x u)
 (require 'undo-tree)
@@ -239,7 +234,8 @@
 
 (setq kill-ring-max 1000)
 
-(setq  ansi-color-faces-vector
+(require 'ansi-color)
+(setq ansi-color-faces-vector
        [default bold shadow italic underline bold bold-italic bold])
 (setq anzu-deactivate-region t)
 (setq anzu-mode-lighter "")
@@ -363,9 +359,6 @@ With argument PREFIX, print output into current buffer."
 
 ;; Don't use expand-region fast keys
 (setq expand-region-fast-keys-enabled nil)
-
-;; Show expand-region command used
-(setq er--show-expansion-message t)
 
 ;; Browse kill ring
 (require 'browse-kill-ring)
