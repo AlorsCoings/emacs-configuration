@@ -2,5 +2,5 @@
 # name: ends
 # key: ends
 # --
-(provide '`(buffer-file-name-body)`)
-;;; `(buffer-file-name-body)`.el ends here$0
+(provide '`(file-name-base)`)
+;;; `(file-name-base)`.el ends here$0

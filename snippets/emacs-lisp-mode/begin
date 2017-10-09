@@ -2,7 +2,7 @@
 # name: begin
 # key: begin
 # --
-;;; package --- `(buffer-file-name-body)`
+;;; package --- `(file-name-base)`
 
 ;;; Commentary:
 ;;; Emacs configuration file for $1
