@@ -159,6 +159,7 @@ re-downloaded in order to locate PACKAGE."
      web-mode
      wgrep
      whitespace-cleanup-mode
+     yaml-mode
      yasnippet)))
 
 (condition-case nil
