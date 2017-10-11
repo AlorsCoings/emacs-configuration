@@ -54,6 +54,7 @@
 (require 'setup-lisp)
 (require 'setup-flycheck)
 (require 'setup-company)
+(require 'setup-yaml)
 
 ;; Map files to modes
 (require 'mode-mappings)
