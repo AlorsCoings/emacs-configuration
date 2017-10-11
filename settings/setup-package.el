@@ -81,6 +81,9 @@ re-downloaded in order to locate PACKAGE."
      diminish
      dired-details
      dired-sort
+     docker
+     docker-compose-mode
+     docker-tramp
      dockerfile-mode
      eclim
      elisp-slime-nav

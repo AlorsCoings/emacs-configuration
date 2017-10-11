@@ -55,6 +55,7 @@
 (require 'setup-flycheck)
 (require 'setup-company)
 (require 'setup-yaml)
+(require 'setup-docker)
 
 ;; Map files to modes
 (require 'mode-mappings)

@@ -153,5 +153,8 @@
 ;; Gnuplot
 (add-to-list 'auto-mode-alist '("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode))
 
+;; Dockerfile
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
 (provide 'mode-mappings)
 ;;; mode-mappings.el ends here
