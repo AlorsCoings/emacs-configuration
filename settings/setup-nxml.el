@@ -36,7 +36,8 @@ using nxml's indentation rules."
 (add-hook 'nxml-mode-hook
           (lambda () (tidy-build-menu nxml-mode-map)
             (define-key nxml-mode-map (kbd "C-c C-n") 'cleanup-buffer)
-            (define-key nxml-mode-map (kbd "M-h") 'er/expand-region)))
+            (define-key nxml-mode-map (kbd "M-h") 'er/expand-region)
+            (define-key nxml-mode-map (kbd "C-c C-o") 'browse-url-of-file)))
 
 (defun sanityinc/tidy-buffer-xml (beg end)
   "Run \"tidy -xml\" on the region from BEG to END, or whole buffer."
