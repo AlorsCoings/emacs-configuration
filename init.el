@@ -26,7 +26,7 @@
 
 ;; Setup extensions
 (require 'setup-ido)
-(require 'setup-smartparens)
+(require 'setup-paredit)
 (require 'setup-org)
 (require 'setup-dired)
 (require 'setup-rgrep)

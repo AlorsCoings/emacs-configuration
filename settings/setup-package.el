@@ -136,6 +136,7 @@ re-downloaded in order to locate PACKAGE."
      org-gcal
      org-pdfview
      page-break-lines
+     paredit
      pdf-tools
      php-mode
      plsql
@@ -147,7 +148,6 @@ re-downloaded in order to locate PACKAGE."
      slime
      slime-company
      smart-mode-line
-     smartparens
      smex
      sql-indent
      sqlplus
