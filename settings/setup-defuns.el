@@ -5,6 +5,10 @@
 
 ;;; Code:
 
+(defvar settings-dir
+  (expand-file-name "settings" user-emacs-directory)
+  "Path to settings directory.")
+
 (defvar defuns-dir (expand-file-name "defuns" settings-dir))
 
 (dolist (file (directory-files defuns-dir t "\\w+"))
