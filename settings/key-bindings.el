@@ -251,11 +251,13 @@
 (global-set-key (kbd "C-S-d") (lambda() (interactive) (ignore-errors (previous-line 5)))) ;; was paredit-forward-delete
 (global-set-key (kbd "M-d") 'move-text-up) ;; was paredit-forward-kill-word
 (global-set-key (kbd "M-D") 'move-text-up) ;; was kill-region-or-backward-word
+(global-set-key (kbd "C-M-d") 'backward-paragraph)
 
 ;; n → s
 (global-set-key (kbd "C-s") 'next-line) ;; was isearch-forward
 (global-set-key (kbd "C-S-s") (lambda() (interactive) (ignore-errors (next-line 5)))) ;; was isearch-forward-use-region
 (global-set-key (kbd "M-S") 'move-text-down)
+(global-set-key (kbd "C-M-s") 'forward-paragraph)
 
 ;; b → t
 (global-set-key (kbd "C-t") 'backward-char) ;; was transpose-chars
