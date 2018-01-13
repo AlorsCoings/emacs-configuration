@@ -7,6 +7,7 @@
 
 (require 'cc-mode)
 (setq c-default-style "k&r")
+(setq c-basic-offset 4)
 
 ;; google-c-style
 ;; (require 'google-c-style)
@@ -47,33 +48,11 @@
 ;; (defvar c-eldoc-cpp-normal-arguments "-w -P")
 ;; (defvar c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ ") ;; include flags
 
-(defun my-c-define-keybindings (map)
-  "Define personal key bindings c/c++ MAP."
-  (define-key map (kbd "C-c C-c") 'compile)
-  (define-key map (kbd "M-j") (lambda () (interactive) (join-line -1)))
-  (define-key map (kbd "C-<tab>") 'company-complete)
-  (define-key map (kbd "C-e") 'c-electric-delete-forward)
-  (define-key map (kbd "C-d") 'previous-line))
-
-(defun c-eldoc-define-keybindings (map)
-  "Eldoc defines key bindings in MAP."
-  (define-key map (kbd "C-c C-d") 'c-eldoc-force-cache-update))
-
-(add-hook 'c-mode-hook
-          (lambda ()
-            ;; (c-eldoc-define-keybindings c-mode-map)
-            (my-c-define-keybindings c-mode-map)
-            (setq c-basic-offset 4)))
-(add-hook 'c++-mode-hook
-          (lambda ()
-            ;; (c-eldoc-define-keybindings c++-mode-map)
-            (my-c-define-keybindings c++-mode-map)
-            (setq c-basic-offset 4)))
-
-(add-hook 'java-mode-hook
-          (lambda ()
-            (my-c-define-keybindings java-mode-map)
-            (setq c-basic-offset 4)))
+(define-key c-mode-base-map (kbd "C-c C-c") 'compile)
+(define-key c-mode-base-map (kbd "M-j") (lambda () (interactive) (join-line -1)))
+(define-key c-mode-base-map (kbd "C-<tab>") 'company-complete)
+(define-key c-mode-base-map (kbd "C-e") 'c-electric-delete-forward)
+(define-key c-mode-base-map (kbd "C-d") 'previous-line)
 
 (require 'company)
 (add-to-list 'company-backends 'company-c-headers)
