@@ -40,7 +40,7 @@ tar xzf 1.050R-it.tar.gz
 rm 1.050R-it.tar.gz
 sudo fc-cache -f -v
 
-sudo echo "[Unit]
+echo "[Unit]
 Description=Emacs: the extensible, self-documenting text editor
 
 [Service]
@@ -54,7 +54,7 @@ User=%i
 TimeoutStartSec=0
 
 [Install]
-WantedBy=default.target" > /etc/systemd/system/emacs@.service
+WantedBy=default.target" | sudo tee /etc/systemd/system/emacs@.service
 
 sudo systemctl enable emacs@$USER
 sudo systemctl start emacs@$USER

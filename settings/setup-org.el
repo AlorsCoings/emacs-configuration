@@ -268,8 +268,6 @@ Description")
   (interactive)
   (org-map-entries 'org-archive-subtree "/DONE" 'file))
 
-(require 'setup-org-gcal)
-
 (add-hook 'after-init-hook (lambda ()
                              (org-agenda-list)
                              (delete-other-windows)))
