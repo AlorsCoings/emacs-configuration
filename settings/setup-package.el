@@ -160,6 +160,7 @@ re-downloaded in order to locate PACKAGE."
      top-mode
      undo-tree
      visual-regexp
+     vlf
      web-beautify
      web-mode
      wgrep

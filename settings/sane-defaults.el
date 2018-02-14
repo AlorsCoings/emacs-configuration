@@ -370,5 +370,9 @@ With argument PREFIX, print output into current buffer."
 ;; Visual regexp
 (require 'visual-regexp)
 
+;; View Large File
+(require 'vlf)
+(require 'vlf-setup)
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here
