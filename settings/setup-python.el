@@ -26,10 +26,24 @@
 (require 'elpy)
 (elpy-enable)
 
-(define-key elpy-mode-map (kbd "C-c C-p") 'run-python)
+;; (define-key elpy-mode-map (kbd "C-c C-p") 'run-python)
+(define-key elpy-mode-map (kbd "C-c C-p") 'elpy-shell-switch-to-shell)
 
 ;; Remove highlight of indentation
 (delete 'elpy-module-highlight-indentation elpy-modules)
+
+(defun elpy-shell-switch-to-shell-in-root ()
+  "Switch to python shell starting in project root."
+  (interactive)
+  (let ((default-directory (elpy-project-root)))
+    (elpy-shell-switch-to-shell)))
+
+(define-key elpy-mode-map (kbd "C-c p") 'elpy-shell-switch-to-shell-in-root)
+
+;; PYLINT Messages references
+;; Disable them by using '# pylint: disable=C0103'
+;; C0103: Invalid %s name
+
 ;; (define-key elpy-mode-map (kbd "C-c C-r") 'python-shell-send-region)
 ;; (require 'anaconda-mode)
 ;; (add-hook 'python-mode-hook 'anaconda-mode)
