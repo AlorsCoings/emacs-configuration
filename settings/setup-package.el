@@ -153,6 +153,7 @@ re-downloaded in order to locate PACKAGE."
      sqlplus
      sqlup-mode
      tern
+     tide
      tidy
      toggle-quotes
      top-mode
