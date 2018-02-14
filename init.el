@@ -66,6 +66,7 @@
 (require 'setup-company)
 (require 'setup-yaml)
 (require 'setup-docker)
+(require 'setup-dart)
 (require 'setup-typescript)
 
 ;; Map files to modes
