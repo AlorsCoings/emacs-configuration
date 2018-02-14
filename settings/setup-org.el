@@ -333,5 +333,11 @@ Description")
             (org-agenda-list)
             (delete-other-windows)))
 
+;; To fix this, I added the following code after the line (funcall lang-mode) in the org-html-fontify-code defun in ox-html.el.
+
+;; (when (require 'fill-column-indicator nil 'noerror)
+;;   (fci-mode -1))
+;; (Make sure you delete ox-html.elc else your patched ox-html.el won't be effective)
+
 (provide 'setup-org)
 ;;; setup-org.el ends here
