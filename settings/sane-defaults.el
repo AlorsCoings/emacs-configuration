@@ -45,7 +45,8 @@
                 comint-mode-hook
                 compilation-mode-hook
                 twittering-mode-hook
-                minibuffer-setup-hook))
+                minibuffer-setup-hook
+                markdown-mode-hook))
   (add-hook hook #'sanityinc/no-trailing-whitespace))
 
 (global-whitespace-cleanup-mode t)
@@ -290,7 +291,9 @@ With argument PREFIX, print output into current buffer."
 (global-whitespace-cleanup-mode)
 
 ;; Do not remove double space at end of line
+(require 'markdown-mode)
 (add-hook 'markdown-mode-hook (lambda () (whitespace-cleanup-mode -1)))
+(define-key markdown-mode-map (kbd "M-p") 'subword-downcase)
 
 ;; Use normal tabs in makefiles
 (add-hook 'makefile-mode-hook 'indent-tabs-mode)

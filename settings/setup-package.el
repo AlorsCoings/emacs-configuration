@@ -128,6 +128,7 @@ re-downloaded in order to locate PACKAGE."
      legalese
      lua-mode
      magit
+     markdown-mode
      math-symbol-lists
      move-text
      multiple-cursors

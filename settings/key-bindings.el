@@ -273,6 +273,8 @@
 (global-set-key (kbd "M-R") (lambda() (interactive) (ignore-errors (subword-forward 5)))) ;; was paredit-raise-sexp
 (global-set-key (kbd "C-M-r") 'forward-sexp) ;; was isearch-backward-regexp
 
+(define-key minibuffer-local-map (kbd "M-r") 'subword-forward)
+
 ;; Expand and contract region
 (global-set-key (kbd "M-h") 'er/expand-region)
 (global-set-key (kbd "M-H") 'er/contract-region)
@@ -282,7 +284,6 @@
 (global-set-key (kbd "C-p") 'recenter-top-bottom)
 
 (global-set-key (kbd "M-p") 'subword-downcase)
-78.95
 (global-set-key (kbd "C-e") 'delete-forward-char)
 (global-set-key (kbd "M-e") 'kill-word)
 (global-set-key (kbd "C-M-e") 'kill-sexp)
