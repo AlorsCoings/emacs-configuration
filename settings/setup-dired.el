@@ -7,15 +7,10 @@
 
 (require 'dired)
 (require 'dash)
-(require 'dired-sort)
 
-;; Make dired less verbose
-;; This also binds the following keys in dired buffers:
-;;   ) - dired-details-show
-;;   ( - dired-details-hide
-(require 'dired-details)
-(setq-default dired-details-hidden-string "--- ")
-(dired-details-install)
+(add-hook 'dired-mode-hook
+          (lambda()
+            (dired-hide-details-mode)))
 
 ;; Get human readeable value of file's size in dired mode
 (setq dired-listing-switches "-alh")
@@ -63,6 +58,7 @@
 
 (eval-after-load "dired"
   '(define-key dired-mode-map "z" 'dired-zip-files))
+
 (defun dired-zip-files (zip-file)
   "Create an archive containing the marked ZIP-FILE."
   (interactive "sEnter name of zip file: ")
