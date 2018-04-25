@@ -9,7 +9,7 @@
 
 ;; (setq python-indent-offset 4)
 (add-to-list 'python-shell-completion-native-disabled-interpreters "python")
-;; (setq python-shell-interpreter "python")
+(setq python-shell-interpreter "python3")
 ;; (setq python-shell-interpreter "ipython")
 ;; (setq python-shell-interpreter-args "--profile=dev")
 ;; (setq python-shell-interpreter-args "")
@@ -30,30 +30,20 @@
 
 ;; Remove highlight of indentation
 (delete 'elpy-module-highlight-indentation elpy-modules)
-;; (define-key elpy-mode-map (kbd "C-c C-r") 'python-shell-send-region)
-;; (require 'anaconda-mode)
-;; (add-hook 'python-mode-hook 'anaconda-mode)
-;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-;; (define-key anaconda-mode-map (kbd "M-r") nil)
-;; (define-key anaconda-mode-map (kbd "C-c C-d") 'anaconda-mode-show-doc)
-;; (define-key anaconda-mode-map (kbd "M-.") 'anaconda-mode-find-references)
-;; Remove warning when starting python shell
-;; (add-to-list 'python-shell-completion-native-disabled-interpreters "python")
 
-;; (add-hook 'python-mode-hook #'flycheck-mode)
+(setq elpy-rpc-python-command "python3")
 
-;; (elpy-enable)
+(require 'flycheck)
+(setq flycheck-python-pycompile-executable "python3")
+(setq flycheck-python-pylint-executable "python3")
+(setq flycheck-disabled-checkers '("python-flake8"))
+
+(add-hook 'python-mode-hook (lambda()
+                             (flymake-mode nil)
+                             (set-fill-column 90)))
 ;; (elpy-use-ipython)
-;; (require 'anaconda-mode)
-;; (add-hook 'python-mode-hook 'anaconda-mode)
-;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-;; (define-key anaconda-mode-map (kbd "M-r") nil)
-;; (define-key anaconda-mode-map (kbd "C-c C-d") 'anaconda-mode-show-doc)
-;; (define-key anaconda-mode-map (kbd "M-.") 'anaconda-mode-find-references)
+;; (elpy-use-cpython)
 
-;; (remove-hook 'anaconda-mode-response-read-fail-hook
-;;              'anaconda-mode-show-unreadable-response)
-;; Add intern dependencies
 ;; Virtual environment
 ;; M-x pythonic-activate RET /path/to/virtualenv RET
 
