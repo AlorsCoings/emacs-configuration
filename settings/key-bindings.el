@@ -118,7 +118,7 @@
 
 ;; Completion at point
 (global-set-key (kbd "C-<tab>") 'completion-at-point)
-(global-set-key (kbd "M-<tab>") 'completion-at-point)
+(global-set-key (kbd "M-<tab>") 'company-complete)
 
 ;; Query replace regex key binding
 (global-set-key (kbd "M-&") 'anzu-replace-at-cursor-thing)

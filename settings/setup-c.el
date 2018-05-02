@@ -53,8 +53,6 @@
 (define-key c-mode-base-map (kbd "C-<tab>") 'company-complete)
 (define-key c-mode-base-map (kbd "C-e") 'c-electric-delete-forward)
 (define-key c-mode-base-map (kbd "C-d") 'previous-line)
-(define-key c-mode-base-map (kbd "M-e") 'kill-word)
-(define-key c-mode-map (kbd "C-c C-d") 'c-eldoc-force-cache-update)
 
 (require 'company)
 (add-to-list 'company-backends 'company-c-headers)

@@ -79,8 +79,8 @@ re-downloaded in order to locate PACKAGE."
      dash-functional
      deferred
      diminish
-     dired-details
-     dired-sort
+     ;dired-details
+     ;dired-sort
      docker
      docker-compose-mode
      docker-tramp
@@ -113,7 +113,7 @@ re-downloaded in order to locate PACKAGE."
      highlight-symbol
      hl-sexp
      ibuffer-vc
-     icomplete+
+     ;icomplete+
      ido-at-point
      ido-completing-read+
      ido-vertical-mode
@@ -140,7 +140,7 @@ re-downloaded in order to locate PACKAGE."
      paredit
      pdf-tools
      php-mode
-     plsql
+     ;plsql
      rainbow-mode
      scala-mode
      scss-mode
@@ -151,13 +151,12 @@ re-downloaded in order to locate PACKAGE."
      smart-mode-line
      smex
      sql-indent
-     sqlplus
+     ;sqlplus
      sqlup-mode
      tern
-     tide
-     tidy
+     ;tidy
      toggle-quotes
-     top-mode
+     ;top-mode
      undo-tree
      visual-regexp
      vlf

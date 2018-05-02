@@ -15,10 +15,13 @@ sudo apt-get -qq install -y stow build-essential libx11-dev xaw3dg-dev \
      libxml2-dev libgpm-dev libotf-dev libm17n-dev \
      libgnutls-dev wget
 
+cd /tmp
+
 # download source package
 if [[ ! -d emacs-"$version" ]]; then
     wget http://ftp.gnu.org/gnu/emacs/emacs-"$version".tar.xz
     tar xvf emacs-"$version".tar.xz
+    rm emacs-"$version".tar.xz
 fi
 
 # build and install
@@ -31,6 +34,8 @@ sudo make install-arch-dep install-arch-indep prefix="${install_directory}"/emac
 
 cd ${install_directory}
 sudo stow emacs-"$version"
+
+rm -r emacs-"$version"
 
 # install source code pro font
 mkdir -p ~/.fonts

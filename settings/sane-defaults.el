@@ -354,7 +354,7 @@ With argument PREFIX, print output into current buffer."
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
 
-(icomplete-mode 99)
+;(icomplete-mode 99)
 
 ;; Smart M-x is smart
 (require 'smex)
