@@ -34,9 +34,10 @@ clean buffer we're an order of magnitude laxer about checking."
   (flycheck-pos-tip-mode))
 
 (require 'flycheck-google-cpplint)
-(setq flycheck-c/c++-googlelint-executable "/usr/local/bin/cpplint.py")
-(flycheck-add-next-checker 'c/c++-clang
+(setq flycheck-c/c++-googlelint-executable "cpplint")
+(flycheck-add-next-checker 'c/c++-gcc
                            '(warning . c/c++-googlelint))
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
 
 ;; (add-to-list 'flycheck-disabled-checkers 'javascript-jshint)
 ;; (setq flycheck-eslintrc "~/.eslintrc")

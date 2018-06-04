@@ -54,6 +54,15 @@
 (define-key c-mode-base-map (kbd "C-e") 'c-electric-delete-forward)
 (define-key c-mode-base-map (kbd "C-d") 'previous-line)
 
+(defun astyle-this-buffer (pmin pmax)
+  (interactive "r")
+  (shell-command-on-region pmin pmax
+                           "astyle --style=google --indent=spaces=4"
+                           (current-buffer) t
+                           (get-buffer-create "*Astyle Errors*") t))
+(define-key c-mode-base-map (kbd "C-c C-r") 'astyle-this-buffer)
+
+
 (require 'company)
 (add-to-list 'company-backends 'company-c-headers)
 ;; (setq company-clang-arguments '("-I/usr/include" "-I/usr/local/include"))
@@ -61,6 +70,9 @@
 (require 'compile)
 (define-key compilation-mode-map (kbd "C-o") 'other-window)
 (define-key compilation-mode-map (kbd "C-S-o") (lambda() (interactive) (other-window -1)))
+
+(require 'csharp-mode)
+(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 
 (provide 'setup-c)
 ;;; setup-c.el ends here

@@ -296,7 +296,9 @@ With argument PREFIX, print output into current buffer."
 (define-key markdown-mode-map (kbd "M-p") 'subword-downcase)
 
 ;; Use normal tabs in makefiles
-(add-hook 'makefile-mode-hook 'indent-tabs-mode)
+(require 'make-mode)
+(define-key makefile-mode-map (kbd "M-p") 'subword-downcase)
+
 
 (defadvice fill-paragraph (after indent-after activate)
   "Indent after calling `fill-paragraph'."

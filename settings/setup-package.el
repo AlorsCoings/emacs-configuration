@@ -128,6 +128,7 @@ re-downloaded in order to locate PACKAGE."
      legalese
      lua-mode
      magit
+     magit-gitflow
      markdown-mode
      math-symbol-lists
      move-text
@@ -155,8 +156,10 @@ re-downloaded in order to locate PACKAGE."
      sqlup-mode
      tern
      ;tidy
+     tide
      toggle-quotes
      ;top-mode
+     typescript-mode
      undo-tree
      visual-regexp
      vlf
