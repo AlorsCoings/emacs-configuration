@@ -367,5 +367,9 @@ With argument PREFIX, print output into current buffer."
 ;; Visual regexp
 (require 'visual-regexp)
 
+(add-hook 'grep-mode-hook
+          '(lambda ()
+             (define-key grep-mode-map (kbd "C-o") nil)))
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here

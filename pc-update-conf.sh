@@ -7,7 +7,7 @@ sudo apt-get dist-upgrade -y
 sudo apt-get install -y git python3 python3-pip python-dev build-essential \
      curl ffmpeg imagemagick pdftk texlive-full
 
-git clone https://github.com/AlvaGingra/emacs-configuration "${HOME}/.emacs.d"
+git clone https://github.com/AlorsCoings/emacs-configuration "${HOME}/.emacs.d"
 bash "${HOME}/.emacs.d/install_emacs.sh"
 
 gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 3
@@ -48,10 +48,10 @@ export PI3=pi@192.168.1.4
 export ALTERNATE_EDITOR=""
 export EDITOR=emacsclient
 
+alias ll='ls -alh'
+
 # [ -f ${HOME}/.Xmodmap ] && xmodmap ${HOME}/.Xmodmap 2> /dev/null
 " >> "${HOME}/.bashrc"
-
-
 
 echo "keycode 0x42 = Control_L
 add Control = Control_L
@@ -67,9 +67,7 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 
 pip3 install --upgrade pip
-sudo -H pip3 install streamlink youtube-dl
-# Twitch Id
-echo "http-header=Client-ID=ewvlchtxgqq88ru9gmfp1gmyt6h2b93" > "${HOME}"/.livestreamerrc
+sudo -H pip3 install youtube-dl
 
 sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -79,7 +77,6 @@ sudo apt-get install google-chrome-stable
 echo "[user]
     email = gros.nicolas0@gmail.com
     name = Nicolas Gros
-    name = AlvaGingra
 [core]
     editor = emacs
 [color]
@@ -167,7 +164,7 @@ gsettings set com.canonical.Unity integrated-menus true
 # Auto-Hide launcher menu
 dconf write "/org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode" 1
 
-    echo '#!/bin/sh -e
+echo '#!/bin/sh -e
 #
 # rc.local
 #
@@ -232,7 +229,8 @@ gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "[]"
 gsettings set org.gnome.desktop.wm.keybindings show-desktop "[]"
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver '<Super>l'
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'emacs'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'emacsclient -c'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Primary><Super>e'
@@ -245,6 +243,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'switch audio output'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command '/home/toad/scripts/switchAudioOutput.sh'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Super>eacute'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'gnome-terminal maximize'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command 'gnome-terminal --window --maximize'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Ctrl><Alt>c'
 
 gsettings set com.canonical.indicator.datetime show-date true
 gsettings set com.canonical.indicator.datetime show-day true
@@ -296,7 +297,6 @@ dconf write "/org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness" 
 dconf write "/org/compiz/profiles/unity/plugins-with-set-keys" "['place', 'unityshell', 'session', 'ezoom', 'unitymtgrabhandles', 'switcher', 'core', 'scale', 'commands', 'resize', 'vpswitch', 'mousepoll', 'opengl', 'animation', 'grid', 'expo', 'staticswitcher', 'snap', 'fade', 'matecompat', 'move', 'workarounds', 'wall', 'decor', 'composite', 'gnomecompat', 'put']"
 dconf write "/org/compiz/profiles/unity/plugins/core/active-plugins" "['core', 'composite', 'opengl', 'grid', 'snap', 'put', 'move', 'wall', 'place', 'regex', 'session', 'winrules', 'compiztoolbox', 'imgpng', 'resize', 'vpswitch', 'mousepoll', 'animation', 'expo', 'fade', 'workarounds', 'ezoom', 'switcher', 'scale', 'unityshell']"
 dconf write "/org/gnome/desktop/interface/toolkit-accessibility" false
-dconf write "/org/compiz/profiles/unity/plugins/winrules/fullscreen-match" "'class=Gnome-terminal'"
 
 dconf write "/org/compiz/profiles/unity/plugins/animation/unminimize-effects" "['animation:Glide 2']"
 dconf write "/org/compiz/profiles/unity/plugins/animation/close-matches" "['((type=Normal | Unknown) | name=sun-awt-X11-XFramePeer | name=sun-awt-X11-XDialogPeer) & !(role=toolTipTip | role=qtooltip_label) & !(type=Normal & override_redirect=1) & !(name=gnome-screensaver) & !(name=gnome-screenshot)', '((type=Menu | PopupMenu | DropdownMenu | Combo | Dialog | ModalDialog | Normal) & !(class=\\.exe$))', '(type=Tooltip | Notification | Utility) & !(name=compiz) & !(title=notify-osd)']"
@@ -309,6 +309,8 @@ dconf write "/org/compiz/profiles/unity/plugins/put/put-pointer-key" "'Disabled'
 dconf write "/org/compiz/profiles/unity/plugins/put/put-restore-key" "'Disabled'"
 dconf write "/org/compiz/profiles/unity/plugins/put/put-center-key" "'Disabled'"
 dconf write "/org/compiz/profiles/unity/plugins/put/put-next-output-key" "'<Super>z'"
+dconf write "/org/compiz/profiles/unity/plugins/put/speed" "10.0"
+dconf write "/org/compiz/profiles/unity/plugins/put/timestep" "0.1"
 
 dconf write "/org/gnome/desktop/wm/keybindings/move-to-side-n" "['disabled']"
 dconf write "/org/gnome/desktop/wm/keybindings/move-to-corner-ne" "['disabled']"

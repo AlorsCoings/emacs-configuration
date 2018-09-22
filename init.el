@@ -50,7 +50,7 @@
 ;(require 'setup-sql)
 (require 'setup-gnus)
 (require 'setup-bbdb)
-;(require 'setup-nxml)
+(require 'setup-nxml)
 (require 'setup-ibuffer)
 (require 'setup-image)
 (require 'setup-gnuplot)
@@ -65,6 +65,7 @@
 (require 'setup-flycheck)
 (require 'setup-company)
 (require 'setup-yaml)
+(require 'setup-markdown)
 (require 'setup-docker)
 
 ;; Map files to modes
