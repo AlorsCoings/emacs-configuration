@@ -111,7 +111,6 @@ re-downloaded in order to locate PACKAGE."
      highlight-escape-sequences
      highlight-indentation
      highlight-symbol
-     hl-sexp
      ibuffer-vc
      ;icomplete+
      ido-at-point

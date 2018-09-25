@@ -4,16 +4,16 @@
 
 set -eu
 
-readonly version="25.2"
+readonly version="26.1"
 install_directory="/usr/local/stow"
 
 # install dependencies
 sudo apt-get -qq update
 sudo apt-get -qq install -y stow build-essential libx11-dev xaw3dg-dev \
-     libjpeg-dev libpng12-dev libgif-dev libtiff5-dev libncurses5-dev \
+     libjpeg-dev libpng-dev libgif-dev libtiff5-dev libncurses5-dev \
      libxft-dev librsvg2-dev libmagickcore-dev libmagick++-dev \
      libxml2-dev libgpm-dev libotf-dev libm17n-dev \
-     libgnutls-dev wget
+     libgnutls28-dev wget
 
 cd /tmp
 
@@ -21,7 +21,7 @@ cd /tmp
 if [[ ! -d emacs-"$version" ]]; then
     wget http://ftp.gnu.org/gnu/emacs/emacs-"$version".tar.xz
     tar xvf emacs-"$version".tar.xz
-    rm emacs-"$version".tar.xz
+    rm -rf emacs-"$version".tar.xz
 fi
 
 # build and install

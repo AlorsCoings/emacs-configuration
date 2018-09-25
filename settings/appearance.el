@@ -23,14 +23,6 @@
 (global-hl-line-mode 1)
 (set-face-attribute 'hl-line nil :background "gray10")
 
-;; Highlight sexp
-(require 'hl-sexp)
-;; Prevent flickery behaviour due to hl-sexp-mode unhighlighting before each command
-(eval-after-load 'hl-sexp
-  (defadvice hl-sexp-mode (after unflicker (&optional turn-on) activate)
-    (when turn-on
-      (remove-hook 'pre-command-hook #'hl-sexp-unhighlight))))
-
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 (set-face-attribute 'show-paren-match nil :background "#333399")
