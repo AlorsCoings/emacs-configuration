@@ -128,6 +128,7 @@ re-downloaded in order to locate PACKAGE."
      lua-mode
      magit
      math-symbol-lists
+     markdown-mode
      move-text
      multiple-cursors
      oauth2
