@@ -29,24 +29,5 @@ using nxml's indentation rules."
     (nxml-mode)
     (indent-region beg end)))
 
-;;----------------------------------------------------------------------------
-;; Integration with tidy for html + xml
-;;----------------------------------------------------------------------------
-(require 'tidy)
-(add-hook 'nxml-mode-hook
-          (lambda () (tidy-build-menu nxml-mode-map)
-            (define-key nxml-mode-map (kbd "C-c C-n") 'cleanup-buffer)
-            (define-key nxml-mode-map (kbd "M-h") 'er/expand-region)
-            (define-key nxml-mode-map (kbd "C-c C-o") 'browse-url-of-file)))
-
-(defun sanityinc/tidy-buffer-xml (beg end)
-  "Run \"tidy -xml\" on the region from BEG to END, or whole buffer."
-  (interactive "r")
-  (unless (use-region-p)
-    (setq beg (point-min)
-          end (point-max)))
-  (shell-command-on-region beg end "tidy -xml -q -i" (current-buffer) t "*tidy-errors*" t))
-
-
 (provide 'setup-nxml)
 ;;; setup-nxml.el ends here

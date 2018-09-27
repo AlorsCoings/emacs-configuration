@@ -9,7 +9,6 @@
 
 (require 'sql)
 (require 'sql-indent)
-(require 'plsql)
 
 (defun sanityinc/pop-to-sqli-buffer ()
   "Switch to the corresponding sqli buffer."

@@ -130,6 +130,7 @@ re-downloaded in order to locate PACKAGE."
      magit-gitflow
      markdown-mode
      math-symbol-lists
+     markdown-mode
      move-text
      multiple-cursors
      oauth2

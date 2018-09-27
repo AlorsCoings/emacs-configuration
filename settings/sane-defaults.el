@@ -378,5 +378,9 @@ With argument PREFIX, print output into current buffer."
 
 (require 'sparql-mode)
 
+(add-hook 'grep-mode-hook
+          '(lambda ()
+             (define-key grep-mode-map (kbd "C-o") nil)))
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here
