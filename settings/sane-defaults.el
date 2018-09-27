@@ -376,5 +376,7 @@ With argument PREFIX, print output into current buffer."
 (require 'vlf)
 (require 'vlf-setup)
 
+(require 'sparql-mode)
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here

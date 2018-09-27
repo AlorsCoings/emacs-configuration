@@ -38,9 +38,9 @@
 ;; gdb print vector
 ;; print *(myVector._M_impl._M_start)@myVector.size()
 
-(require 'c-eldoc)
-(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-(add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
+;; (require 'c-eldoc)
+;; (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+;; (add-hook 'c++-mode-hook 'c-turn-on-eldoc-mode)
 ;; (setq c-eldoc-cpp-command "/usr/bin/clang")
 ;; (setq c-eldoc-cpp-command "/usr/bin/cpp")
 ;; (defvar c-eldoc-cpp-command "/lib/cpp ") ;; compiler
@@ -62,9 +62,8 @@
                            (get-buffer-create "*Astyle Errors*") t))
 (define-key c-mode-base-map (kbd "C-c C-r") 'astyle-this-buffer)
 
-
 (require 'company)
-(add-to-list 'company-backends 'company-c-headers)
+;; (add-to-list 'company-backends 'company-c-headers)
 ;; (setq company-clang-arguments '("-I/usr/include" "-I/usr/local/include"))
 
 (require 'compile)

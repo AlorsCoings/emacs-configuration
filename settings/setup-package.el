@@ -111,7 +111,6 @@ re-downloaded in order to locate PACKAGE."
      highlight-escape-sequences
      highlight-indentation
      highlight-symbol
-     hl-sexp
      ibuffer-vc
      ;icomplete+
      ido-at-point
@@ -151,6 +150,7 @@ re-downloaded in order to locate PACKAGE."
      slime-company
      smart-mode-line
      smex
+     sparql-mode
      sql-indent
      ;sqlplus
      sqlup-mode

@@ -307,5 +307,8 @@
 (global-set-key (kbd "M-f p") 'transpose-params)
 
 (global-set-key (kbd "M-,") 'comment-dwim)
+
+(global-set-key (kbd "M-ç") 'align-regexp)
+
 (provide 'key-bindings)
 ;;; key-bindings.el ends here

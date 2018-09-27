@@ -156,7 +156,11 @@
 ;; Dockerfile
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
+;; C#
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
+
+;; Turtle
+(add-to-list 'auto-mode-alist '("\\.ttl$" . ttl-mode))
 
 (provide 'mode-mappings)
 ;;; mode-mappings.el ends here

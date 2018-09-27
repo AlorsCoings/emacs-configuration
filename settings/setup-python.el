@@ -57,7 +57,7 @@
 ;; (elpy-use-cpython)
 
 ;; Virtual environment
-;; M-x pythonic-activate RET /path/to/virtualenv RET
+(define-key elpy-mode-map (kbd "C-c C-a") 'pyvenv-activate)
 
 (provide 'setup-python)
 ;;; setup-python.el ends here
