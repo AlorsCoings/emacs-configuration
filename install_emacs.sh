@@ -35,7 +35,7 @@ sudo make install-arch-dep install-arch-indep prefix="${install_directory}"/emac
 cd ${install_directory}
 sudo stow emacs-"$version"
 
-rm -r emacs-"$version"
+rm -rf emacs-"$version"
 
 # install source code pro font
 mkdir -p ~/.fonts
