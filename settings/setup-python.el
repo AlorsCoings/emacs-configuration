@@ -26,9 +26,6 @@
 (require 'elpy)
 (elpy-enable)
 
-;; (define-key elpy-mode-map (kbd "C-c C-p") 'run-python)
-(define-key elpy-mode-map (kbd "C-c C-p") 'elpy-shell-switch-to-shell)
-
 ;; Remove highlight of indentation
 (delete 'elpy-module-highlight-indentation elpy-modules)
 
@@ -38,7 +35,8 @@
   (let ((default-directory (elpy-project-root)))
     (elpy-shell-switch-to-shell)))
 
-(define-key elpy-mode-map (kbd "C-c p") 'elpy-shell-switch-to-shell-in-root)
+(define-key elpy-mode-map (kbd "C-c C-p") 'elpy-shell-switch-to-shell-in-root)
+(define-key elpy-mode-map (kbd "C-c p") 'run-python)
 
 ;; PYLINT Messages references
 ;; Disable them by using '# pylint: disable=C0103'

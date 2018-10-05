@@ -6,8 +6,18 @@
 ;;; Code:
 
 (require 'cc-mode)
-(setq c-default-style "k&r")
+
+(setq c-default-style '((java-mode . "java")
+                        (awk-mode . "awk")
+                        (other . "gnu")))
+
 (setq c-basic-offset 4)
+;; (defun my-c-mode-hook ()
+;;   (c-set-style
+;;    (if (and (buffer-file-name)
+;;             (string-match "/usr/src/linux" (buffer-file-name)))
+;;        "linux"
+;;      "free-group-style")))
 
 ;; google-c-style
 ;; (require 'google-c-style)
@@ -16,7 +26,7 @@
 ;; (add-hook 'c++-mode-common-hook 'google-set-c-style)
 ;; (add-hook 'c++-mode-common-hook 'google-make-newline-indent)
 
-;; (semantic-mode 1)
+(semantic-mode 1)
 ;; (global-semantic-idle-completions-mode t)
 ;; (global-semantic-decoration-mode t)
 ;; (global-semantic-highlight-func-mode t)
@@ -53,18 +63,21 @@
 (define-key c-mode-base-map (kbd "C-<tab>") 'company-complete)
 (define-key c-mode-base-map (kbd "C-e") 'c-electric-delete-forward)
 (define-key c-mode-base-map (kbd "C-d") 'previous-line)
+(define-key c-mode-base-map (kbd "M-<return>") 'c-context-line-break)
 
-(defun astyle-this-buffer (pmin pmax)
-  (interactive "r")
-  (shell-command-on-region pmin pmax
-                           "astyle --style=google --indent=spaces=4"
-                           (current-buffer) t
-                           (get-buffer-create "*Astyle Errors*") t))
+(defun astyle-this-buffer ()
+  "Reformat the buffer with custom style"
+  (interactive)
+  (let ((temp-point (point)))
+    (shell-command-on-region (point-min) (point-max)
+                             "astyle --style=kr --indent=spaces=4 --align-pointer=type --align-reference=type --remove-brackets --max-code-length=120 --break-after-logical"
+                             (current-buffer) t
+                             (get-buffer-create "*Astyle Errors*") t)
+    (goto-char temp-point)))
+
 (define-key c-mode-base-map (kbd "C-c C-r") 'astyle-this-buffer)
 
 (require 'company)
-;; (add-to-list 'company-backends 'company-c-headers)
-;; (setq company-clang-arguments '("-I/usr/include" "-I/usr/local/include"))
 
 (require 'compile)
 (define-key compilation-mode-map (kbd "C-o") 'other-window)
@@ -72,6 +85,19 @@
 
 (require 'csharp-mode)
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
+
+(require 'flycheck-google-cpplint)
+(setq flycheck-c/c++-googlelint-executable "cpplint")
+(flycheck-add-next-checker 'c/c++-gcc
+                           'c/c++-googlelint
+                           'append)
+(custom-set-variables
+ '(flycheck-googlelint-verbose "3")
+ '(flycheck-googlelint-filter "+build,+whitespace,+runtime,+readability,-whitespace/braces,-whitespace/indent")
+ '(flycheck-googlelint-linelength "140"))
+
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
+
 
 (provide 'setup-c)
 ;;; setup-c.el ends here
