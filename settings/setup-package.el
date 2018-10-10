@@ -75,6 +75,8 @@ re-downloaded in order to locate PACKAGE."
      company-restclient
      crappy-jsp-mode
      css-eldoc
+     csharp-mode
+     dart-mode
      dash
      dash-functional
      deferred

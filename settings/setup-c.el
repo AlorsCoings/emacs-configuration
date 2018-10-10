@@ -70,7 +70,7 @@
   (interactive)
   (let ((temp-point (point)))
     (shell-command-on-region (point-min) (point-max)
-                             "astyle --style=kr --indent=spaces=4 --align-pointer=type --align-reference=type --remove-brackets --max-code-length=120 --break-after-logical"
+                             "astyle --style=kr --indent=spaces=4 --align-pointer=type --align-reference=type --remove-brackets --max-code-length=140 --break-after-logical"
                              (current-buffer) t
                              (get-buffer-create "*Astyle Errors*") t)
     (goto-char temp-point)))
@@ -87,7 +87,7 @@
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 
 (require 'flycheck-google-cpplint)
-(setq flycheck-c/c++-googlelint-executable "cpplint")
+(setq flycheck-c/c++-googlelint-executable "/usr/local/bin/cpplint.py")
 (flycheck-add-next-checker 'c/c++-gcc
                            'c/c++-googlelint
                            'append)
@@ -96,8 +96,9 @@
  '(flycheck-googlelint-filter "+build,+whitespace,+runtime,+readability,-whitespace/braces,-whitespace/indent")
  '(flycheck-googlelint-linelength "140"))
 
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
-
+(add-hook 'c++-mode-hook (lambda ()
+                           (setq flycheck-gcc-language-standard "c++11")
+                           (setq fill-column 140)))
 
 (provide 'setup-c)
 ;;; setup-c.el ends here

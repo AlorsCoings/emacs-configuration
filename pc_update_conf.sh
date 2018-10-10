@@ -45,6 +45,14 @@ sudo -H pip3 install tensorflow pandas pylint youtube-dl \
 # Install nvidia drivers
 sudo ubuntu-drivers autoinstall
 
+# Google cpplint c++ checker
+sudo wget 'https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py' -O /usr/local/bin/cpplint.py
+
+sudo chmod a+x /usr/local/bin/cpplint.py
+
+sudo apt-get install -y astyle
+
+
 # sudo apt-get install -y indicator-multiload
 # indicator-multiload &
 

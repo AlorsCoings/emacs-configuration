@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -eu
+
 # Setup hard drive
 echo "Add a line to /etc/fstab to mount hdd at startup"
 echo "

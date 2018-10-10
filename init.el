@@ -58,6 +58,7 @@
 (require 'setup-magit)
 (require 'setup-php)
 (require 'setup-lua)
+(require 'setup-dart)
 (require 'setup-pdf-tools)
 (require 'setup-python)
 (require 'setup-js2-mode)
