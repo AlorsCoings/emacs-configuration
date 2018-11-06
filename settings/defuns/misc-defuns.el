@@ -96,8 +96,6 @@ This is useful when followed by an immediate kill."
      (interactive)
      ,@body))
 
-(global-set-key (kbd "M-L") (λ (insert "\u03bb")))
-
 ;; command to help set up magit-gh-pulls
 (defun magit-gh-pulls-setup (repoid)
   (interactive "suser/repo: ")
@@ -201,17 +199,25 @@ This is useful when followed by an immediate kill."
   (with-current-buffer (htmlize-buffer buffer)
     (buffer-string)))
 
-(defun sudo-edit (&optional arg)
-  (interactive "p")
-  (if (or arg (not buffer-file-name))
-      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
-
-(defun raspberry-edit (&optional arg)
-  (interactive "p")
-  (if (or arg (not buffer-file-name))
-      (find-file (concat "/ssh:pi@89.84.80.180:" (ido-read-file-name "File: ")))
-    (find-alternate-file (concat "/ssh:pi@89.84.80.180:" buffer-file-name))))
+(defun sudo-edit ()
+  "Edit ARG with root privilege."
+  (interactive)
+  (let
+      ((file-name (ido-read-file-name "File: ")))
+    (if (tramp-tramp-file-p file-name)
+        (with-parsed-tramp-file-name file-name nil
+          (find-file (replace-regexp-in-string
+                    ":|sudo:"
+                    "|sudo:"
+                    (tramp-make-tramp-file-name
+                     method
+                     user
+                     domain
+                     host
+                     port
+                     (concat "|sudo:" host ":" localname)
+                     hop))))
+      (find-file (concat "/sudo:root@localhost:" file-name)))))
 
 (defun add-file-find-hook-with-pattern (pattern fn &optional contents)
   "Add a find-file-hook that calls FN for files where PATTERN
