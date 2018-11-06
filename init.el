@@ -67,6 +67,7 @@
 (require 'setup-yaml)
 (require 'setup-markdown)
 (require 'setup-docker)
+(require 'setup-dart)
 
 ;; Map files to modes
 (require 'mode-mappings)
