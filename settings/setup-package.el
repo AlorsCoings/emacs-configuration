@@ -145,6 +145,7 @@ re-downloaded in order to locate PACKAGE."
      php-mode
      ;plsql
      rainbow-mode
+     sass-mode
      scala-mode
      scss-mode
      shell-command
@@ -161,7 +162,7 @@ re-downloaded in order to locate PACKAGE."
      ;tidy
      tide
      toggle-quotes
-     ;top-mode
+     ttl-mode
      typescript-mode
      undo-tree
      visual-regexp

@@ -9,7 +9,7 @@
 (load-library "iso-transl")
 
 (setq max-specpdl-size 13000)
-(setq max-lisp-eval-depth 5000)
+(setq max-lisp-eval-depth 50000)
 
 (setq-default
  bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)

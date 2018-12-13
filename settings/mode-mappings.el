@@ -162,5 +162,8 @@
 ;; Turtle
 (add-to-list 'auto-mode-alist '("\\.ttl$" . ttl-mode))
 
+;; Turtle
+(add-to-list 'auto-mode-alist '("\\.dart$" . dart-mode))
+
 (provide 'mode-mappings)
 ;;; mode-mappings.el ends here

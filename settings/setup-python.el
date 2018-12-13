@@ -50,7 +50,7 @@
 (setq flycheck-disabled-checkers '("python-flake8"))
 
 (add-hook 'python-mode-hook (lambda()
-                             (set-fill-column 90)))
+                             (set-fill-column 100)))
 ;; (elpy-use-ipython)
 ;; (elpy-use-cpython)
 

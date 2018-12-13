@@ -66,7 +66,7 @@
 (define-key c-mode-base-map (kbd "M-<return>") 'c-context-line-break)
 
 (defun astyle-this-buffer ()
-  "Reformat the buffer with custom style"
+  "Reformat the buffer with custom style."
   (interactive)
   (let ((temp-point (point)))
     (shell-command-on-region (point-min) (point-max)

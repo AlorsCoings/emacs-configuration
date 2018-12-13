@@ -9,7 +9,11 @@
 
 (setq dart-enable-analysis-server t)
 
+(setq dart-sdk-path 'nil)
+(setq dart-sdk-path "/usr/lib/dart/")
+(setq dart-formatter-command-override "/usr/lib/dart/bin/dartfmt")
 (add-hook 'dart-mode-hook 'flycheck-mode)
+(add-to-list 'flycheck-checkers 'dart-analysis-server 'append)
 
 ;; Seeing more information at point
 ;; (C-u) C-c ?
@@ -52,9 +56,12 @@
 ;; bindings, but if it doesn't you can manually choose a fallback by setting the
 ;; `
 
-(define-key dart-mode-map (kbd "C-d") 'previous-line)
-(define-key dart-mode-map (kbd "C-c C-n") 'dart-format)
+(define-key dart-mode-map (kbd "C-d") 'nil)
+(define-key dart-mode-map (kbd "C-c C-r") 'dart-format)
 (define-key dart-mode-map (kbd "C-j") 'emmet-expand-yas)
+(define-key dart-mode-map (kbd "M-e") 'nil)
+(define-key dart-mode-map (kbd "C-<tab>") 'dart-expand)
+(define-key dart-mode-map (kbd "C-S-<iso-lefttab>") 'dart-expand-parameters)
 
 (provide 'setup-dart)
 ;;; setup-dart.el ends here
