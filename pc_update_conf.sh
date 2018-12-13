@@ -106,6 +106,7 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.mutter overlay-key ''
 
 # Custom key-bindings
+gsettings set org.gnome.settings-daemon.plugins.media-keys screencast "''"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Primary><Super>s']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
