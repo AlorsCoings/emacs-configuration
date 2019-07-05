@@ -8,6 +8,7 @@
 (require 'tide)
 
 (defun setup-tide-mode ()
+  "Setup tide mode."
   (interactive)
   (tide-setup)
   (flycheck-mode +1)

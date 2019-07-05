@@ -6,7 +6,7 @@ mkdir -p "${HOME}"/log
 sudo apt-get update
 sudo apt-get dist-upgrade -y
 sudo apt-get install -y git python3 python3-pip python-dev build-essential \
-     curl ffmpeg imagemagick
+     curl ffmpeg imagemagick astyle
 
 # Install emacs
 git clone https://github.com/AlorsCoings/emacs-configuration "${HOME}/.emacs.d"
@@ -49,9 +49,6 @@ sudo ubuntu-drivers autoinstall
 sudo wget 'https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py' -O /usr/local/bin/cpplint.py
 
 sudo chmod a+x /usr/local/bin/cpplint.py
-
-sudo apt-get install -y astyle
-
 
 # sudo apt-get install -y indicator-multiload
 # indicator-multiload &
@@ -282,12 +279,6 @@ alias ll='ls -alh'
 
 # [ -f ${HOME}/.Xmodmap ] && xmodmap ${HOME}/.Xmodmap 2> /dev/null
 " >> "${HOME}/.bashrc"
-
-# .Xmodmap
-echo "clear lock
-clear control
-add control = Caps_Lock Control_L Control_R
-keycode 66 = Control_L Caps_Lock" > "${HOME}/.Xmodmap"
 
 # Git config
 echo "[user]

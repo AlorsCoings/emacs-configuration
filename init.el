@@ -12,14 +12,6 @@
   "Path to settings directory.")
 
 (setq message-log-max 10000)
-(defun my-tracing-function (orig-fun &rest args)
-  "Print a message before and after ORIG-FUN is call with ARGS."
-  (message "require %S start" args)
-  (let ((res (apply orig-fun args)))
-    (message "require %S ended" res)
-    res))
-
-(advice-add 'require :around #'my-tracing-function)
 
 ;; Set up load path
 (add-to-list 'load-path settings-dir)
@@ -47,14 +39,9 @@
 (require 'setup-latex)
 (require 'setup-c)
 (require 'setup-ispell)
-;(require 'setup-sql)
-(require 'setup-gnus)
-(require 'setup-bbdb)
 (require 'setup-nxml)
 (require 'setup-ibuffer)
 (require 'setup-image)
-(require 'setup-gnuplot)
-(require 'setup-helm-dash)
 (require 'setup-magit)
 (require 'setup-php)
 (require 'setup-lua)
@@ -79,8 +66,6 @@
 (require 'multiple-cursors)
 (require 'delsel)
 (require 'wgrep)
-(require 'google-translate)
-(require 'google-translate-default-ui)
 (require 'legalese)
 (require 'misc)
 
@@ -88,9 +73,6 @@
 
 (require 'atomic-chrome)
 (require 'setup-server)
-
-;; Remove advice defined at the beginning of this file
-(advice-remove 'require #'my-tracing-function)
 
 (provide 'init)
 ;;; init.el ends here

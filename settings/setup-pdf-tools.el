@@ -11,7 +11,7 @@
 
 (setq pdf-view-continuous nil)
 
-(when (eq system-type 'gnu/linux)
+(when (and (eq system-type 'gnu/linux) (not (string-equal (getenv "UHOME") "/home/emacs")))
 
   (pdf-tools-install)
 

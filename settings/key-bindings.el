@@ -291,6 +291,10 @@
 (global-set-key (kbd "M-'") 'backward-kill-word)
 (global-set-key (kbd "C-M-'") 'backward-kill-sexp)
 
+;; Change key bindings during isearch
+(define-key isearch-mode-map (kbd "C-d") 'isearch-repeat-backward)
+(define-key isearch-mode-map (kbd "C-'") 'isearch-delete-char)
+
 (global-set-key (kbd "C-n") 'isearch-forward)
 (global-set-key (kbd "C-M-n") 'isearch-forward-regexp)
 (global-set-key (kbd "M-n") 'isearch-forward-regexp)

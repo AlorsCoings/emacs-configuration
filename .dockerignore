@@ -1,3 +1,4 @@
+*/.git
 \#*
 .mc-lists.el
 .places
@@ -33,3 +34,8 @@ recentf~
 setup-org-gcal.el
 .erc-auth
 transient
+emacs.Dockerfile
+work_conf.sh
+pc_update_conf.sh
+install_emacs.sh
+home_conf.sh

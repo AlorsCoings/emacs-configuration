@@ -11,12 +11,6 @@
 (define-key company-search-map (kbd "C-d") 'company-select-previous)
 (define-key company-search-map (kbd "C-s") 'company-select-next)
 
-;; bigger popup window
-(setq company-tooltip-limit 20)
-
-;; align annotations to the right tooltip border
-(setq company-tooltip-align-annotations 't)
-
 ;; decrease delay before autocompletion popup shows
 (setq company-idle-delay .3)
 

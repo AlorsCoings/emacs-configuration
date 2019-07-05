@@ -87,7 +87,6 @@ re-downloaded in order to locate PACKAGE."
      docker-compose-mode
      docker-tramp
      dockerfile-mode
-     eclim
      elisp-slime-nav
      elnode
      elpy
@@ -106,8 +105,6 @@ re-downloaded in order to locate PACKAGE."
      gitignore-mode
      gnuplot
      gnuplot-mode
-     ;; google-c-style
-     google-translate
      helm
      helm-dash
      highlight-escape-sequences
@@ -119,7 +116,6 @@ re-downloaded in order to locate PACKAGE."
      ido-completing-read+
      ido-vertical-mode
      idomenu
-     image+
      impatient-mode
      irony
      js2-mode
@@ -135,6 +131,7 @@ re-downloaded in order to locate PACKAGE."
      markdown-mode
      move-text
      multiple-cursors
+     nginx-mode
      oauth2
      org
      org-gcal

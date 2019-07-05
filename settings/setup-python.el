@@ -12,7 +12,7 @@
 (setq python-shell-interpreter "python3")
 ;; (setq python-shell-interpreter "ipython")
 ;; (setq python-shell-interpreter-args "--profile=dev")
-;; (setq python-shell-interpreter-args "")
+(setq python-shell-interpreter-args "-u")
 
 (define-key python-mode-map (kbd "C-M-S-h") 'python-mark-defun)
 (define-key inferior-python-mode-map (kbd "M-d") 'comint-previous-input)
@@ -56,6 +56,9 @@
 
 ;; Virtual environment
 (define-key elpy-mode-map (kbd "C-c C-a") 'pyvenv-activate)
+
+;; Setup for tensorflow
+(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":/home/gros/projects/tensorflow_models/research:/home/gros/projects/tensorflow_models/research/slim"))
 
 (provide 'setup-python)
 ;;; setup-python.el ends here
