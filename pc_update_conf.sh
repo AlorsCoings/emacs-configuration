@@ -3,10 +3,19 @@
 set -eu
 
 mkdir -p "${HOME}"/log
+
+# Install go
+sudo add-apt-repository ppa:longsleep/golang-backports -y
+
 sudo apt-get update
 sudo apt-get dist-upgrade -y
 sudo apt-get install -y git python3 python3-pip python-dev build-essential \
-     curl ffmpeg imagemagick astyle
+     curl ffmpeg imagemagick astyle golang-go
+
+# Install go packages
+go get github.com/rogpeppe/godef
+go get golang.org/x/tools/cmd/...
+go get -u github.com/nsf/gocode
 
 # Install emacs
 git clone https://github.com/AlorsCoings/emacs-configuration "${HOME}/.emacs.d"
@@ -34,8 +43,8 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo apt-get update
 sudo apt-get install google-chrome-stable
 
-# Install verson 8 of nodejs
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+# Install verson 10 of nodejs
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install python packages
@@ -269,8 +278,8 @@ function bindCommands {
 # Use bindCommands if the script is sourced
 [[ $_ != $0 ]] && bind '\"\C-V\": beginning-of-line' 2>&1 | grep -q 'warning' || bindCommands
 
-export RASPBERRY=pi@192.168.1.89
-export PI3=pi@192.168.1.4
+# go packages
+export PATH=$PATH:~/go/bin
 
 export ALTERNATE_EDITOR=""
 export EDITOR=emacsclient

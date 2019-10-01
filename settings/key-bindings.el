@@ -186,9 +186,6 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
 
-(global-set-key (kbd "C-c C-j") (lambda () (interactive) (require 'setup-java)))
-(global-set-key (kbd "C-c j") 'eclim-manage-projects)
-
 (global-set-key (kbd "C-h é") 'describe-major-mode)
 
 ;; Change word separators

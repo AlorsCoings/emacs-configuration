@@ -93,6 +93,7 @@ COPY .gitconfig_ub $UHOME/.gitconfig
 COPY . $UHOME/.emacs.d
 
 RUN asEnvUser emacs -nw -batch -u ${UNAME} -q -kill
+RUN asEnvUser emacs -nw -batch -u ${UNAME} -q -kill --eval="(company-tabnine-install-binary)"
 
 WORKDIR "${WORKSPACE}"
 

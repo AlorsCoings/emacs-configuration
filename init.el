@@ -56,6 +56,7 @@
 (require 'setup-markdown)
 (require 'setup-docker)
 (require 'setup-typescript)
+(require 'setup-go)
 
 ;; Map files to modes
 (require 'mode-mappings)

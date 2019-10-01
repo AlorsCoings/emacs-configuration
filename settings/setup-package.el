@@ -70,9 +70,11 @@ re-downloaded in order to locate PACKAGE."
      company-auctex
      company-c-headers
      company-emacs-eclim
+     company-go
      company-irony
      company-jedi
      company-restclient
+     company-tabnine
      crappy-jsp-mode
      css-eldoc
      csharp-mode
@@ -105,6 +107,8 @@ re-downloaded in order to locate PACKAGE."
      gitignore-mode
      gnuplot
      gnuplot-mode
+     go-guru
+     go-mode
      helm
      helm-dash
      highlight-escape-sequences
