@@ -46,7 +46,6 @@
 (require 'setup-php)
 (require 'setup-lua)
 (require 'setup-dart)
-(require 'setup-pdf-tools)
 (require 'setup-python)
 (require 'setup-js2-mode)
 (require 'setup-lisp)
@@ -57,6 +56,7 @@
 (require 'setup-docker)
 (require 'setup-typescript)
 (require 'setup-go)
+(require 'setup-prolog)
 
 ;; Map files to modes
 (require 'mode-mappings)

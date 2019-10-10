@@ -142,10 +142,10 @@ re-downloaded in order to locate PACKAGE."
      org-pdfview
      page-break-lines
      paredit
-     pdf-tools
      php-mode
      ;plsql
      rainbow-mode
+     realgud
      sass-mode
      scala-mode
      scss-mode
