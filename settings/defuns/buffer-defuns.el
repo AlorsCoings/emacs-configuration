@@ -176,6 +176,10 @@ Symbols matching the text at point are put first in the completion list."
   (interactive)
   (indent-region (point-min) (point-max)))
 
+(defadvice fill-paragraph (after indent-after activate)
+  "Indent after calling `fill-paragraph'."
+  (indent-buffer))
+
 (defun cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer.
 Including indent-buffer, which should not be called automatically on save."

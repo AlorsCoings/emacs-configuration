@@ -3,23 +3,34 @@
 set -eu
 
 mkdir -p "${HOME}"/log
+
+# Install go
+sudo add-apt-repository ppa:longsleep/golang-backports -y
+
 sudo apt-get update
 sudo apt-get dist-upgrade -y
 sudo apt-get install -y git python3 python3-pip python-dev build-essential \
-     curl ffmpeg imagemagick
+     curl ffmpeg imagemagick astyle golang-go
+
+# Install go packages
+go get github.com/rogpeppe/godef
+go get golang.org/x/tools/cmd/...
+go get -u github.com/nsf/gocode
 
 # Install emacs
 git clone https://github.com/AlorsCoings/emacs-configuration "${HOME}/.emacs.d"
 bash "${HOME}/.emacs.d/install_emacs.sh"
 
 # Install docker
-curl -fsSL get.docker.com -o get-docker.sh
-sh get-docker.sh
-rm get-docker.sh
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 sudo -H usermod -aG docker ${USER}
-
-# Handle update of docker
-echo "deb [arch=armhf] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
 
 # Install docker-compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
@@ -34,46 +45,21 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo apt-get update
 sudo apt-get install google-chrome-stable
 
-# Install verson 8 of nodejs
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+# Install verson 10 of nodejs
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install python packages
-sudo -H pip3 install tensorflow pandas pylint youtube-dl \
+sudo -H pip3 install tensorflow pandas pylint \
      yapf autopep8 jedi flake8 rope_py3k
 
 # Install nvidia drivers
 sudo ubuntu-drivers autoinstall
 
-# sudo apt-get install -y indicator-multiload
-# indicator-multiload &
+# Google cpplint c++ checker
+sudo wget 'https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py' -O /usr/local/bin/cpplint.py
 
-# gsettings set de.mh21.indicator-multiload.general autostart true
-# gsettings set de.mh21.indicator-multiload.general background-color 'xosview:background'
-# gsettings set de.mh21.indicator-multiload.general color-scheme 'xosview'
-# gsettings set de.mh21.indicator-multiload.general indicator-expressions '['"'"''"'"', '"'"'CPU $(percent(cpu.inuse))'"'"', '"'"'Mem $(size(mem.user))'"'"', '"'"'Swap $(size(swap.used))'"'"', '"'"'Net $(speed(net.down))/$(speed(net.up))'"'"', '"'"'Load $(decimals(load.avg,2))'"'"', '"'"'Disk $(speed(disk.read))/$(speed(disk.write))'"'"']'
-# gsettings set de.mh21.indicator-multiload.general menu-expressions '['"'"'CPU: $(percent(cpu.inuse)), iowait $(percent(cpu.io))'"'"', '"'"'Mem: $(size(mem.user)), cache $(size(mem.cached))'"'"', '"'"'Swap: $(size(swap.used))'"'"', '"'"'Net: down $(speed(net.down)), up $(speed(net.up))'"'"', '"'"'Load: $(decimals(load.avg,2))'"'"', '"'"'Disk: read $(speed(disk.read)), write $(speed(disk.write))'"'"']'
-# gsettings set de.mh21.indicator-multiload.general width 100
-# gsettings set de.mh21.indicator-multiload.graphs.disk enabled true
-# gsettings set de.mh21.indicator-multiload.graphs.load enabled true
-# gsettings set de.mh21.indicator-multiload.graphs.mem enabled true
-# gsettings set de.mh21.indicator-multiload.graphs.net enabled true
-# gsettings set de.mh21.indicator-multiload.graphs.swap enabled true
-# gsettings set de.mh21.indicator-multiload.traces.cpu1 color 'xosview:cpu1'
-# gsettings set de.mh21.indicator-multiload.traces.cpu2 color 'xosview:cpu2'
-# gsettings set de.mh21.indicator-multiload.traces.cpu3 color 'xosview:cpu3'
-# gsettings set de.mh21.indicator-multiload.traces.cpu4 color 'xosview:cpu4'
-# gsettings set de.mh21.indicator-multiload.traces.disk1 color 'rgb(138,226,52)'
-# gsettings set de.mh21.indicator-multiload.traces.disk2 color 'rgb(193,125,17)'
-# gsettings set de.mh21.indicator-multiload.traces.load1 color 'xosview:load1'
-# gsettings set de.mh21.indicator-multiload.traces.mem1 color 'xosview:mem1'
-# gsettings set de.mh21.indicator-multiload.traces.mem2 color 'xosview:mem2'
-# gsettings set de.mh21.indicator-multiload.traces.mem3 color 'xosview:mem3'
-# gsettings set de.mh21.indicator-multiload.traces.mem4 color 'xosview:mem4'
-# gsettings set de.mh21.indicator-multiload.traces.net1 color 'rgb(255,255,0)'
-# gsettings set de.mh21.indicator-multiload.traces.net2 color 'rgb(0,0,255)'
-# gsettings set de.mh21.indicator-multiload.traces.net3 color 'rgb(0,0,0)'
-# gsettings set de.mh21.indicator-multiload.traces.swap1 color 'xosview:swap1'
+sudo chmod a+x /usr/local/bin/cpplint.py
 
 # Keyboard layout
 gsettings set org.gnome.desktop.input-sources show-all-sources true
@@ -98,6 +84,7 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.mutter overlay-key ''
 
 # Custom key-bindings
+gsettings set org.gnome.settings-daemon.plugins.media-keys screencast "''"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Primary><Super>s']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
@@ -165,6 +152,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'gnome-terminal maximize'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command 'gnome-terminal --window --maximize'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Ctrl><Alt>c'
+
+# Make caps lock an other ctrl
+gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier']"
 
 # Sane defaults
 gsettings set org.gtk.Settings.ColorChooser custom-colors "[(0.0, 0.0, 1.0, 1.0), (1.0, 1.0, 0.0, 1.0), (0.1803921568627451, 0.54509803921568623, 0.3411764705882353, 1.0), (0.52941176470588236, 0.80784313725490198, 0.92156862745098034, 1.0), (0.51372549019607838, 0.43529411764705883, 1.0, 1.0)]"
@@ -260,22 +250,18 @@ function bindCommands {
 # Use bindCommands if the script is sourced
 [[ $_ != $0 ]] && bind '\"\C-V\": beginning-of-line' 2>&1 | grep -q 'warning' || bindCommands
 
-export RASPBERRY=pi@192.168.1.89
-export PI3=pi@192.168.1.4
+# go packages
+export PATH=$PATH:~/go/bin
 
 export ALTERNATE_EDITOR=""
 export EDITOR=emacsclient
 
 alias ll='ls -alh'
 
-# [ -f ${HOME}/.Xmodmap ] && xmodmap ${HOME}/.Xmodmap 2> /dev/null
-" >> "${HOME}/.bashrc"
+# export PATH=/usr/local/cuda-10.1/bin:/usr/local/cuda-10.1/NsightCompute-2019.1${PATH:+:${PATH}}
+# export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
-# .Xmodmap
-echo "clear lock
-clear control
-add control = Caps_Lock Control_L Control_R
-keycode 66 = Control_L Caps_Lock" > "${HOME}/.Xmodmap"
+" >> "${HOME}/.bashrc"
 
 # Git config
 echo "[user]
@@ -292,3 +278,20 @@ echo "[user]
     default = simple" > "${HOME}"/.gitconfig
 
 sudo apt-get install -y texlive-full gimp vlc
+
+# Install docker-nvidia
+sudo apt install -y cuda-drivers
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+
+# Install cpu/memory monitoring
+sudo apt-get install -y gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  gir1.2-clutter-1.0
+# Manual
+# Ubuntu software
+# Search: "system-monitor"
+# Install
+
+# sudo apt-get install -y gnome-tweak-tool

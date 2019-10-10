@@ -58,7 +58,8 @@
 ;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
 (setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
 
-(setq org-agenda-files '("~/org"))
+(when (file-directory-p "~/org/")
+  (setq org-agenda-files (directory-files "~/org/" t ".org$" t)))
 
 (require 'org-agenda)
 (define-key org-agenda-mode-map (kbd "V") 'org-agenda-do-date-earlier)
@@ -248,8 +249,6 @@ Description")
 ;; Removes clocked tasks with 0:00 duration
 (setq org-clock-out-remove-zero-time-clocks t)
 
-(setq org-time-clocksum-format
-      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 (defun sanityinc/show-org-clock-in-header-line ()
   "Show org clock in header line."
   (setq-default header-line-format '((" " org-mode-line-string " "))))
@@ -263,10 +262,6 @@ Description")
 (add-hook 'org-clock-cancel-hook 'sanityinc/hide-org-clock-from-header-line)
 
 (setq org-archive-location "%s_archive::* Archive")
-
-(defun my-org-archive-done-tasks ()
-  (interactive)
-  (org-map-entries 'org-archive-subtree "/DONE" 'file))
 
 (add-hook 'after-init-hook (lambda ()
                              (org-agenda-list)
@@ -316,9 +311,13 @@ Description")
      (screen)
      (shell . t)
      (shen)
+     (sparql . t)
      (sql . t)
      (dot . t)
      (sqlite))))
+
+(require 'ob-python)
+(setq org-babel-python-command "python3")
 
 (setq org-agenda-compact-blocks nil)
 (setq org-agenda-dim-blocked-tasks nil)
@@ -332,6 +331,12 @@ Description")
           (lambda ()
             (org-agenda-list)
             (delete-other-windows)))
+
+;; To fix this, I added the following code after the line (funcall lang-mode) in the org-html-fontify-code defun in ox-html.el.
+
+;; (when (require 'fill-column-indicator nil 'noerror)
+;;   (fci-mode -1))
+;; (Make sure you delete ox-html.elc else your patched ox-html.el won't be effective)
 
 (provide 'setup-org)
 ;;; setup-org.el ends here

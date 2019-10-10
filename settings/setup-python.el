@@ -12,7 +12,7 @@
 (setq python-shell-interpreter "python3")
 ;; (setq python-shell-interpreter "ipython")
 ;; (setq python-shell-interpreter-args "--profile=dev")
-;; (setq python-shell-interpreter-args "")
+(setq python-shell-interpreter-args "-u")
 
 (define-key python-mode-map (kbd "C-M-S-h") 'python-mark-defun)
 (define-key inferior-python-mode-map (kbd "M-d") 'comint-previous-input)
@@ -26,10 +26,21 @@
 (require 'elpy)
 (elpy-enable)
 
-(define-key elpy-mode-map (kbd "C-c C-p") 'run-python)
-
 ;; Remove highlight of indentation
 (delete 'elpy-module-highlight-indentation elpy-modules)
+
+(defun elpy-shell-switch-to-shell-in-root ()
+  "Switch to python shell starting in project root."
+  (interactive)
+  (let ((default-directory (elpy-project-root)))
+    (elpy-shell-switch-to-shell)))
+
+(define-key elpy-mode-map (kbd "C-c C-p") 'elpy-shell-switch-to-shell-in-root)
+(define-key elpy-mode-map (kbd "C-c p") 'run-python)
+
+;; PYLINT Messages references
+;; Disable them by using '# pylint: disable=C0103'
+;; C0103: Invalid %s name
 
 (setq elpy-rpc-python-command "python3")
 
@@ -39,13 +50,15 @@
 (setq flycheck-disabled-checkers '("python-flake8"))
 
 (add-hook 'python-mode-hook (lambda()
-                             (flymake-mode nil)
-                             (set-fill-column 90)))
+                             (set-fill-column 100)))
 ;; (elpy-use-ipython)
 ;; (elpy-use-cpython)
 
 ;; Virtual environment
-;; M-x pythonic-activate RET /path/to/virtualenv RET
+(define-key elpy-mode-map (kbd "C-c C-a") 'pyvenv-activate)
+
+;; Setup for tensorflow
+(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":/home/gros/projects/tensorflow_models/research:/home/gros/projects/tensorflow_models/research/slim"))
 
 (provide 'setup-python)
 ;;; setup-python.el ends here
