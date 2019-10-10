@@ -22,13 +22,15 @@ git clone https://github.com/AlorsCoings/emacs-configuration "${HOME}/.emacs.d"
 bash "${HOME}/.emacs.d/install_emacs.sh"
 
 # Install docker
-curl -fsSL get.docker.com -o get-docker.sh
-sh get-docker.sh
-rm get-docker.sh
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 sudo -H usermod -aG docker ${USER}
-
-# Handle update of docker
-echo "deb [arch=armhf] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
 
 # Install docker-compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
@@ -48,7 +50,7 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install python packages
-sudo -H pip3 install tensorflow pandas pylint youtube-dl \
+sudo -H pip3 install tensorflow pandas pylint \
      yapf autopep8 jedi flake8 rope_py3k
 
 # Install nvidia drivers
@@ -58,36 +60,6 @@ sudo ubuntu-drivers autoinstall
 sudo wget 'https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py' -O /usr/local/bin/cpplint.py
 
 sudo chmod a+x /usr/local/bin/cpplint.py
-
-# sudo apt-get install -y indicator-multiload
-# indicator-multiload &
-
-# gsettings set de.mh21.indicator-multiload.general autostart true
-# gsettings set de.mh21.indicator-multiload.general background-color 'xosview:background'
-# gsettings set de.mh21.indicator-multiload.general color-scheme 'xosview'
-# gsettings set de.mh21.indicator-multiload.general indicator-expressions '['"'"''"'"', '"'"'CPU $(percent(cpu.inuse))'"'"', '"'"'Mem $(size(mem.user))'"'"', '"'"'Swap $(size(swap.used))'"'"', '"'"'Net $(speed(net.down))/$(speed(net.up))'"'"', '"'"'Load $(decimals(load.avg,2))'"'"', '"'"'Disk $(speed(disk.read))/$(speed(disk.write))'"'"']'
-# gsettings set de.mh21.indicator-multiload.general menu-expressions '['"'"'CPU: $(percent(cpu.inuse)), iowait $(percent(cpu.io))'"'"', '"'"'Mem: $(size(mem.user)), cache $(size(mem.cached))'"'"', '"'"'Swap: $(size(swap.used))'"'"', '"'"'Net: down $(speed(net.down)), up $(speed(net.up))'"'"', '"'"'Load: $(decimals(load.avg,2))'"'"', '"'"'Disk: read $(speed(disk.read)), write $(speed(disk.write))'"'"']'
-# gsettings set de.mh21.indicator-multiload.general width 100
-# gsettings set de.mh21.indicator-multiload.graphs.disk enabled true
-# gsettings set de.mh21.indicator-multiload.graphs.load enabled true
-# gsettings set de.mh21.indicator-multiload.graphs.mem enabled true
-# gsettings set de.mh21.indicator-multiload.graphs.net enabled true
-# gsettings set de.mh21.indicator-multiload.graphs.swap enabled true
-# gsettings set de.mh21.indicator-multiload.traces.cpu1 color 'xosview:cpu1'
-# gsettings set de.mh21.indicator-multiload.traces.cpu2 color 'xosview:cpu2'
-# gsettings set de.mh21.indicator-multiload.traces.cpu3 color 'xosview:cpu3'
-# gsettings set de.mh21.indicator-multiload.traces.cpu4 color 'xosview:cpu4'
-# gsettings set de.mh21.indicator-multiload.traces.disk1 color 'rgb(138,226,52)'
-# gsettings set de.mh21.indicator-multiload.traces.disk2 color 'rgb(193,125,17)'
-# gsettings set de.mh21.indicator-multiload.traces.load1 color 'xosview:load1'
-# gsettings set de.mh21.indicator-multiload.traces.mem1 color 'xosview:mem1'
-# gsettings set de.mh21.indicator-multiload.traces.mem2 color 'xosview:mem2'
-# gsettings set de.mh21.indicator-multiload.traces.mem3 color 'xosview:mem3'
-# gsettings set de.mh21.indicator-multiload.traces.mem4 color 'xosview:mem4'
-# gsettings set de.mh21.indicator-multiload.traces.net1 color 'rgb(255,255,0)'
-# gsettings set de.mh21.indicator-multiload.traces.net2 color 'rgb(0,0,255)'
-# gsettings set de.mh21.indicator-multiload.traces.net3 color 'rgb(0,0,0)'
-# gsettings set de.mh21.indicator-multiload.traces.swap1 color 'xosview:swap1'
 
 # Keyboard layout
 gsettings set org.gnome.desktop.input-sources show-all-sources true
@@ -286,7 +258,9 @@ export EDITOR=emacsclient
 
 alias ll='ls -alh'
 
-# [ -f ${HOME}/.Xmodmap ] && xmodmap ${HOME}/.Xmodmap 2> /dev/null
+# export PATH=/usr/local/cuda-10.1/bin:/usr/local/cuda-10.1/NsightCompute-2019.1${PATH:+:${PATH}}
+# export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
 " >> "${HOME}/.bashrc"
 
 # Git config
@@ -304,3 +278,20 @@ echo "[user]
     default = simple" > "${HOME}"/.gitconfig
 
 sudo apt-get install -y texlive-full gimp vlc
+
+# Install docker-nvidia
+sudo apt install -y cuda-drivers
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+
+# Install cpu/memory monitoring
+sudo apt-get install -y gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  gir1.2-clutter-1.0
+# Manual
+# Ubuntu software
+# Search: "system-monitor"
+# Install
+
+# sudo apt-get install -y gnome-tweak-tool
