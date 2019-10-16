@@ -74,7 +74,6 @@ re-downloaded in order to locate PACKAGE."
      company-irony
      company-jedi
      company-restclient
-     company-tabnine
      crappy-jsp-mode
      css-eldoc
      csharp-mode

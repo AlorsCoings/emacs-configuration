@@ -14,9 +14,6 @@
 ;; decrease delay before autocompletion popup shows
 (setq company-idle-delay .3)
 
-(require 'company-tabnine)
-(add-to-list 'company-backends #'company-tabnine)
-
 ;; Trigger completion immediately.
 (setq company-idle-delay 0)
 

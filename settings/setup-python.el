@@ -58,7 +58,9 @@
 (define-key elpy-mode-map (kbd "C-c C-a") 'pyvenv-activate)
 
 ;; Setup for tensorflow
-(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":/home/gros/projects/tensorflow_models/research:/home/gros/projects/tensorflow_models/research/slim"))
+;; (setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":/home/gros/projects/tensorflow_models/research:/home/gros/projects/tensorflow_models/research/slim"))
+
+(setq elpy-rpc-timeout 10)
 
 (provide 'setup-python)
 ;;; setup-python.el ends here
