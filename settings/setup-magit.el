@@ -6,6 +6,7 @@
 ;;; Code:
 
 (require 'magit)
+(require 'magit-extras)
 
 ;; Don't prompt me
 (magit-auto-revert-mode t)
