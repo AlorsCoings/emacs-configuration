@@ -30,6 +30,8 @@ using nxml's indentation rules."
     (indent-region beg end)))
 
 (define-key nxml-mode-map (kbd "C-c C-o") 'nil)
+(define-key nxml-mode-map (kbd "C-M-u") 'nil)
+(define-key nxml-mode-map (kbd "C-M-n") 'nil)
 
 (provide 'setup-nxml)
 ;;; setup-nxml.el ends here

@@ -311,5 +311,8 @@
 
 (global-set-key (kbd "M-ç") 'align-regexp)
 
+;; unidecode
+(global-set-key (kbd "C-M-u") 'xah-asciify-text)
+
 (provide 'key-bindings)
 ;;; key-bindings.el ends here

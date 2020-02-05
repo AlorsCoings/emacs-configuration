@@ -9,6 +9,7 @@
 
 (add-hook 'markdown-mode-hook
           '(lambda ()
+             (define-key markdown-mode-map (kbd "C-c C-s C-b") 'markdown-insert-bold)
              (define-key markdown-mode-map (kbd "M-p") nil)))
 
 (setq markdown-command "pandoc")
