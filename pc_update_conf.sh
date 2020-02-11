@@ -39,6 +39,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 # Upgrade pip
 pip3 install --upgrade pip
 
+# Make python3 default
+sudo rm "`which python`"
+sudo ln -s "`which python3`" "`which python`"
+
 # Install google chrome
 sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -50,7 +54,7 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install python packages
-sudo -H pip3 install tensorflow pandas pylint \
+sudo -H pip3 install cpplint tensorflow pandas pylint \
      yapf autopep8 jedi flake8 rope_py3k
 
 # Install nvidia drivers
@@ -223,6 +227,12 @@ exit 0' | sudo tee /etc/rc.local
 # Terminal keybindings
 echo "
 function bindCommands {
+    if [[ -z \"$GNOME_TERMINAL_SCREEN\" ]]
+    then
+        return
+    fi
+
+    echo \"Loading bindings\"
     stty lnext undef
     bind '\"\C-V\": beginning-of-line'
     bind '\"\C-L\": end-of-line'

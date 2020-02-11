@@ -3,4 +3,4 @@
 set -eu
 
 sudo apt-get update
-sudo apt-get install -y openvpn libboost-dev libboost-program-options-dev doxygen graphviz
+sudo apt-get install -y libboost-dev libboost-program-options-dev doxygen graphviz
