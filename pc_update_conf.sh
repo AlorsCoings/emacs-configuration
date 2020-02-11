@@ -227,6 +227,7 @@ exit 0' | sudo tee /etc/rc.local
 # Terminal keybindings
 echo "
 function bindCommands {
+    # Fix issue with emacs shell
     if [[ -z \"$GNOME_TERMINAL_SCREEN\" ]]
     then
         return
