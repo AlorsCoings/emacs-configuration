@@ -10,7 +10,7 @@ sudo add-apt-repository ppa:longsleep/golang-backports -y
 sudo apt-get update
 sudo apt-get dist-upgrade -y
 sudo apt-get install -y git python3 python3-pip python-dev build-essential \
-     curl ffmpeg imagemagick astyle golang-go
+     curl ffmpeg imagemagick astyle golang-go python3-venv
 
 # Install go packages
 go get github.com/rogpeppe/godef
@@ -233,7 +233,6 @@ function bindCommands {
         return
     fi
 
-    echo \"Loading bindings\"
     stty lnext undef
     bind '\"\C-V\": beginning-of-line'
     bind '\"\C-L\": end-of-line'
@@ -297,6 +296,9 @@ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
 sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
+
+# Install ng
+sudo npm install -g @angular/cli tslint typescript js-beautify
 
 # Install cpu/memory monitoring
 sudo apt-get install -y gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  gir1.2-clutter-1.0
