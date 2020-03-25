@@ -27,6 +27,9 @@
 (elpy-enable)
 
 (define-key elpy-mode-map (kbd "C-c C-p") 'run-python)
+(define-key elpy-mode-map (kbd "<C-return>") 'nil)
+(define-key elpy-mode-map (kbd "<M-return>") 'elpy-shell-send-statement-and-step)
+
 
 ;; Remove highlight of indentation
 (delete 'elpy-module-highlight-indentation elpy-modules)
