@@ -8,8 +8,10 @@
 ;; Enable accent
 (load-library "iso-transl")
 
+(setq default-input-method "")
+
 (setq max-specpdl-size 13000)
-(setq max-lisp-eval-depth 5000)
+(setq max-lisp-eval-depth 50000)
 
 (setq-default
  bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
@@ -37,7 +39,7 @@
   "Turn off display of trailing whitespace in this buffer."
   (setq show-trailing-whitespace nil))
 
-;; But don't show trailing whitespace in SQLi, inf-ruby etc.
+;; But don't show trailing whitespace in some modes
 (dolist (hook '(special-mode-hook
                 Info-mode-hook
                 eww-mode-hook
@@ -141,9 +143,6 @@
 (setq-default truncate-lines t)
 
 ;; Keep cursor away from edges when scrolling up/down
-;; (require 'smooth-scrolling)
-;; (smooth-scrolling-mode 1)
-;; (setq smooth-scroll-margin 10)
 (setq scroll-margin 10
       scroll-step 1
       scroll-conservatively 10
@@ -243,9 +242,6 @@
 (setq anzu-replace-to-string-separator " => ")
 (setq anzu-search-threshold 1000)
 
-(require 'eww)
-(setq eww-download-directory "~/EWW_Downloads/")
-
 (defadvice undo-tree-undo (around keep-region activate)
   "Keep region when undoing in region."
   (if (use-region-p)
@@ -270,23 +266,6 @@ With argument PREFIX, print output into current buffer."
 (define-key emacs-lisp-mode-map (kbd "C-x C-e")
   'sanityinc/eval-last-sexp-or-region)
 
-;; Add Urban Dictionary to webjump (C-x g)
-(require 'webjump)
-
-;; Webjump let's you quickly search google, wikipedia
-(defvar webjump-sites
-  '(("Google" .
-     [simple-query "www.google.com" "www.google.com/search?q=" ""])
-    ("Google Groups" .
-     [simple-query "groups.google.com" "groups.google.com/groups?q=" ""])
-    ("DuckDuckGo" .
-     [simple-query "duckduckgo.com" "duckduckgo.com/?q=" ""])
-    ("Wikipedia" .
-     [simple-query "wikipedia.org" "wikipedia.org/wiki/" ""])
-    ("Urban Dictionary" .
-     [simple-query "www.urbandictionary.com"
-                   "http://www.urbandictionary.com/define.php?term=" ""])))
-
 ;; Fix whitespace on save, but only if the file was clean
 (global-whitespace-cleanup-mode)
 
@@ -299,33 +278,11 @@ With argument PREFIX, print output into current buffer."
 (require 'make-mode)
 (define-key makefile-mode-map (kbd "M-p") 'subword-downcase)
 
-
-(defadvice fill-paragraph (after indent-after activate)
-  "Indent after calling `fill-paragraph'."
-  (indent-buffer))
-
 (defun describe-major-mode ()
   "Show inline doc for current `major-mode'."
   ;; code by Kevin Rodgers. 2009-02-25
   (interactive)
   (describe-function major-mode))
-
-(defun my-randomize-region (beg end)
-  "Randomize lines in region from BEG to END."
-  (interactive "*r")
-  (let ((lines (split-string
-                (delete-and-extract-region beg end) "\n")))
-    (when (string-equal "" (car (last lines 1)))
-      (setq lines (butlast lines 1)))
-    (apply 'insert
-           (mapcar 'cdr
-                   (sort (mapcar (lambda (x) (cons (random) (concat x "\n"))) lines)
-                         (lambda (a b) (< (car a) (car b))))))))
-
-(require 'google-translate-default-ui)
-;; Make Google translate from auto-detect to french by default
-(setq google-translate-default-source-language "auto")
-(setq google-translate-default-target-language "fr")
 
 ;; No warning for goal-column
 (put 'set-goal-column 'disabled nil)
@@ -341,10 +298,6 @@ With argument PREFIX, print output into current buffer."
 ;; Do not ask which shell to get
 (setenv "ESHELL" "bash")
 
-;; Change key bindings during isearch
-(define-key isearch-mode-map (kbd "C-d") 'isearch-repeat-backward)
-(define-key isearch-mode-map (kbd "C-'") 'isearch-delete-char)
-
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
@@ -355,8 +308,6 @@ With argument PREFIX, print output into current buffer."
 (require 'browse-url)
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
-
-;(icomplete-mode 99)
 
 ;; Smart M-x is smart
 (require 'smex)
@@ -381,6 +332,8 @@ With argument PREFIX, print output into current buffer."
 (add-hook 'grep-mode-hook
           '(lambda ()
              (define-key grep-mode-map (kbd "C-o") nil)))
+
+(require 'nginx-mode)
 
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here

@@ -70,6 +70,7 @@ re-downloaded in order to locate PACKAGE."
      company-auctex
      company-c-headers
      company-emacs-eclim
+     company-go
      company-irony
      company-jedi
      company-restclient
@@ -87,7 +88,6 @@ re-downloaded in order to locate PACKAGE."
      docker-compose-mode
      docker-tramp
      dockerfile-mode
-     eclim
      elisp-slime-nav
      elnode
      elpy
@@ -106,8 +106,8 @@ re-downloaded in order to locate PACKAGE."
      gitignore-mode
      gnuplot
      gnuplot-mode
-     ;; google-c-style
-     google-translate
+     go-guru
+     go-mode
      helm
      helm-dash
      highlight-escape-sequences
@@ -119,7 +119,6 @@ re-downloaded in order to locate PACKAGE."
      ido-completing-read+
      ido-vertical-mode
      idomenu
-     image+
      impatient-mode
      irony
      js2-mode
@@ -135,16 +134,18 @@ re-downloaded in order to locate PACKAGE."
      markdown-mode
      move-text
      multiple-cursors
+     nginx-mode
      oauth2
      org
      org-gcal
      org-pdfview
      page-break-lines
      paredit
-     pdf-tools
      php-mode
      ;plsql
      rainbow-mode
+     realgud
+     sass-mode
      scala-mode
      scss-mode
      shell-command
@@ -161,7 +162,7 @@ re-downloaded in order to locate PACKAGE."
      ;tidy
      tide
      toggle-quotes
-     ;top-mode
+     ttl-mode
      typescript-mode
      undo-tree
      visual-regexp

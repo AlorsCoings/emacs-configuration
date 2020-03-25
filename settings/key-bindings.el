@@ -186,9 +186,6 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
 
-(global-set-key (kbd "C-c C-j") (lambda () (interactive) (require 'setup-java)))
-(global-set-key (kbd "C-c j") 'eclim-manage-projects)
-
 (global-set-key (kbd "C-h é") 'describe-major-mode)
 
 ;; Change word separators
@@ -291,6 +288,10 @@
 (global-set-key (kbd "M-'") 'backward-kill-word)
 (global-set-key (kbd "C-M-'") 'backward-kill-sexp)
 
+;; Change key bindings during isearch
+(define-key isearch-mode-map (kbd "C-d") 'isearch-repeat-backward)
+(define-key isearch-mode-map (kbd "C-'") 'isearch-delete-char)
+
 (global-set-key (kbd "C-n") 'isearch-forward)
 (global-set-key (kbd "C-M-n") 'isearch-forward-regexp)
 (global-set-key (kbd "M-n") 'isearch-forward-regexp)
@@ -309,6 +310,9 @@
 (global-set-key (kbd "M-,") 'comment-dwim)
 
 (global-set-key (kbd "M-ç") 'align-regexp)
+
+;; unidecode
+(global-set-key (kbd "C-M-u") 'xah-asciify-text)
 
 (provide 'key-bindings)
 ;;; key-bindings.el ends here

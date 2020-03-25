@@ -5,10 +5,8 @@
 
 ;;; Code:
 
-(require 'image+)
+(require 'image-mode)
 
-;; (eval-after-load 'image+ '(imagex-auto-adjust-mode 1))
-;; (eval-after-load 'image+ '(imagex-global-sticky-mode 1))
 (define-key image-mode-map (kbd "+") 'imagex-sticky-zoom-in)
 (define-key image-mode-map (kbd "-") 'imagex-sticky-zoom-out)
 (define-key image-mode-map (kbd "M") 'imagex-sticky-maximize)

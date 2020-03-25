@@ -1,3 +1,0 @@
-Cordialement
-
-Nicolas Gros

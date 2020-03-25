@@ -8,7 +8,7 @@
 (require 'paredit)
 
 (defun paredit-everywhere()
-  "Load some paredit keybindings in prog-mode."
+  "Load some paredit keybindings in `prog-mode'."
   (local-set-key (kbd "C-M-S-s") 'paredit-splice-sexp-killing-forward)
   (local-set-key (kbd "C-M-S-d") 'paredit-splice-sexp-killing-backward)
   (local-set-key (kbd "C-M-S-r") 'paredit-forward-slurp-sexp)
