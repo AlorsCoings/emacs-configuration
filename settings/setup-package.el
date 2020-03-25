@@ -70,11 +70,13 @@ re-downloaded in order to locate PACKAGE."
      company-auctex
      company-c-headers
      company-emacs-eclim
+     company-go
      company-irony
      company-jedi
      company-restclient
      crappy-jsp-mode
      css-eldoc
+     csharp-mode
      dart-mode
      dash
      dash-functional
@@ -86,7 +88,6 @@ re-downloaded in order to locate PACKAGE."
      docker-compose-mode
      docker-tramp
      dockerfile-mode
-     eclim
      elisp-slime-nav
      elnode
      elpy
@@ -105,8 +106,8 @@ re-downloaded in order to locate PACKAGE."
      gitignore-mode
      gnuplot
      gnuplot-mode
-     ;; google-c-style
-     google-translate
+     go-guru
+     go-mode
      helm
      helm-dash
      highlight-escape-sequences
@@ -118,7 +119,6 @@ re-downloaded in order to locate PACKAGE."
      ido-completing-read+
      ido-vertical-mode
      idomenu
-     image+
      impatient-mode
      irony
      js2-mode
@@ -128,20 +128,24 @@ re-downloaded in order to locate PACKAGE."
      legalese
      lua-mode
      magit
+     magit-gitflow
+     markdown-mode
      math-symbol-lists
      markdown-mode
      move-text
      multiple-cursors
+     nginx-mode
      oauth2
      org
      org-gcal
      org-pdfview
      page-break-lines
      paredit
-     pdf-tools
      php-mode
      ;plsql
      rainbow-mode
+     realgud
+     sass-mode
      scala-mode
      scss-mode
      shell-command
@@ -150,15 +154,19 @@ re-downloaded in order to locate PACKAGE."
      slime-company
      smart-mode-line
      smex
+     sparql-mode
      sql-indent
      ;sqlplus
      sqlup-mode
      tern
      ;tidy
+     tide
      toggle-quotes
-     ;top-mode
+     ttl-mode
+     typescript-mode
      undo-tree
      visual-regexp
+     vlf
      web-beautify
      web-mode
      wgrep

@@ -63,5 +63,12 @@
        (delete-other-windows))
      (define-key vc-annotate-mode-map (kbd "q") 'vc-annotate-quit)))
 
+(require 'magit-gitflow)
+(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+;;; C-f in the magit status buffer invokes the magit-gitflow popup. If you
+;;; would like to use a different key, set the magit-gitflow-popup-key variable
+;;; before loading magit-gitflow
+;; (setq magit-gitflow-popup-key "C-n")
+
 (provide 'setup-magit)
 ;;; setup-magit.el ends here

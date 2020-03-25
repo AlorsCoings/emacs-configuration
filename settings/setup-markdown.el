@@ -11,5 +11,7 @@
           '(lambda ()
              (define-key markdown-mode-map (kbd "M-p") nil)))
 
+(setq markdown-command "pandoc")
+
 (provide 'setup-markdown)
-;;; setup-mardown.el ends here
+;;; setup-markdown.el ends here

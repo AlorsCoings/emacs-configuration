@@ -27,7 +27,7 @@
                    name (file-name-nondirectory new-name)))))))
 
 (defun delete-current-buffer-file ()
-  "Removes file connected to current buffer and kills buffer."
+  "Remove file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
         (buffer (current-buffer))

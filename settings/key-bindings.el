@@ -186,9 +186,6 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
 
-(global-set-key (kbd "C-c C-j") (lambda () (interactive) (require 'setup-java)))
-(global-set-key (kbd "C-c j") 'eclim-manage-projects)
-
 (global-set-key (kbd "C-h é") 'describe-major-mode)
 
 ;; Change word separators
@@ -273,6 +270,8 @@
 (global-set-key (kbd "M-R") (lambda() (interactive) (ignore-errors (subword-forward 5)))) ;; was paredit-raise-sexp
 (global-set-key (kbd "C-M-r") 'forward-sexp) ;; was isearch-backward-regexp
 
+(define-key minibuffer-local-map (kbd "M-r") 'subword-forward)
+
 ;; Expand and contract region
 (global-set-key (kbd "M-h") 'er/expand-region)
 (global-set-key (kbd "M-H") 'er/contract-region)
@@ -282,13 +281,16 @@
 (global-set-key (kbd "C-p") 'recenter-top-bottom)
 
 (global-set-key (kbd "M-p") 'subword-downcase)
-78.95
 (global-set-key (kbd "C-e") 'delete-forward-char)
 (global-set-key (kbd "M-e") 'kill-word)
 (global-set-key (kbd "C-M-e") 'kill-sexp)
 (global-set-key (kbd "C-'") 'delete-backward-char)
 (global-set-key (kbd "M-'") 'backward-kill-word)
 (global-set-key (kbd "C-M-'") 'backward-kill-sexp)
+
+;; Change key bindings during isearch
+(define-key isearch-mode-map (kbd "C-d") 'isearch-repeat-backward)
+(define-key isearch-mode-map (kbd "C-'") 'isearch-delete-char)
 
 (global-set-key (kbd "C-n") 'isearch-forward)
 (global-set-key (kbd "C-M-n") 'isearch-forward-regexp)
@@ -306,5 +308,8 @@
 (global-set-key (kbd "M-f p") 'transpose-params)
 
 (global-set-key (kbd "M-,") 'comment-dwim)
+
+(global-set-key (kbd "M-ç") 'align-regexp)
+
 (provide 'key-bindings)
 ;;; key-bindings.el ends here

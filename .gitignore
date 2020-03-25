@@ -1,3 +1,4 @@
+\#*
 .mc-lists.el
 .places
 abbrev_defs
@@ -16,7 +17,6 @@ tramp
 *~
 /url
 /var
-\#ido.last\#
 %backup%~
 ido.last
 recentf
@@ -32,3 +32,5 @@ recentf~
 /anaconda-mode
 setup-org-gcal.el
 /transient
+.erc-auth
+/elpy

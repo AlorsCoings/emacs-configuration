@@ -12,7 +12,7 @@
 (setq ispell-highlight-face 'custom-themed)
 (setq ispell-dictionary "french")
 (defun fd-switch-dictionary()
-  "Change dictionary for ispell."
+  "Change dictionary for Ispell."
   (interactive)
   (let* ((dic ispell-current-dictionary)
          (change (if (string= dic "french") "english" "french")))

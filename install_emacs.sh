@@ -4,7 +4,7 @@
 
 set -eu
 
-readonly version="26.1"
+readonly version="26.3"
 install_directory="/usr/local/stow"
 
 # install dependencies
@@ -35,7 +35,7 @@ sudo make install-arch-dep install-arch-indep prefix="${install_directory}"/emac
 cd ${install_directory}
 sudo stow emacs-"$version"
 
-rm -r emacs-"$version"
+sudo rm -rf emacs-"$version"
 
 # install source code pro font
 mkdir -p ~/.fonts
@@ -63,3 +63,5 @@ WantedBy=default.target" | sudo tee /etc/systemd/system/emacs@.service
 
 sudo systemctl enable emacs@$USER
 sudo systemctl start emacs@$USER
+
+echo "Done installing emacs. You can start emacs client with the following command 'emacsclient -c'"

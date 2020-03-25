@@ -22,9 +22,9 @@
 (add-hook 'shell-command-complete-functions
           'bash-completion-dynamic-complete)
 
-(setenv "PATH" "~/local/bin:/home/toad/anaconda3/bin:/usr/lib/jvm/jdk1.8/bin:/usr/local/apache-maven-3.3.9/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usrr/games:/usr/local/games:/home/toad/local/bin:/usr/local/apache-log4j-1.2.15:/snap/bin:/snap/bin")
-(setenv "JAVA_HOME" "/usr/lib/jvm/jdk1.8")
+;; (setenv "PATH" "~/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin")
 (setenv "SHELL" "/bin/bash")
+
 
 (when (eq system-type 'gnu/linux)
   (require 'exec-path-from-shell)

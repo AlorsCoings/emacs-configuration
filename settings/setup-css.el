@@ -26,5 +26,7 @@
 (autoload 'turn-on-css-eldoc "css-eldoc")
 (add-hook 'css-mode-hook 'turn-on-css-eldoc)
 
+(require 'sass-mode)
+
 (provide 'setup-css)
 ;;; setup-css.el ends here
