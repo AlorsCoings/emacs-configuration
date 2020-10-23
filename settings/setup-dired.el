@@ -38,6 +38,7 @@
 (define-key dired-mode-map (kbd "C-S-o") (lambda() (interactive) (other-window -1)))
 (define-key dired-mode-map (kbd "C-S-n") 'dired-do-isearch)
 (define-key dired-mode-map (kbd "C-M-S-n") 'dired-do-isearch-regexp)
+(define-key dired-mode-map (kbd "C-M-n") 'isearch-forward-regexp)
 
 (define-key dired-mode-map (vector 'remap 'smart-up) 'dired-back-to-top)
 

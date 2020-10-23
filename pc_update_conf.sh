@@ -40,8 +40,9 @@ sudo chmod +x /usr/local/bin/docker-compose
 pip3 install --upgrade pip
 
 # Make python3 default
-sudo rm "`which python`"
-sudo ln -s "`which python3`" "`which python`"
+PYTHON_PATH="`which python`"
+sudo rm "$PYTHON_PATH"
+sudo ln -s "`which python3`" "$PYTHON_PATH"
 
 # Install google chrome
 sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
@@ -54,7 +55,7 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install python packages
-sudo -H pip3 install cpplint tensorflow pandas pylint \
+sudo -H pip3 install cpplint tensorflow pandas pylint flake8 \
      yapf autopep8 jedi flake8 rope_py3k
 
 # Install nvidia drivers
@@ -62,6 +63,7 @@ sudo ubuntu-drivers autoinstall
 
 # Google cpplint c++ checker
 sudo wget 'https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py' -O /usr/local/bin/cpplint.py
+sudo sed -i 's/#!\/usr\/bin\/env python/#!\/usr\/bin\/env python2/' /usr/local/bin/cpplint.py
 
 sudo chmod a+x /usr/local/bin/cpplint.py
 

@@ -77,6 +77,7 @@ re-downloaded in order to locate PACKAGE."
      crappy-jsp-mode
      css-eldoc
      csharp-mode
+     cmake-mode
      dart-mode
      dash
      dash-functional

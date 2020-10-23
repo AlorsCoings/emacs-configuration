@@ -47,10 +47,12 @@
 (require 'flycheck)
 (setq flycheck-python-pycompile-executable "python3")
 (setq flycheck-python-pylint-executable "python3")
+(setq flycheck-python-flake8-executable "python3")
 (setq flycheck-disabled-checkers '("python-flake8"))
 
+
 (add-hook 'python-mode-hook (lambda()
-                             (set-fill-column 100)))
+                              (set-fill-column 120)))
 ;; (elpy-use-ipython)
 ;; (elpy-use-cpython)
 

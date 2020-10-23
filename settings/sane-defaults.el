@@ -335,5 +335,7 @@ With argument PREFIX, print output into current buffer."
 
 (require 'nginx-mode)
 
+(require 'realgud)
+
 (provide 'sane-defaults)
 ;;; sane-defaults.el ends here
