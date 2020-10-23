@@ -5,7 +5,7 @@
 
 ;;; Code:
 
-(package-initialize)
+;(package-initialize)
 
 (defvar settings-dir
   (expand-file-name "settings" user-emacs-directory)
@@ -44,7 +44,7 @@
 (require 'setup-image)
 (require 'setup-magit)
 (require 'setup-php)
-(require 'setup-lua)
+;(require 'setup-lua)
 (require 'setup-dart)
 (require 'setup-python)
 (require 'setup-js2-mode)

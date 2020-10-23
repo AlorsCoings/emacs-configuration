@@ -24,7 +24,7 @@
 (setq-default TeX-master t)
 
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+;; (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 ;; (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
@@ -49,15 +49,10 @@
 (setq LaTeX-command "latex -synctex=1")
 
 (setq TeX-source-correlate-method 'synctex)
-(setq TeX-source-correlate-mode t)
-(setq TeX-source-correlate-start-server nil)
-(setq TeX-view-program-list '("Okular" "okular --unique %o#src:%n%b"))
-(setq TeX-view-program-selection
-      '(((output-dvi style-pstricks)
-         "dvips and gv")
-        (output-dvi "xdvi")
-        (output-html "xdg-open")
-        (output-pdf "Evince")))
+;; (setq TeX-source-correlate-mode t)
+(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+      TeX-source-correlate-start-server t) ;; not sure if last line is neccessary
 
 (require 'latex)
 (define-key LaTeX-mode-map (kbd "C-c C-n") 'cleanup-buffer)

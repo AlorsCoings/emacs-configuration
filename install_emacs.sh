@@ -4,7 +4,7 @@
 
 set -eu
 
-readonly version="26.3"
+readonly version="27.1"
 install_directory="/usr/local/stow"
 
 # install dependencies
