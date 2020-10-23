@@ -56,6 +56,7 @@
 
 (require 'flycheck-google-cpplint)
 (setq flycheck-c/c++-googlelint-executable "/usr/local/bin/cpplint.py")
+(setq flycheck-gcc-include-path '("/usr/include/python3.6" "/usr/local/include/QualityCoversLib"))
 (flycheck-add-next-checker 'c/c++-gcc
                            'c/c++-googlelint
                            'append)
@@ -67,6 +68,8 @@
 (add-hook 'c++-mode-hook (lambda ()
                            (setq flycheck-gcc-language-standard "c++11")
                            (setq fill-column 140)))
+
+(require 'cmake-mode)
 
 (provide 'setup-c)
 ;;; setup-c.el ends here
