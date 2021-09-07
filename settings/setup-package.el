@@ -52,6 +52,7 @@ re-downloaded in order to locate PACKAGE."
   "Install extensions if they're missing."
   (packages-install
    '(
+     add-node-modules-path
      angular-snippets
      anzu
      apache-mode
@@ -143,6 +144,7 @@ re-downloaded in order to locate PACKAGE."
      page-break-lines
      paredit
      php-mode
+     prettier-js
      ;plsql
      rainbow-mode
      realgud

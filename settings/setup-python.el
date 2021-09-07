@@ -36,6 +36,7 @@
     (elpy-shell-switch-to-shell)))
 
 (define-key elpy-mode-map (kbd "C-c C-p") 'elpy-shell-switch-to-shell-in-root)
+(define-key elpy-mode-map (kbd "C-c C-r f") 'elpy-format-code)
 (define-key elpy-mode-map (kbd "C-c p") 'run-python)
 
 ;; PYLINT Messages references
@@ -63,6 +64,13 @@
 ;; (setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":/home/gros/projects/tensorflow_models/research:/home/gros/projects/tensorflow_models/research/slim"))
 
 (setq elpy-rpc-timeout 10)
+
+(require 'company-jedi)
+
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+
+(add-hook 'python-mode-hook 'my/python-mode-hook)
 
 (provide 'setup-python)
 ;;; setup-python.el ends here

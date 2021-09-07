@@ -35,7 +35,7 @@ sudo make install-arch-dep install-arch-indep prefix="${install_directory}"/emac
 cd ${install_directory}
 sudo stow emacs-"$version"
 
-sudo rm -rf emacs-"$version"
+#sudo rm -rf emacs-"$version"
 
 # install source code pro font
 mkdir -p ~/.fonts
@@ -45,6 +45,11 @@ tar xzf 1.050R-it.tar.gz
 rm 1.050R-it.tar.gz
 sudo fc-cache -f -v
 
+
+mkdir -p ~/.config/systemd/user/
+cp /usr/local/stow/emacs-27.1/lib/systemd/user/emacs.service ~/.config/systemd/user/emacs.service
+
+# maybe sed ssh
 echo "[Unit]
 Description=Emacs: the extensible, self-documenting text editor
 
@@ -61,7 +66,7 @@ TimeoutStartSec=0
 [Install]
 WantedBy=default.target" | sudo tee /etc/systemd/system/emacs@.service
 
-sudo systemctl enable emacs@$USER
-sudo systemctl start emacs@$USER
+systemctl enable --user emacs
+systemctl start --user emacs
 
 echo "Done installing emacs. You can start emacs client with the following command 'emacsclient -c'"

@@ -72,7 +72,6 @@
 
 (require 'key-bindings)
 
-(require 'atomic-chrome)
 (require 'setup-server)
 
 (provide 'init)

@@ -230,7 +230,8 @@
   (indent-according-to-mode))
 
 (require 'hexl)
-(add-hook 'hexl-mode-hook 'font-lock-fontify-buffer)
+;; Was font-lock-fontify-buffer now font-lock-ensure/font-lock-flush
+(add-hook 'hexl-mode-hook 'font-lock-ensure)
 
 (setq kill-ring-max 1000)
 

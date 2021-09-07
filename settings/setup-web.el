@@ -19,14 +19,16 @@
 (require 'web-mode)
 (setq web-mode-markup-indent-offset 4)
 (setq web-mode-css-indent-offset 4)
+(setq web-mode-code-indent-offset 4)
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-enable-current-element-highlight t)
-(setq web-mode-code-indent-offset 4)
 (setq web-mode-enable-auto-quoting t)
 (setq web-mode-enable-css-colorization t)
 (setq web-mode-enable-inlays t)
 (setq web-mode-enable-part-face t)
 (setq web-mode-enable-sql-detection t)
+
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 
 (set-face-attribute 'web-mode-html-attr-custom-face nil :inherit font-lock-keyword-face)
 ;; (set-face-attribute 'web-mode-variable-name-face t :foreground "Pink3")
@@ -35,6 +37,23 @@
 ;; (set-face-attribute 'web-mode-html-attr-custom-face t :inherit font-lock-keyword-face)
 ;; (set-face-attribute 'web-mode-html-attr-name-face t :inherit web-mode-variable-name-face)
 
+
+(require 'flycheck)
+;; Disable default jslint
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint json-jsonlist)))
+;; Enable eslint checker for web-mode
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+(require 'add-node-modules-path)
+(add-hook 'flycheck-mode-hook 'add-node-modules-path)
+
+(defun web-mode-init-prettier-hook ()
+  (add-node-modules-path)
+  (prettier-js-mode))
+
+(add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
 
 ;; example
 ;; html[ng-app=nicolasGros lang=fr]>head>title+meta[charset=utf-8]+p*3>lorem3

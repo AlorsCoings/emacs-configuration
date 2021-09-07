@@ -22,19 +22,7 @@ git clone https://github.com/AlorsCoings/emacs-configuration "${HOME}/.emacs.d"
 bash "${HOME}/.emacs.d/install_emacs.sh"
 
 # Install docker
-sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
-     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-       $(lsb_release -cs) \
-       stable"
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-sudo -H usermod -aG docker ${USER}
-
-# Install docker-compose
-sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+curl https://get.docker.com | sh && sudo systemctl --now enable docker
 
 # Upgrade pip
 pip3 install --upgrade pip
@@ -50,13 +38,15 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo apt-get update
 sudo apt-get install google-chrome-stable
 
-# Install verson 10 of nodejs
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+# Install verson 14 of nodejs
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install python packages
 sudo -H pip3 install cpplint tensorflow pandas pylint flake8 \
-     yapf autopep8 jedi flake8 rope_py3k
+     yapf autopep8 jedi flake8 rope_py3k black
 
 # Install nvidia drivers
 sudo ubuntu-drivers autoinstall
@@ -77,6 +67,9 @@ gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 
 gsettings set org.gnome.desktop.sound event-sounds false
+
+# Dark mode
+gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-dark'
 
 # Handle power setup
 gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action 'nothing'
@@ -179,6 +172,8 @@ gsettings set org.gnome.shell.keybindings toggle-overview "[]"
 gsettings set org.gnome.ControlCenter last-panel 'display'
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic false
+gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-from 5.0
+gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-to 4.9833333333333298
 
 gsettings set org.gnome.ControlCenter last-panel 'ubuntu'
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
@@ -262,18 +257,22 @@ function bindCommands {
 # Use bindCommands if the script is sourced
 [[ $_ != $0 ]] && bind '\"\C-V\": beginning-of-line' 2>&1 | grep -q 'warning' || bindCommands
 
+alias ll='ls -alh'
+" >> "${HOME}/.bashrc"
+
+echo "
+
 # go packages
 export PATH=$PATH:~/go/bin
 
 export ALTERNATE_EDITOR=""
 export EDITOR=emacsclient
 
-alias ll='ls -alh'
-
 # export PATH=/usr/local/cuda-10.1/bin:/usr/local/cuda-10.1/NsightCompute-2019.1${PATH:+:${PATH}}
 # export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
-" >> "${HOME}/.bashrc"
+" >> "${HOME}/.profile"
+
 
 # Git config
 echo "[user]
@@ -292,21 +291,53 @@ echo "[user]
 sudo apt-get install -y texlive-full gimp vlc
 
 # Install docker-nvidia
-sudo apt install -y cuda-drivers
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
-curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+    && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+    && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
+# Check with
+# docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
 
 # Install ng
-sudo npm install -g @angular/cli tslint typescript js-beautify
+sudo npm install -g @angular/cli tslint typescript js-beautify eslint babel-eslint eslint-plugin-react
 
-# Install cpu/memory monitoring
-sudo apt-get install -y gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  gir1.2-clutter-1.0
-# Manual
-# Ubuntu software
-# Search: "system-monitor"
-# Install
+echo "{
+    \"parser\": \"babel-eslint\",
+    \"plugins\": [ \"react\" ],
+    \"env\": {
+        \"browser\": true,
+        \"es6\": true,
+        \"node\": true
+    },
+    \"ecmaFeatures\": {
+        \"arrowFunctions\": true,
+        \"blockBindings\": true,
+        \"classes\": true,
+        \"defaultParams\": true,
+        \"destructuring\": true,
+        \"forOf\": true,
+        \"generators\": true,
+        \"modules\": true,
+        \"spread\": true,
+        \"templateStrings\": true,
+        \"jsx\": true
+    },
+    \"rules\": {
+        \"consistent-return\": [0],
+        \"key-spacing\": [0],
+        \"quotes\": [0],
+        \"new-cap\": [0],
+        \"no-multi-spaces\": [0],
+        \"no-shadow\": [0],
+        \"no-unused-vars\": [1],
+        \"no-use-before-define\": [2, \"nofunc\"],
+        \"react/jsx-no-undef\": 1,
+        \"react/jsx-uses-react\": 1,
+        \"react/jsx-uses-vars\": 1
+    }
+}" > "${HOME}"/.eslintrc
 
-# sudo apt-get install -y gnome-tweak-tool
+# sudo apt-get install -y gnome-shell-extension-system-monitor

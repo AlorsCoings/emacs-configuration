@@ -12,6 +12,9 @@
           (lambda()
             (dired-hide-details-mode)))
 
+;; Auto-refresh dired on file change
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+
 ;; Get human readeable value of file's size in dired mode
 (setq dired-listing-switches "-alh")
 
