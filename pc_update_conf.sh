@@ -340,4 +340,12 @@ echo "{
     }
 }" > "${HOME}"/.eslintrc
 
+# https://askubuntu.com/questions/799301/wifi-asks-for-password-again-and-again
+# These adapters do not support 802.11n protocol well (at least on linux), but iwlwifi driver tries to use it. You can disable this protocol by running in terminal
+
+# sudo tee /etc/modprobe.d/iwlwifi-opt.conf <<< "options iwlwifi 11n_disable=1"
+# This will be applied after a reboot.
+
 # sudo apt-get install -y gnome-shell-extension-system-monitor
+# sudo apt-get install -y lm-sensors sensors-applet
+# sudo sensors-detect
