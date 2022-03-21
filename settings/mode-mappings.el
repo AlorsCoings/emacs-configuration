@@ -81,9 +81,6 @@
 ;; Dockerfile
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
-;; Turtle
-(add-to-list 'auto-mode-alist '("\\.ttl$" . ttl-mode))
-
 ;; Dart
 (add-to-list 'auto-mode-alist '("\\.dart$" . dart-mode))
 

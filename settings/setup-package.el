@@ -104,8 +104,8 @@ re-downloaded in order to locate PACKAGE."
      flycheck-pos-tip
      fullframe
      git-messenger
-     gitconfig-mode
-     gitignore-mode
+     ;; gitconfig-mode
+     ;; gitignore-mode
      gnuplot
      gnuplot-mode
      go-guru
@@ -140,7 +140,7 @@ re-downloaded in order to locate PACKAGE."
      oauth2
      org
      org-gcal
-     org-pdfview
+     ;; org-pdfview
      page-break-lines
      paredit
      php-mode
@@ -151,7 +151,7 @@ re-downloaded in order to locate PACKAGE."
      sass-mode
      scala-mode
      scss-mode
-     shell-command
+     ;; shell-command
      skewer-mode
      slime
      slime-company
@@ -165,7 +165,7 @@ re-downloaded in order to locate PACKAGE."
      ;tidy
      tide
      toggle-quotes
-     ttl-mode
+     ;; ttl-mode
      typescript-mode
      undo-tree
      visual-regexp

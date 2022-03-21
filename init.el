@@ -57,7 +57,6 @@
 (require 'setup-typescript)
 (require 'setup-go)
 (require 'setup-prolog)
-(require 'setup-kotlin)
 
 ;; Map files to modes
 (require 'mode-mappings)

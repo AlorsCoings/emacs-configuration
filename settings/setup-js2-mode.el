@@ -55,10 +55,7 @@
 
 (require 'json)
 (require 'json-mode)
-(require 'json-reformat)
 
-(setq json-reformat:indent-width 4)
-(setq json-reformat:pretty-string\? t)
 (define-key json-mode-map (kbd "C-c C-n") 'web-beautify-js)
 
 (require 'karma)
