@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -eux
 
 mkdir -p "${HOME}"/log
 
@@ -13,13 +13,13 @@ sudo apt-get install -y git python3 python3-pip python-dev build-essential \
      curl ffmpeg imagemagick astyle golang-go python3-venv
 
 # Install go packages
-go get github.com/rogpeppe/godef
-go get golang.org/x/tools/cmd/...
-go get -u github.com/nsf/gocode
+# go get github.com/rogpeppe/godef
+# go get golang.org/x/tools/cmd/...
+# go get -u github.com/nsf/gocode
 
 # Install emacs
-git clone https://github.com/AlorsCoings/emacs-configuration "${HOME}/.emacs.d"
-bash "${HOME}/.emacs.d/install_emacs.sh"
+# git clone https://github.com/AlorsCoings/emacs-configuration "${HOME}/.emacs.d"
+# bash "${HOME}/.emacs.d/install_emacs.sh"
 
 # Install docker
 curl https://get.docker.com | sh && sudo systemctl --now enable docker
@@ -83,7 +83,7 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.mutter overlay-key ''
 
 # Custom key-bindings
-gsettings set org.gnome.settings-daemon.plugins.media-keys screencast "''"
+gsettings set org.gnome.settings-daemon.plugins.media-keys screencast "['']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Primary><Super>s']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
@@ -96,7 +96,7 @@ gsettings set org.gnome.mutter workspaces-only-on-primary false
 
 gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "[]"
 gsettings set org.gnome.desktop.wm.keybindings show-desktop "[]"
-gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver '<Super>l'
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super>l']"
 
 gsettings set org.gnome.desktop.wm.keybindings begin-move "[]"
 gsettings set org.gnome.desktop.wm.keybindings begin-resize "[]"
@@ -130,11 +130,11 @@ gsettings set org.gnome.desktop.wm.keybindings switch-panels "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "[]"
 
 gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "[]"
-gsettings set org.gnome.settings-daemon.plugins.media-keys home '<Control><Super>l'
-gsettings set org.gnome.settings-daemon.plugins.media-keys terminal '<Primary><Alt>c'
-gsettings set org.gnome.settings-daemon.plugins.media-keys www '<Control><Super>w'
+gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Control><Super>l']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Primary><Alt>c']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Control><Super>w']"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ''
+# gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ''
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'emacs'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'emacsclient -c'
@@ -161,8 +161,8 @@ gsettings set org.gtk.Settings.ColorChooser selected-color "(true, 0.54117647058
 gsettings set org.gnome.desktop.background show-desktop-icons false
 
 gsettings set org.gnome.desktop.wm.preferences audible-bell false
-gsettings set org.gnome.settings-daemon.peripherals.keyboard numlock-state "'on'"
-gsettings set org.gnome.settings-daemon.peripherals.keyboard remember-numlock-state true
+gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
+gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state true
 
 gsettings set org.gnome.shell favorite-apps "[]"
 gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
@@ -343,3 +343,7 @@ echo "{
 }" > "${HOME}"/.eslintrc
 
 # sudo apt-get install -y gnome-shell-extension-system-monitor
+# # To activate top bar gnome info
+# gnome-extensions enable system-monitor@paradoxxx.zero.gmail.com
+# sudo apt-get install -y lm-sensors sensors-applet
+# sudo sensors-detect

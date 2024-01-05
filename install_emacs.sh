@@ -49,23 +49,4 @@ sudo fc-cache -f -v
 mkdir -p ~/.config/systemd/user/
 cp /usr/local/stow/emacs-"$version"/lib/systemd/user/emacs.service ~/.config/systemd/user/emacs.service
 
-# maybe sed ssh
-# echo "[Unit]
-# Description=Emacs: the extensible, self-documenting text editor
-
-# [Service]
-# Type=forking
-# ExecStart=/usr/local/bin/emacs --daemon
-# ExecStop=/usr/local/bin/emacsclient --eval \"(kill-emacs)\"
-# Environment=SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-# Restart=always
-# User=%i
-# TimeoutStartSec=900
-
-# [Install]
-# WantedBy=default.target" | sudo tee /etc/systemd/system/emacs@.service
-
-# systemctl enable --user emacs
-# systemctl start --user emacs
-
 echo "Done installing emacs. You can start emacs client with the following command 'emacsclient -c'"
