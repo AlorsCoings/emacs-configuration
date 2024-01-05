@@ -77,7 +77,6 @@ re-downloaded in order to locate PACKAGE."
      company-restclient
      crappy-jsp-mode
      css-eldoc
-     csharp-mode
      cmake-mode
      dart-mode
      dash
@@ -88,7 +87,7 @@ re-downloaded in order to locate PACKAGE."
      ;dired-sort
      docker
      docker-compose-mode
-     docker-tramp
+     ;; docker-tramp replace by integrated tramp-container
      dockerfile-mode
      elisp-slime-nav
      elnode

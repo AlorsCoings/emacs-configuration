@@ -117,7 +117,8 @@
 (global-set-key (kbd "C-x M-g") 'browse-url-at-point)
 
 ;; Completion at point
-(global-set-key (kbd "C-<tab>") 'completion-at-point)
+;; (global-set-key (kbd "C-<tab>") 'completion-at-point)
+(global-set-key (kbd "C-<tab>") 'company-complete)
 (global-set-key (kbd "M-<tab>") 'company-complete)
 
 ;; Query replace regex key binding
@@ -216,6 +217,7 @@
 ;; Easy-mode fullscreen rgrep
 (global-set-key (kbd "M-s s") 'git-grep-fullscreen)
 (global-set-key (kbd "M-s S") 'rgrep-fullscreen)
+;; Change to wgrep C-x C-q
 
 (global-set-key (kbd "C-x k") (lambda() (interactive) (kill-buffer (current-buffer))))
 

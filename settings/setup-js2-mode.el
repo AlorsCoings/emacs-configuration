@@ -55,7 +55,6 @@
 
 (require 'json)
 (require 'json-mode)
-(require 'json-reformat)
 
 (setq json-reformat:indent-width 4)
 (setq json-reformat:pretty-string\? t)

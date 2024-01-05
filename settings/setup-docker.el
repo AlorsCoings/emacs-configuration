@@ -11,7 +11,7 @@
 (require 'docker-compose-mode)
 
 ;; C-x C-f /docker:[user]@container:/path/to/file
-(require 'docker-tramp)
+;; (require 'docker-tramp)
 
 ;; Add this line to dockerfile to give it a default name
 ;;

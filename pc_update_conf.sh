@@ -45,7 +45,7 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 # Install python packages
-sudo -H pip3 install cpplint tensorflow pandas pylint flake8 \
+sudo -H pip3 install cpplint pandas pylint flake8 \
      yapf autopep8 jedi flake8 rope_py3k black
 
 # Install nvidia drivers
@@ -177,6 +177,8 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-to 4.
 
 gsettings set org.gnome.ControlCenter last-panel 'ubuntu'
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
+
+gsettings set org.gnome.mutter workspaces-only-on-primary false
 
 # Nautilus
 gsettings set org.gnome.nautilus.list-view default-column-order "['name', 'size', 'type', 'date_modified', 'date_accessed', 'owner', 'group', 'permissions', 'mime_type', 'where']"

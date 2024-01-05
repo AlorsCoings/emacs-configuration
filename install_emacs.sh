@@ -4,7 +4,7 @@
 
 set -eu
 
-readonly version="27.1"
+readonly version="29.1"
 install_directory="/usr/local/stow"
 
 # install dependencies
@@ -27,10 +27,10 @@ fi
 # build and install
 sudo mkdir -p ${install_directory}
 cd emacs-"$version"
-./configure --with-xft --with-x-toolkit=lucid
+#./configure --with-xft --with-x-toolkit=lucid
 
 make
-sudo make install-arch-dep install-arch-indep prefix="${install_directory}"/emacs-"$version"
+sudo make install-arch-dep -lsystemd install-arch-indep prefix="${install_directory}"/emacs-"$version"
 
 cd ${install_directory}
 sudo stow emacs-"$version"
@@ -47,26 +47,25 @@ sudo fc-cache -f -v
 
 
 mkdir -p ~/.config/systemd/user/
-cp /usr/local/stow/emacs-27.1/lib/systemd/user/emacs.service ~/.config/systemd/user/emacs.service
+cp /usr/local/stow/emacs-"$version"/lib/systemd/user/emacs.service ~/.config/systemd/user/emacs.service
 
 # maybe sed ssh
-echo "[Unit]
-Description=Emacs: the extensible, self-documenting text editor
+# echo "[Unit]
+# Description=Emacs: the extensible, self-documenting text editor
 
-[Service]
-Type=forking
-ExecStart=/usr/local/bin/emacs --daemon
-ExecStop=/usr/local/bin/emacsclient --eval \"(kill-emacs)\"
-Environment=SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-Restart=always
-User=%i
+# [Service]
+# Type=forking
+# ExecStart=/usr/local/bin/emacs --daemon
+# ExecStop=/usr/local/bin/emacsclient --eval \"(kill-emacs)\"
+# Environment=SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+# Restart=always
+# User=%i
+# TimeoutStartSec=900
 
-TimeoutStartSec=0
+# [Install]
+# WantedBy=default.target" | sudo tee /etc/systemd/system/emacs@.service
 
-[Install]
-WantedBy=default.target" | sudo tee /etc/systemd/system/emacs@.service
-
-systemctl enable --user emacs
-systemctl start --user emacs
+# systemctl enable --user emacs
+# systemctl start --user emacs
 
 echo "Done installing emacs. You can start emacs client with the following command 'emacsclient -c'"
